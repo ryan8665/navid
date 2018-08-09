@@ -99,11 +99,15 @@
                               closable="true" closeOnEscape="true" widgetVar="dlg1" modal="true"  width="600">
                         <h:form id="formnew" class="Fs12">
                             <div class="EmptyBox5"></div>
-                            <p:inputText placeholder="گیرنده" value="#{messageBean.title}" rendered="true" class="Container96"/>
+                            <p:selectOneMenu  required="true" value="#{sentMessageBean.reciver}"   filterMatchMode="contains" filter="true"  var="items"  style="direction: ltr"  class=" Container90  Responsive" >
+                                <f:selectItem  itemLabel="گیرنده" itemValue="" noSelectionOption="true" />
+                                <f:selectItems  value="#{sentMessageBean.userLIst()}" var="cu" itemLabel="#{cu.name} #{cu.family}" itemValue="#{cu.id}"/>
+                            </p:selectOneMenu>
+                            
                             <div class="EmptyBox5"></div>
-                            <p:inputText placeholder="تیتر" value="#{messageBean.title}" rendered="true" class="Container96"/>
+                            <p:inputText placeholder="تیتر" value="#{sentMessageBean.title}" rendered="true" class="Container96"/>
                             <div class="EmptyBox5"></div>
-                            <p:textEditor style="direction: ltr" widgetVar="editor2" rendered="true" value="#{messageBean.message}" height="200"  >
+                            <p:textEditor style="direction: ltr" widgetVar="editor2" rendered="true" value="#{sentMessageBean.message}" height="200"  >
                                 <f:facet name="toolbar">
                                     <span class="ql-formats">
                                         <button class="ql-bold"></button>
@@ -118,7 +122,7 @@
                                 <div class="EmptyBox5"></div>
                             </p:textEditor>
                             <div class="EmptyBox10"></div>
-                            <p:commandButton styleClass="MainButton2" value="ارسال" update="formnew :formmain" style="float: left"  actionListener="#{packageBean.savePackage(main.loginDto.userType)}" />
+                            <p:commandButton styleClass="MainButton2" value="ارسال" update="formnew :formmain" style="float: left"  actionListener="#{sentMessageBean.sendMessage()}" />
                             <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>

@@ -7,6 +7,7 @@ package com.beans;
 
 import com.entity.Message;
 import com.entity.User;
+import com.service.UserServiceImp;
 import com.service.messageServiceImp;
 import java.text.ParseException;
 import java.util.Date;
@@ -133,6 +134,11 @@ public class sentMessageBean extends BaseBean{
         om.setTitle(title);
         messageServiceImp messageService = new messageServiceImp();
         messageService.saveMessage(om);
+    }
+    
+    public List<User> userLIst(){
+        UserServiceImp ou = new UserServiceImp();
+        return ou.getAllUser();
     }
     
 }
