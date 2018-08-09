@@ -5,19 +5,19 @@
  */
 package com.service;
 
-import com.entity.Lesson;
+import com.entity.SubChapter;
 import java.util.List;
 
 /**
  *
  * @author ryan
  */
-public interface LessonService {
+public interface SubChapterService {
     
-    public List<Lesson> getAllLesson();
-    
-    public Lesson getLessonDetaile(int id);
+    public List<SubChapter> getAllSubChapter();
 
-    public void saveLesson(Lesson lesson);
+    public SubChapter getSubChapterDetaile(int id);
+
+    public void saveSubChapter(SubChapter subChapter);
     
 }

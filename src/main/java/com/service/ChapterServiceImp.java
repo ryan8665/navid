@@ -5,7 +5,8 @@
  */
 package com.service;
 
-import com.entity.Course;
+import com.entity.Category;
+import com.entity.Chapter;
 import com.utility.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -15,33 +16,31 @@ import org.hibernate.criterion.Order;
  *
  * @author ryan
  */
-public class CourseServiceImp implements CourseService {
+public class ChapterServiceImp implements ChapterService{
 
     @Override
-    public List<Course> getAllCourse() {
+    public List<Chapter> getAllChapter() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            List<Course> courseList = session.createCriteria(Course.class)
+            List<Chapter> chapter = session.createCriteria(Chapter.class)
                     .addOrder(Order.asc("name"))
                     .list();
-            return courseList;
+            return chapter;
         } catch (Exception e) {
-            System.out.println("com.service.CourseServiceImp.getAllCourse() " + e.toString());
             return null;
         } finally {
             session.close();
-
         }
     }
 
     @Override
-    public Course getCourseDetaile(int id) {
+    public Chapter getChapterDetaile(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Course course = (Course) session.get(Course.class, id);
-            return course;
+            Chapter chapter = (Chapter) session.get(Chapter.class, id);
+            return chapter;
         } catch (Exception e) {
-            System.out.println("com.service.CourseServiceImp.getCourseDetaile(int id) " + e.toString());
+            System.out.println("com.service.ChapterServiceImp.getChapterDetaile(int id) " + e.toString());
             return null;
         } finally {
             session.close();
@@ -50,12 +49,12 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public void saveCourse(Course course) {
+    public void saveChapter(Chapter chapter) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(course);
+        session.save(chapter);
         session.getTransaction().commit();
         session.close();
     }
-
+    
 }

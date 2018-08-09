@@ -5,19 +5,21 @@
  */
 package com.service;
 
-import com.entity.Lesson;
+import com.entity.Question;
 import java.util.List;
 
 /**
  *
  * @author ryan
  */
-public interface LessonService {
+public interface QuestionService {
     
-    public List<Lesson> getAllLesson();
+    public List<Question> getAllQuestion();
     
-    public Lesson getLessonDetaile(int id);
+    public List<Question> getAllQuestionByUser(int id);
 
-    public void saveLesson(Lesson lesson);
+    public Question getQuestionDetaile(int id);
+
+    public void saveQuestion(Question question);
     
 }

@@ -16,4 +16,8 @@ public interface CourseService {
     
     public List<Course> getAllCourse();
     
+    public Course getCourseDetaile(int id);
+
+    public void saveCourse(Course course);
+    
 }
