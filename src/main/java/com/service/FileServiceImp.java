@@ -42,5 +42,27 @@ public class FileServiceImp implements FileService{
         }
         return file.getAbsolutePath();
     }
+    @Override
+    public String copyStream(InputStream is, String i,String type) throws FileNotFoundException, IOException {
+        File file = new File(i + "."+type);
+        FileOutputStream os = new FileOutputStream(file);
+        final int buffer_size = 1024;
+        try {
+            byte[] bytes = new byte[buffer_size];
+            for (;;) {
+                int count = is.read(bytes, 0, buffer_size);
+                if (count == -1) {
+                    break;
+                }
+                os.write(bytes, 0, count);
+
+            }
+
+        } catch (Exception ex) {
+        } finally {
+            os.close();
+        }
+        return file.getAbsolutePath();
+    }
     
 }

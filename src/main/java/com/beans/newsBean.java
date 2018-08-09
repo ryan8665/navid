@@ -15,6 +15,7 @@ import com.service.LogServiceImp;
 import com.service.NewsServiceImp;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.hibernate.Session;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
@@ -197,9 +199,7 @@ public class newsBean extends BaseBean{
         vbrif = newsO.getBrif();
         vnews = newsO.getNews();
         uid = newsO.getUserId().getId() + "";
-        String rootPath = System.getProperty("user.dir");
-        File dir = new File(rootPath + File.separator + "webapp" + File.separator + "resources" + File.separator + "files");
-        downloadLink = dir.getAbsolutePath() + "\\" + nid + ".jpg";
+        downloadLink = "\\resources\\news\\" + nid + ".png";
 
 
     }
@@ -227,11 +227,13 @@ public class newsBean extends BaseBean{
         FileServiceImp fileService = new FileServiceImp();
         FacesMessage message = new FacesMessage("آپلود شد", " آپلود شد.");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        String rootPath = System.getProperty("user.dir");
-        File dir = new File(rootPath + File.separator + "webapp" + File.separator + "resources" + File.separator + "files");
-        fileService.copyStream(event.getFile().getInputstream(), dir.getAbsolutePath()+"\\" + nid);
+        ServletContext ctx = (ServletContext) FacesContext
+                .getCurrentInstance().getExternalContext().getContext();
+        String absoluteDiskPath = ctx.getRealPath("/resources/");
+        System.out.println("----------- " + absoluteDiskPath);
+        fileService.copyStream(event.getFile().getInputstream(), absoluteDiskPath+"/news/" + nid);
        
-
+      
     }
     
    

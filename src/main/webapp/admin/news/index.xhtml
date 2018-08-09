@@ -39,7 +39,7 @@
                             <div dir="rtl">
                                 <h:form id="menubar">
                                     <p:commandButton styleClass="MainButton2"  value="جدید" type="button" onclick="PF('dlg1').show();" />
-                                    <p:commandButton styleClass="MainButton2" disabled="#{newsBean.disable}"  value="نمایش" type="button" onclick="PF('dlg2').show();" />
+                                    <p:commandButton styleClass="MainButton2" update=":formview" disabled="#{newsBean.disable}"  value="نمایش" type="button" onclick="PF('dlg2').show();" />
                                     <p:commandButton styleClass="MainButton2"  disabled="#{newsBean.disable}" value="تصویر" type="button" onclick="PF('dlg4').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{newsBean.disable}" update=":formmain:tbmain :menubar"  action="#{newsBean.updateNewsStatus()}" 
                                                       value="فعال/غیر فعال"  ajax="true"  /> 

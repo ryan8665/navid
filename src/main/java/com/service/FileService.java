@@ -19,4 +19,6 @@ public interface FileService {
 
     public String copyStream(InputStream is, String i) throws FileNotFoundException, IOException;
     
+    public String copyStream(InputStream is, String i,String type) throws FileNotFoundException, IOException;
+    
 }

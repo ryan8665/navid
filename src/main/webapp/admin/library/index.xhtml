@@ -37,7 +37,7 @@
                             <div dir="rtl">
                                 <h:form id="menubar">
                                     <p:commandButton styleClass="MainButton2"  value="جدید" type="button" onclick="PF('dlg1').show();" />
-                                    <p:commandButton styleClass="MainButton2" disabled="#{libraryBean.disable}"  value="نمایش" type="button" onclick="PF('dlg2').show();" />
+                                    <p:commandButton styleClass="MainButton2" update=":formview" disabled="#{libraryBean.disable}"  value="نمایش" type="button" onclick="PF('dlg2').show();" />
                                     <p:commandButton styleClass="MainButton2"  disabled="#{libraryBean.disable}" value="آپلود" type="button" onclick="PF('dlg4').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{libraryBean.disable}" update=":formmain :menubar"  action="#{libraryBean.updateLibraryStatus()}" 
                                                      value="فعال/غیر فعال"  ajax="true"  /> 
@@ -193,7 +193,9 @@
                             <div class="EmptyBox5"></div> 
                             توضیحات: #{libraryBean.vdescription}
                             <div class="EmptyBox5"></div>
-                            <p:commandLink value="دانلود" action="#{libraryBean.downloadLink}"  class="ClassRTL fontIran" />
+                            <p:commandLink value="دانلود" ajax="false" class="ClassRTL fontIran Fs12">
+                                <p:fileDownload value="#{libraryBean.downloadLink}" />
+                            </p:commandLink>
                             <div class="EmptyBox5"></div>
                         </h:form>  
                     </p:dialog>
@@ -202,7 +204,7 @@
                               closable="true" closeOnEscape="true" widgetVar="dlg4" modal="true" >
                         <h:form id="formphoto">
                             <p:fileUpload styleClass="MainButton2" fileUploadListener="#{libraryBean.handleFileUpload}" mode="advanced" dragDropSupport="true"
-                                          update="messages" sizeLimit="1500000"  allowTypes="/(\.|\/)(jpg)$/" />
+                                          update="messages" sizeLimit="15000000"  allowTypes="/(\.|\/)(jpg)$/" />
                             <p:growl id="messages" showDetail="false"  />
                         </h:form>
                     </p:dialog>

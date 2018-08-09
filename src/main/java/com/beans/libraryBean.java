@@ -23,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 
@@ -191,11 +192,8 @@ public class libraryBean extends BaseBean{
         vdescription = media.getDescription();
         vmediname = media.getMediaTypeId().getName();
         vname = media.getName();
-        String rootPath = System.getProperty("user.dir");
-        File dir = new File(rootPath + File.separator + "webapp" + File.separator + "resources" + File.separator + "files");
-        downloadLink = dir.getAbsolutePath() +"\\"+id+"."+vmediatype;
+        downloadLink = "/resources/media/" + id + "."+vmediatype;
         uploadFile = "/(\\.|\\/)(jpg)$/";
-        System.out.println("com.beans.libraryBean.onRowSelect() "+downloadLink);
        
      
     }
@@ -206,8 +204,11 @@ public class libraryBean extends BaseBean{
         FileServiceImp fileService = new FileServiceImp();
         FacesMessage message = new FacesMessage("آپلود شد", " آپلود شد.");
         FacesContext.getCurrentInstance().addMessage(null, message);
-
-        fileService.copyStream(event.getFile().getInputstream(), "D:\\" + id);
+        ServletContext ctx = (ServletContext) FacesContext
+                .getCurrentInstance().getExternalContext().getContext();
+        String absoluteDiskPath = ctx.getRealPath("/resources/");
+        System.out.println("----------- " + absoluteDiskPath);
+        fileService.copyStream(event.getFile().getInputstream(), absoluteDiskPath + "/media/" + id ,vmediatype);
 
     }
     
