@@ -7,7 +7,9 @@ package com.beans;
 
 import com.entity.Course;
 import com.service.CourseServiceImp;
+import java.text.ParseException;
 import java.util.List;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -26,6 +28,18 @@ public class courseBean extends BaseBean {
     public Course getCourseDetaile() {
         CourseServiceImp CourseServiceImp = new CourseServiceImp();
         return CourseServiceImp.getCourseDetaile(id);
+    }
+    
+    public void saveCourse() {
+
+    }
+    
+    public void onRowSelect(SelectEvent event) throws ParseException {
+        disable = false;
+        id = ((Course) event.getObject()).getId();
+        CourseServiceImp courseServiceImp = new CourseServiceImp();
+        Course course = courseServiceImp.getCourseDetaile(id);
+
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import com.entity.GlobalStatus;
 import com.entity.Question;
 import com.utility.HibernateUtil;
 import java.util.List;
@@ -16,7 +17,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author ryan
  */
-public class QuestionServiceImp implements QuestionService{
+public class QuestionServiceImp implements QuestionService {
 
     @Override
     public List<Question> getAllQuestion() {
@@ -72,5 +73,22 @@ public class QuestionServiceImp implements QuestionService{
         session.getTransaction().commit();
         session.close();
     }
-    
+
+    @Override
+    public void changeQuestionStatus(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Question on = (Question) session.get(Question.class, id);
+
+        if (on.getGlobalStatusId().getId() == 1) {
+            on.setGlobalStatusId(new GlobalStatus(2));
+        } else {
+            on.setGlobalStatusId(new GlobalStatus(1));
+        }
+
+        session.beginTransaction();
+        session.update(on);
+        session.getTransaction().commit();
+        session.close();
+    }
+
 }

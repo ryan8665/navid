@@ -7,7 +7,9 @@ package com.beans;
 
 import com.entity.Category;
 import com.service.CategoryServiceImp;
+import java.text.ParseException;
 import java.util.List;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -25,6 +27,18 @@ public class categoryBean extends BaseBean{
     public Category getCategoryDetaile() {
         CategoryServiceImp categoryServiceImp = new CategoryServiceImp();
         return categoryServiceImp.getCategoryDetaile(id);
+    }
+    
+    public void saveCategory(){
+        
+    }
+    
+    public void onRowSelect(SelectEvent event) throws ParseException {
+        disable = false;
+        id = ((Category) event.getObject()).getId();
+        CategoryServiceImp categoryServiceImp = new CategoryServiceImp();
+        Category category =categoryServiceImp.getCategoryDetaile(id);
+
     }
     
 }

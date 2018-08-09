@@ -7,7 +7,9 @@ package com.beans;
 
 import com.entity.Lesson;
 import com.service.LessonServiceImp;
+import java.text.ParseException;
 import java.util.List;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -26,6 +28,18 @@ public class subCourseBean extends BaseBean {
     public Lesson getLessonDetaile() {
         LessonServiceImp LessonServiceImp = new LessonServiceImp();
         return LessonServiceImp.getLessonDetaile(id);
+    }
+    
+    public void saveLesson() {
+
+    }
+    
+    public void onRowSelect(SelectEvent event) throws ParseException {
+        disable = false;
+        id = ((Lesson) event.getObject()).getId();
+        LessonServiceImp LessonServiceImp = new LessonServiceImp();
+        Lesson lesson = LessonServiceImp.getLessonDetaile(id);
+
     }
 
 }

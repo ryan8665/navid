@@ -22,4 +22,6 @@ public interface QuestionService {
 
     public void saveQuestion(Question question);
     
+    public void changeQuestionStatus(int id);
+    
 }

@@ -7,7 +7,9 @@ package com.beans;
 
 import com.entity.SubChapter;
 import com.service.SubChapterServiceImp;
+import java.text.ParseException;
 import java.util.List;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -26,6 +28,18 @@ public class subChapterBean extends BaseBean {
     public SubChapter getSubChapterDetaile() {
         SubChapterServiceImp subChapterServiceImp = new SubChapterServiceImp();
         return subChapterServiceImp.getSubChapterDetaile(id);
+    }
+    
+    public void saveSubChapter() {
+
+    }
+    
+    public void onRowSelect(SelectEvent event) throws ParseException {
+        disable = false;
+        id = ((SubChapter) event.getObject()).getId();
+        SubChapterServiceImp subChapterServiceImp = new SubChapterServiceImp();
+        SubChapter subChapter = subChapterServiceImp.getSubChapterDetaile(id);
+
     }
 
 }
