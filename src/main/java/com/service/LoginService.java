@@ -20,4 +20,6 @@ public interface LoginService {
     
     public List<UserRule> getUserRule(int userID);
     
+    public void updateLastLoginById(int id);
+    
 }

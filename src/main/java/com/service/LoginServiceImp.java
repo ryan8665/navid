@@ -10,6 +10,7 @@ import com.entity.User;
 import com.entity.UserRule;
 import com.utility.HibernateUtil;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -88,6 +89,17 @@ public class LoginServiceImp implements LoginService{
             session.close();
 
         }
+    }
+
+    @Override
+    public void updateLastLoginById(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        User on = (User) session.get(User.class, id);
+        on.setLastlogin(new Date());
+        session.beginTransaction();
+        session.update(on);
+        session.getTransaction().commit();
+        session.close();
     }
        
 }

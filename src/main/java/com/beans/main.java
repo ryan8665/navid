@@ -81,7 +81,7 @@ public class main {
         
         if(isLOgin){
             userRule = ol.getUserRule(loginDto.getUserType());
-
+            ol.updateLastLoginById(loginDto.getUserType());
             com.loger.log.newLog(1);
             FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
         }else{
