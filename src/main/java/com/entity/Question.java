@@ -43,6 +43,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Question.findByTime", query = "SELECT q FROM Question q WHERE q.time = :time")})
 public class Question implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "answer")
+    private int answer;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -263,6 +268,14 @@ public class Question implements Serializable {
     @Override
     public String toString() {
         return "com.entity.Question[ id=" + id + " ]";
+    }
+
+    public int getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(int answer) {
+        this.answer = answer;
     }
     
 }

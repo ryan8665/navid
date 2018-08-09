@@ -5,6 +5,8 @@
  */
 package com.dto;
 
+import java.util.Date;
+
 /**
  *
  * @author ryan
@@ -13,6 +15,16 @@ public class LoginDto {
     private String name,family,phone,address,type;
     private boolean Login;
     private int id,userType;
+    private Date LastLogin;
+
+    public Date getLastLogin() {
+        return LastLogin;
+    }
+
+    public void setLastLogin(Date LastLogin) {
+        this.LastLogin = LastLogin;
+    }
+    
 
     public String getType() {
         return type;

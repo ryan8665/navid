@@ -43,6 +43,11 @@ public class LoginServiceImp implements LoginService{
             loginDto.setUserType(user.getUserTypeId().getId());
             loginDto.setType(user.getUserTypeId().getName());
             loginDto.setAddress(user.getAddress());
+            try {
+                loginDto.setLastLogin(user.getLastlogin());
+            } catch (Exception e) {
+                
+            }
         
             
             

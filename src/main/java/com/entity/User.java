@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,6 +46,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByCreationDate", query = "SELECT u FROM User u WHERE u.creationDate = :creationDate")})
 public class User implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "lastlogin")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastlogin;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -344,6 +351,14 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.entity.User[ id=" + id + " ]";
+    }
+
+    public Date getLastlogin() {
+        return lastlogin;
+    }
+
+    public void setLastlogin(Date lastlogin) {
+        this.lastlogin = lastlogin;
     }
     
 }
