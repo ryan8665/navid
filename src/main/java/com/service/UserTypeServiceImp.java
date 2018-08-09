@@ -32,5 +32,10 @@ public class UserTypeServiceImp implements UserTypeService{
             session.close();
         }
     }
+
+    @Override
+    public UserType getUserTypeDetaile(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

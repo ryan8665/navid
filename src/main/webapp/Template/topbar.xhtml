@@ -21,7 +21,9 @@
                     <li class="Animated05"><a href="/logout"  class="white Unselectable fontIran Fs12"><i class="icon-logout"></i>خروج</a></li>
                 </ul>
             </li>
-
+            <c:if test="#{main.loginDto.userType eq 1}">
+            <li onclick="location.href = '/admin/setting/index.xhtml';"  class="Fleft BordRadHalf TexAlCenter "><i class="icon-cog-1"></i> </li>
+            </c:if>
             <li onclick="location.href = '/admin/message/inbox.xhtml';" class="Fleft BordRadHalf TexAlCenter "><i class="icon-mail"></i>
                 <span class="alertBubble BordRad10 Fs9">
                     <h:form>
@@ -45,7 +47,7 @@
                     <li class="Animated05"><a href="/admin/profile/index.xhtml" class="white Unselectable fontIran Fs12"><i class="icon-sliders"></i>ناحیه کاربری</a></li>
                 </ul>
             </li>
-
+            
         </ul>
         <!-- NEVER REMOVE FOLLOWING 'UL' TAG ! BECAUSE THIS CONTAINS RESPONSIVE MODE HEADER MENU OPEN-CLOSE BUTTON -->
         <ul id="sm-mobiletopmenu" class="layout-header-widgets white Fs14">

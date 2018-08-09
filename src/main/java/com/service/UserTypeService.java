@@ -15,5 +15,7 @@ import java.util.List;
 public interface UserTypeService {
 
     public List<UserType> getAllUserTypes();
+    
+    public UserType getUserTypeDetaile(int id);
 
 }
