@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="refresh" content="#{facesContext.externalContext.sessionMaxInactiveInterval};url=#{request.contextPath}/login.xhtml"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>تراکنش ها</title>
+        <h:outputScript name="js/layout.js" library="sentinel-layout" />
+        <ui:insert name="head" />
+        <style type="text/css">
+            .ui-growl {
+                left: 20px;
+            }
+
+        </style>
+    </h:head>
+
+    <h:body class="ui-sentinel-rtl" >        
+        <ui:include src="/Template/topbar.xhtml" />
+
+        <ui:include src="/Template/leftmenu.xhtml" />
+
+        <div id="layout-portlets-cover" class="fontRegular">
+            <ui:insert name="content">
+                <div class="ContainerIndent">
+
+
+                    <p:panel style="min-height: 500px" class="IranSans " >
+                        <div class="ContainerIndent">
+                            <div dir="rtl">
+                                <h:form id="menubar">
+                                    <p:commandButton styleClass="MainButton2" disabled="#{financeBean.disable}"  value="نمایش" type="button" onclick="PF('dlg2').show();" />
+                                    <p:commandButton  styleClass="MainButton2" ajax="false" style="float: left" value="Export" type="text" >
+                                        <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
+                                    </p:commandButton>
+                                </h:form>
+                            </div>
+                            <div class="EmptyBox10"></div>  
+                            <f:view>
+                                <h:form id="formmain">
+                                    <p:dataTable id="tbmain" value="#{financeBean.allTransaction}" rowKey="#{item.id}"  var="item"  rowIndexVar="index"
+                                                 selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+                                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
+                                        <p:ajax event="rowSelect" update=":menubar :formview"  listener="#{financeBean.onRowSelect}" />
+                                        <p:column class="ClassRTL fontIran Fs12" width="10%" sortBy="#{dateTime.getCurrentShamsidate(item.date)}" filterBy="#{dateTime.getCurrentShamsidate(item.date)}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="تاریخ"/>
+                                            </f:facet>
+                                            <h:outputText value="#{dateTime.getCurrentShamsidate(item.date)}">
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="20%" sortBy="#{item.redeemUserId.redeemId.code}" filterBy="#{item.redeemUserId.redeemId.code}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="کد تخفیف"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.redeemUserId.redeemId.code}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="10%" sortBy="#{item.amount}" filterBy="#{item.amount}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="مبلغ"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.amount}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="40%" sortBy="#{item.description}" filterBy="#{item.description}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="توضیحات"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.description}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.userId.name} #{item.userId.family}" filterBy="#{item.userId.name} #{item.userId.family}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="کاربر"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.userId.name} #{item.userId.family}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="5%">
+                                            <f:facet name="header">
+                                                <h:outputText value="ردیف"/>
+                                            </f:facet>
+                                            <h:outputText value="#{index + 1}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </f:view>
+                        </div>
+                    </p:panel>
+
+                    <div class="EmptyBox20"></div>
+                    
+                    <p:dialog dir="rtl" header="نمایش" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg2" modal="true"  width="600">
+                        <h:form id="formview" class="Fs12">
+                            <div class="EmptyBox5"></div>  
+                            کاربر: #{financeBean.vuser} 
+                            <div class="EmptyBox5"></div>  
+                            تاریخ: #{dateTime.getCurrentShamsidate(financeBean.vdate)}
+                            <div class="EmptyBox5"></div>  
+                            تیتر: #{financeBean.vname}
+                            <div class="EmptyBox5"></div>  
+                            مبلغ: #{financeBean.vamount}
+                            <div class="EmptyBox5"></div> 
+                            توضیخات: #{financeBean.vdescription}
+                            <div class="EmptyBox5"></div>  
+                        </h:form>  
+                    </p:dialog>
+
+                </div>     
+                <ui:include src="/Template/footer.xhtml" />
+            </ui:insert>
+        </div>
+
+
+        <p:ajaxStatus style="width:32px; height:32px; position:fixed; left:12px; bottom:10px">
+            <f:facet name="start">
+                <p:graphicImage name="images/preloader.gif" library="sentinel-layout"/>
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+
+        <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+    </h:body>
+
+</html>

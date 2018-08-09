@@ -1,0 +1,57 @@
+<ui:composition 
+
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <div id="layout-header" class="Unselectable fontRegular">
+        <a href="/dashboard.xhtml" id="layout-logo">
+
+            <span class="Fs18 fontIran Fleft MarRight20"><span class="white Fs14">سامانه </span><span class="yellow "> آموزشمند</span>
+            </span>
+        </a>
+        <ul id="sm-topmenu" class="layout-header-widgets white Fs14">
+            <li class="Fleft BordRadHalf TexAlCenter"><i class="icon-power"></i>
+                <ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+                    <li class="Animated05"><a href="/admin/index.xhtml"  class="white Unselectable fontIran Fs12"><i class="icon-ccw-1 "></i>صفحه اصلی</a></li>
+                    <li class="Animated05"><a href="/logout"  class="white Unselectable fontIran Fs12"><i class="icon-logout"></i>خروج</a></li>
+                </ul>
+            </li>
+
+            <li onclick="location.href = '/admin/message/inbox.xhtml';" class="Fleft BordRadHalf TexAlCenter "><i class="icon-mail"></i>
+                <span class="alertBubble BordRad10 Fs9">
+                    <h:form>
+                        <h:outputText id="alarm_count" value="0" />
+                    </h:form>
+
+                </span> 
+                <ul>
+
+                </ul>
+            </li>
+            <li class="Fleft BordRadHalf TexAlCenter"><i class="icon-user-male"></i>
+                <ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+                    <li class="Animated05"><a href="/admin/profile/index.xhtml" class="white Unselectable"><i class="icon-user-male Fs26 OvHidden"></i><span class="fontIran Fs15"><h:outputText value="#{main.loginDto.name}" escape="false"/><h:outputText value=" " escape="false"/><h:outputText value="#{main.loginDto.family}" escape="false"/>
+                                <span class="Fs11">
+                                 #{main.loginDto.type}
+
+                                </span> </span>
+                        </a></li>
+                    <li class="Animated05"><a href="/admin/user/user.xhtml" class="white Unselectable fontIran Fs12"><i class="icon-users-2"></i>بخش کاربران</a></li>
+                    <li class="Animated05"><a href="/admin/profile/index.xhtml" class="white Unselectable fontIran Fs12"><i class="icon-sliders"></i>ناحیه کاربری</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <!-- NEVER REMOVE FOLLOWING 'UL' TAG ! BECAUSE THIS CONTAINS RESPONSIVE MODE HEADER MENU OPEN-CLOSE BUTTON -->
+        <ul id="sm-mobiletopmenu" class="layout-header-widgets white Fs14">
+            <li class="Fleft BordRadHalf TexAlCenter Animated05 DisplayOnResponsive"><i class="icon-th-1"></i></li>
+        </ul>
+        <!-- ****** -->
+    </div>
+
+</ui:composition>

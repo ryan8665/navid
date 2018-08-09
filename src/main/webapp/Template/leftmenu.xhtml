@@ -1,0 +1,55 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ps="http://primefaces.org/sentinel"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <div id="layout-menubar" class="Unselectable fontIran" >
+        <div class="layout-menubarinner-box" id="buttonArea">
+            <a href="#" id="layout-menubar-resize" class="BordRad3" title="Menu Resize"><i class="icon-th-list-2"></i></a>
+            <a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i class="icon-menu"></i></a>
+        </div>
+
+
+
+        <h:form id="menuform"  >
+            <ps:menu id="sm_leftmenu">
+                <p:menuitem  id="sm_dashboardsa" value="داشبورد" icon="icon-home-outline" outcome="/admin/index" containerStyleClass="layout-menubar-active"/>
+                <p:menuitem  id="sm_news" value="اخبار و اطلاعیه ها" icon="icon-home-outline" outcome="/admin/news/index" containerStyleClass="layout-menubar-active"/>
+                <p:submenu id="sm_message" label="پیام ها" icon="icon-inbox" >
+                    <p:menuitem  id="sm_inbox" value="پیام های دریافتی" icon="icon-home-outline" outcome="/admin/message/inbox" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_outbox" value="پیام های ارسالی" icon="icon-home-outline" outcome="/admin/message/sent" containerStyleClass="layout-menubar-active"/>
+                </p:submenu>
+                <p:submenu id="sm_user" label="کاربران" icon="icon-inbox" >
+                    <p:menuitem  id="sm_user_guser" value="کاربران" icon="icon-home-outline" outcome="/admin/user/user" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_user_student" value="دانش آموزان" icon="icon-home-outline" outcome="/admin/user/student" containerStyleClass="layout-menubar-active"/>
+                </p:submenu>
+                <p:submenu id="sm_edu" label="آموزش" icon="icon-inbox" >
+                    <p:menuitem  id="sm_edu_category" value="گروه درسی" icon="icon-home-outline" outcome="/admin/edu/category" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_course" value="درس" icon="icon-home-outline" outcome="/admin/edu/course" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_sub_course" value="زیر درس" icon="icon-home-outline" outcome="/admin/edu/subcourse" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_chapter" value="بخش" icon="icon-home-outline" outcome="/admin/edu/chapter" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_subchapter" value="زیر بخش" icon="icon-home-outline" outcome="/admin/edu/subchapter" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_question" value="سئوالات" icon="icon-home-outline" outcome="/admin/edu/question" containerStyleClass="layout-menubar-active"/>
+                </p:submenu>
+                <p:submenu id="sm_exam" label="امتحانات" icon="icon-inbox" >
+                    <p:menuitem  id="sm_exam_general" value="امتحان جامع" icon="icon-home-outline" outcome="/admin/exam/ex1" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_exam_type1" value="امتحان دانش آموزان" icon="icon-home-outline" outcome="/admin/exam/ex2" containerStyleClass="layout-menubar-active"/>
+                </p:submenu>
+                <p:menuitem  id="sm_package" value="بسته های آموزشی" icon="icon-home-outline" outcome="/admin/package/index" containerStyleClass="layout-menubar-active"/>
+                <p:submenu id="sm_finance" label="مالی" icon="icon-inbox" >
+                    <p:menuitem  id="sm_finance_transaction" value="تراکنش ها" icon="icon-home-outline" outcome="/admin/finance/transaction" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_finance_redeem" value="کارت تخفیف" icon="icon-home-outline" outcome="/admin/finance/redeem" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_finance_redeem_user" value="تخفیف های استفاده شده" icon="icon-home-outline" outcome="/admin/finance/redeemuser" containerStyleClass="layout-menubar-active"/>
+                </p:submenu>
+                <p:menuitem  id="sm_library" value="کتابخانه" icon="icon-home-outline" outcome="/admin/library/index" containerStyleClass="layout-menubar-active"/>
+                <p:menuitem  id="sm_instraction" value="راهنما" icon="icon-home-outline" outcome="/admin/toterial/index" containerStyleClass="layout-menubar-active"/>
+                <p:menuitem  id="sm_about" value="درباره ما" icon="icon-home-outline" outcome="/admin/about/index" containerStyleClass="layout-menubar-active"/>
+            </ps:menu>
+        </h:form>
+    </div>
+
+</ui:composition>

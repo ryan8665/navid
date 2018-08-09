@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/amoozeshmand?zeroDateTimeBehavior=convertToNull</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.pool_size">10</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <mapping class="com.entity.Category"/>
+        <mapping class="com.entity.Chapter"/>
+        <mapping class="com.entity.Course"/>
+        <mapping class="com.entity.Exam"/>
+        <mapping class="com.entity.ExamQuestionAnswer"/>
+        <mapping class="com.entity.ExamType"/>
+        <mapping class="com.entity.GeneralExam"/>
+        <mapping class="com.entity.GeneralExamUser"/>
+        <mapping class="com.entity.GlobalStatus"/>
+        <mapping class="com.entity.Hadrdness"/>
+        <mapping class="com.entity.Importance"/>
+        <mapping class="com.entity.Lesson"/>
+        <mapping class="com.entity.Package"/>
+        <mapping class="com.entity.PackageUser"/>
+        <mapping class="com.entity.Question"/>
+        <mapping class="com.entity.QuestionType"/>
+        <mapping class="com.entity.Redeem"/>
+        <mapping class="com.entity.RedeemUser"/>
+        <mapping class="com.entity.Rule"/>
+        <mapping class="com.entity.SubChapter"/>
+        <mapping class="com.entity.Tag"/>
+        <mapping class="com.entity.Transaction"/>
+        <mapping class="com.entity.User"/>
+        <mapping class="com.entity.UserRule"/>
+        <mapping class="com.entity.UserType"/>
+        <mapping class="com.entity.LogType"/>
+        <mapping class="com.entity.Logs"/>
+        <mapping class="com.entity.Media"/>
+        <mapping class="com.entity.MediaType"/>
+        <mapping class="com.entity.News"/>
+        <mapping class="com.entity.NewsCat"/>
+        <mapping class="com.entity.Message"/>
+    </session-factory>
+</hibernate-configuration>
