@@ -13,7 +13,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title>اخبار و اطلاعیه ها</title>
+        <title>بخش</title>
         <h:outputScript name="js/layout.js" library="sentinel-layout" />
         <ui:insert name="head" />
         <style type="text/css">
@@ -46,7 +46,39 @@
                             <div class="EmptyBox10"></div>  
                             <f:view>
                                 <h:form id="formmain">
-
+                                    <p:dataTable id="tbmain" value="#{chapterBean.allChapter}" rowKey="#{item.id}"  var="item"  rowIndexVar="index"
+                                                 selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+                                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
+                                        <p:ajax event="rowSelect" update=":menubar"  listener="#{chapterBean.onRowSelect}" />
+                                        <p:column class="ClassRTL fontIran Fs12" width="20%" sortBy="#{item.lessonId.name}" 
+                                                  filterBy="#{item.lessonId.name}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="زیر درس"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.lessonId.name}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="75%" sortBy="#{item.description}"
+                                                  filterBy="#{item.description}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="توضیحات"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.description}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="20%" sortBy="#{item.name}" 
+                                                  filterBy="#{item.name}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="بخش"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.name}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="5%">
+                                            <f:facet name="header">
+                                                <h:outputText value="ردیف"/>
+                                            </f:facet>
+                                            <h:outputText value="#{index + 1}"/>
+                                        </p:column>
+                                    </p:dataTable>
                                 </h:form>
                             </f:view>
                         </div>

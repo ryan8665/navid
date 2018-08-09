@@ -54,7 +54,7 @@
                                     <p:dataTable id="tbmain" value="#{newsBean.newsList()}" rowKey="#{item.id}"  var="item"  rowIndexVar="index"
                                                  selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
                                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                 rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No News found with given criteria">
+                                                 rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
                                         <p:ajax event="rowSelect" update=":menubar :formview"  listener="#{newsBean.onRowSelect}" />
                                         <p:column class="ClassRTL fontIran Fs12" width="10%" sortBy="#{dateTime.getCurrentShamsidate(item.date)}" filterBy="#{dateTime.getCurrentShamsidate(item.date)}" filterMatchMode="contains">
                                             <f:facet name="header">

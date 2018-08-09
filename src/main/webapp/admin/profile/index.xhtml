@@ -5,6 +5,13 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+
+    <style type="text/css">
+        .jqplot-target, .jqplot-axis {
+            color: #9fadb5;
+        }
+    </style>
+
     <h:head>
         <f:facet name="first">
             <meta http-equiv="refresh" content="#{facesContext.externalContext.sessionMaxInactiveInterval};url=#{request.contextPath}/login.xhtml"/>
@@ -13,52 +20,109 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title>اخبار و اطلاعیه ها</title>
+        <title>ناحیه کاربری</title>
         <h:outputScript name="js/layout.js" library="sentinel-layout" />
         <ui:insert name="head" />
-        <style type="text/css">
-            .ui-growl {
-                left: 20px;
-            }
-
-        </style>
     </h:head>
 
-    <h:body class="ui-sentinel-rtl" >        
+    <h:body class="ui-sentinel-rtl"  onload="#{logFacade.setAdminid(adminFacade.i)}">        
         <ui:include src="/Template/topbar.xhtml" />
 
         <ui:include src="/Template/leftmenu.xhtml" />
-
         <div id="layout-portlets-cover" class="fontRegular">
             <ui:insert name="content">
-                <div class="ContainerIndent">
+                <div class="Container100">
+                    <div class="ContainerIndent">
+                        <div class="EmptyBox20"></div>
+                        <div class="Container100">
+                            <div class="Container75 Responsive100 ui-fluid" >
+                                <div class="ContainerIndent">
+                                    <p:panel style="min-height: 500px;" > 
+                                        <f:view>
+                                            <h:form id="formmain">
+                                                <p:dataTable id="tbmain" value="#{logsBean.log()}" rowKey="#{item.id}" var="item" selectionMode="single" rows="12" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+                                                             {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                             rowsPerPageTemplate="12,24,50" paginatorPosition="bottom" resizableColumns="true" emptyMessage="No log found with given criteria">
+                                                    <p:column class="ClassRTL fontIran Fs12"  width="20%">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="تاریخ"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{dateTime.getCurrentShamsidate2(item.date)}">
+                                                        </h:outputText>
+                                                    </p:column>
+                                                    <p:column class="ClassRTL fontIran Fs12"  width="60%">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="عملیات"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.logTypeId.name}"/>
+                                                    </p:column>
+                                                    <p:column class="ClassRTL fontIran Fs12"  width="20%">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="نام کاربر"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.userId.name} #{item.userId.family}"/>
+                                                    </p:column>
+                                                </p:dataTable>
+                                            </h:form>
 
 
-                    <p:panel style="min-height: 500px" class="IranSans " >
-                        <div class="ContainerIndent">
-                            <div dir="rtl">
-                                <h:form id="menubar">
-                                    <p:commandButton  styleClass="MainButton2" ajax="false" style="float: left" value="Export" type="text" >
-                                        <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
-                                    </p:commandButton>
-                                </h:form>
+                                        </f:view>
+                                    </p:panel>
+                                </div>
                             </div>
-                            <div class="EmptyBox10"></div>  
-                            <f:view>
-                                <h:form id="formmain">
 
-                                </h:form>
-                            </f:view>
+                            <div class="Container25 Responsive" >
+                                <div class="ContainerIndent">
+                                    <p:panel style="min-height: 500px;" class="fontIran">
+                                        <i class="icon-user-2 Fs40 Fright Wid25 hardblue TexAlCenter"></i>
+                                        <div class="Fs24 Fright MarTop10 leaden Wid70" dir="rtl"><h:outputText class="red fontIran Fs21" value="#{main.loginDto.name} #{main.loginDto.family}" escape="false"/></div>
+                                        <i class=" softgray MarRight10 Fs14 Fright"></i><i class="MarRight10 Fs10 Fright fontIran"></i>
+                                        <div class="EmptyBox10"></div>
+
+
+                                        <p:separator styleClass="Wid100"></p:separator>
+                                        <div class="EmptyBox10"></div>
+                                        <div class="Container">
+
+                                            <div class="EmptyBox10"></div>
+                                            <div class="Fs12 Fright leaden Wid50 TexAlCenter Responsive fontIran">بازدیدها<br/><span class="Fs24 orange"><h:outputText value="" escape="false"/>0</span></div>
+                                            <div class="Fs12 Fright leaden Wid50 TexAlCenter Responsive fontIran">مدیا ها<br/><span class="Fs24 red"><h:outputText value="" escape="false"/>0</span></div>
+                                            <div class="Fs12 Fright leaden Wid100 TexAlCenter fontIran">پیامک ها<br/><span class="Fs24 hardblue">0</span></div>
+                                        </div>
+                                        <div class="EmptyBox10"></div>
+                                        <p:separator styleClass="Wid100"></p:separator>
+                                        <div class="EmptyBox10"></div>
+                                        <a href="#" onclick="PF('dlg1').show();" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> عملیات گذرواژه</i>  <i class="icon-cog-alt hardblue"></i></a>
+                                    </p:panel>
+                                </div>
+                            </div>                                                     
                         </div>
-                    </p:panel>
+                    </div>
+                </div>
+                <p:dialog dir="rtl" header="ویرایش گذرواژه"  showEffect="fade" 
+                          closable="true" closeOnEscape="true"  widgetVar="dlg1" modal="true"  width="400">
+                    <h:form id="ChangPassDialog">
+                        <p:panel>
+                            <p:messages id="messages"  autoUpdate="true" closable="true" />
+                            <p:password placeholder="پسورد فعلی" id="oldPassword" maxlength="10" value="#{profileBean.password}"  required="true" />
+                            <p:separator styleClass="Wid100"></p:separator>
+                            <p:password placeholder="پسورد جدید" id="newPassword" match="rePassword" validatorMessage="گذر واژهای وارد شده مطابقت ندارند" maxlength="10" value="#{profileBean.newPassword}" feedback="true" requiredMessage="لطفا فیلدها را با دقت پر کنید" required="true" />
+                            <div class="EmptyBox5"></div>
+                            <p:password placeholder="تکرار پسورد جدید" id="rePassword" validatorMessage="گذر واژهای وارد شده مطابقت ندارند" maxlength="10" value="#{profileBean.reNewPassword}"  required="true" />
+                            <div class="EmptyBox20"></div>
+                            <div dir="ltr">
+                                <p:commandButton styleClass="MainButton2" update="ChangPassDialog :formmain:tbmain"  actionListener="#{profileBean.changPassword()}" ajax="true" value="ثبت" >
 
-                    <div class="EmptyBox20"></div>
+                                </p:commandButton>
+                            </div>
+                        </p:panel>
+                    </h:form>
+                </p:dialog>
 
-                </div>     
+                <div class="EmptyBox20"></div>
                 <ui:include src="/Template/footer.xhtml" />
             </ui:insert>
         </div>
-
 
         <p:ajaxStatus style="width:32px; height:32px; position:fixed; left:12px; bottom:10px">
             <f:facet name="start">
