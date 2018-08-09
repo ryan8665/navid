@@ -13,6 +13,9 @@ import java.util.List;
  * @author ryan
  */
 public interface LogService {
+
     public List<Logs> getUserLogById(int UserId);
     
+    public List<Logs> getUserLogByIdAndLogType(int UserId,int LogType);
+
 }

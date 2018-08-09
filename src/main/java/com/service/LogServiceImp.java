@@ -20,7 +20,6 @@ public class LogServiceImp implements LogService{
 
     @Override
     public List<Logs> getUserLogById(int UserId) {
-        System.out.println(UserId);
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             List<Logs> logs = session.createCriteria(Logs.class)
@@ -30,6 +29,25 @@ public class LogServiceImp implements LogService{
             return logs;
         } catch (Exception e) {
             System.out.println("com.service.LogServiceImp.getUserLogById() "+e.toString());
+            return null;
+        } finally {
+            session.close();
+
+        }
+    }
+
+    @Override
+    public List<Logs> getUserLogByIdAndLogType(int UserId, int LogType) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<Logs> logs = session.createCriteria(Logs.class)
+                    .add(Restrictions.eq("logTypeId.id", LogType))
+                    .add(Restrictions.eq("userId.id", UserId))
+                    .addOrder(Order.desc("id"))
+                    .list();
+            return logs;
+        } catch (Exception e) {
+            System.out.println("com.service.LogServiceImp.getUserLogByIdAndLogType " + e.toString());
             return null;
         } finally {
             session.close();

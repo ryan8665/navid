@@ -13,7 +13,11 @@ import java.util.List;
  * @author ryan
  */
 public interface UserService {
-    
-   public List<User> getAllUser();
-    
+
+    public List<User> getAllUser();
+
+    public List<User> getAllUserNoAdmin();
+
+    public List<User> getAllStudent();
+
 }
