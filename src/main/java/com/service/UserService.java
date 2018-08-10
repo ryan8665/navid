@@ -26,6 +26,10 @@ public interface UserService {
     public User getUserById(int id);
     
     public void changeUserStatus(int id);
+    
+    public void saveUser(User user);
+    
+    public boolean chackUserisExist(String mobile);
 
 
 }

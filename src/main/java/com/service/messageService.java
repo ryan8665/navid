@@ -6,6 +6,7 @@
 package com.service;
 
 import com.entity.Message;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -23,4 +24,6 @@ public interface messageService {
     public boolean saveMessage(Message message);
     
     public void updateMessageFlag(int id);
+    
+    public Long countUnreadMessage(int id);
 }

@@ -7,6 +7,7 @@ package com.service;
 
 import com.entity.Message;
 import com.utility.HibernateUtil;
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
@@ -91,6 +92,13 @@ public class messageServiceImp implements messageService {
         session.update(on);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public Long countUnreadMessage(int id)  {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        BigInteger temp =  (BigInteger) session.createSQLQuery("SELECT count(`id`) FROM `message` WHERE `message_flag_id` = 0 and `reciver` = " + id).uniqueResult();
+        return temp.longValue();
     }
 
 }

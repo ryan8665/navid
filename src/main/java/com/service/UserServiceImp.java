@@ -109,5 +109,30 @@ public class UserServiceImp implements UserService{
         session.getTransaction().commit();
         session.close();
     }
+
+    @Override
+    public void saveUser(User user) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(user);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public boolean chackUserisExist(String mobile) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            User User = (User) session.createCriteria(User.class)
+                    .add(Restrictions.eq("mobile", mobile)).uniqueResult();
+            return User != null;
+           
+        } catch (Exception e) {
+            return false;
+        } finally {
+            session.close();
+
+        }
+    }
     
 }
