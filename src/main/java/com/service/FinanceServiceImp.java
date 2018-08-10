@@ -152,5 +152,21 @@ public class FinanceServiceImp implements FinanceService{
         session.getTransaction().commit();
         session.close();
     }
+
+    @Override
+    public List<Transaction> getAllTransactionByUserId(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<Transaction> transactionList = session.createCriteria(Transaction.class)
+                    .add(Restrictions.eq("userId.id", id))
+                    .addOrder(Order.desc("id"))
+                    .list();
+            return transactionList;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
     
 }

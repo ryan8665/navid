@@ -7,7 +7,9 @@ package com.beans;
 
 import com.entity.Message;
 import com.entity.User;
+import com.service.UserService;
 import com.service.UserServiceImp;
+import com.service.messageService;
 import com.service.messageServiceImp;
 import java.text.ParseException;
 import java.util.Date;
@@ -103,14 +105,14 @@ public class sentMessageBean extends BaseBean{
     }
     
     public List<Message> retriveAllSent() {
-        messageServiceImp messageService = new messageServiceImp();
+        messageService messageService = new messageServiceImp();
         return messageService.getAllSentMessageByUserId(getUserID());
     }
     
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((Message) event.getObject()).getId();
-        messageServiceImp messageService = new messageServiceImp();
+        messageService messageService = new messageServiceImp();
         Message message = messageService.getMessageDetail(id);
         try {
             vDate = message.getDate();
@@ -132,12 +134,12 @@ public class sentMessageBean extends BaseBean{
         om.setReciver(new User(Integer.parseInt(Reciver)));
         om.setSender(new User(getUserID()));
         om.setTitle(title);
-        messageServiceImp messageService = new messageServiceImp();
+        messageService messageService = new messageServiceImp();
         messageService.saveMessage(om);
     }
     
     public List<User> userLIst(){
-        UserServiceImp ou = new UserServiceImp();
+        UserService ou = new UserServiceImp();
         return ou.getAllUser();
     }
     

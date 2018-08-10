@@ -35,14 +35,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "exam")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Exam.findAll", query = "SELECT e FROM Exam e")
-    , @NamedQuery(name = "Exam.findById", query = "SELECT e FROM Exam e WHERE e.id = :id")
-    , @NamedQuery(name = "Exam.findByName", query = "SELECT e FROM Exam e WHERE e.name = :name")
-    , @NamedQuery(name = "Exam.findByDescription", query = "SELECT e FROM Exam e WHERE e.description = :description")
-    , @NamedQuery(name = "Exam.findByCreationDate", query = "SELECT e FROM Exam e WHERE e.creationDate = :creationDate")
-    , @NamedQuery(name = "Exam.findByDueDate", query = "SELECT e FROM Exam e WHERE e.dueDate = :dueDate")
-    , @NamedQuery(name = "Exam.findByExpireDate", query = "SELECT e FROM Exam e WHERE e.expireDate = :expireDate")
-    , @NamedQuery(name = "Exam.findByQuestionNumber", query = "SELECT e FROM Exam e WHERE e.questionNumber = :questionNumber")})
+    @NamedQuery(name = "Exam.findAll", query = "SELECT e FROM Exam e"),
+    @NamedQuery(name = "Exam.findById", query = "SELECT e FROM Exam e WHERE e.id = :id"),
+    @NamedQuery(name = "Exam.findByName", query = "SELECT e FROM Exam e WHERE e.name = :name"),
+    @NamedQuery(name = "Exam.findByDescription", query = "SELECT e FROM Exam e WHERE e.description = :description"),
+    @NamedQuery(name = "Exam.findByCreationDate", query = "SELECT e FROM Exam e WHERE e.creationDate = :creationDate"),
+    @NamedQuery(name = "Exam.findByDueDate", query = "SELECT e FROM Exam e WHERE e.dueDate = :dueDate"),
+    @NamedQuery(name = "Exam.findByExpireDate", query = "SELECT e FROM Exam e WHERE e.expireDate = :expireDate"),
+    @NamedQuery(name = "Exam.findByQuestionNumber", query = "SELECT e FROM Exam e WHERE e.questionNumber = :questionNumber")})
 public class Exam implements Serializable {
 
     private static final long serialVersionUID = 1L;

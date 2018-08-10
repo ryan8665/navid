@@ -6,6 +6,7 @@
 package com.beans;
 
 import com.entity.Logs;
+import com.service.LogService;
 import com.service.LogServiceImp;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -46,7 +47,7 @@ public class profileBean extends BaseBean {
     
 
     public List<Logs> getLog() {
-        LogServiceImp logServiceImp = new LogServiceImp();
+        LogService logServiceImp = new LogServiceImp();
         return logServiceImp.getUserLogById(getUserID());
     }
     

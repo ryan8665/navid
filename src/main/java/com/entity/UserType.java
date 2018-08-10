@@ -36,9 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "UserType.findByDescription", query = "SELECT u FROM UserType u WHERE u.description = :description")})
 public class UserType implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userTypeId")
-    private Collection<UserRule> userRuleCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +48,8 @@ public class UserType implements Serializable {
     @Size(max = 500)
     @Column(name = "description")
     private String description;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userTypeId")
+    private Collection<UserRule> userRuleCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userTypeId")
     private Collection<User> userCollection;
 
@@ -86,6 +85,15 @@ public class UserType implements Serializable {
     }
 
     @XmlTransient
+    public Collection<UserRule> getUserRuleCollection() {
+        return userRuleCollection;
+    }
+
+    public void setUserRuleCollection(Collection<UserRule> userRuleCollection) {
+        this.userRuleCollection = userRuleCollection;
+    }
+
+    @XmlTransient
     public Collection<User> getUserCollection() {
         return userCollection;
     }
@@ -117,15 +125,6 @@ public class UserType implements Serializable {
     @Override
     public String toString() {
         return "com.entity.UserType[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<UserRule> getUserRuleCollection() {
-        return userRuleCollection;
-    }
-
-    public void setUserRuleCollection(Collection<UserRule> userRuleCollection) {
-        this.userRuleCollection = userRuleCollection;
     }
     
 }

@@ -31,24 +31,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "rule")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Rule.findAll", query = "SELECT r FROM Rule r")
-    , @NamedQuery(name = "Rule.findById", query = "SELECT r FROM Rule r WHERE r.id = :id")
-    , @NamedQuery(name = "Rule.findByName", query = "SELECT r FROM Rule r WHERE r.name = :name")
-    , @NamedQuery(name = "Rule.findByDespription", query = "SELECT r FROM Rule r WHERE r.despription = :despription")})
+    @NamedQuery(name = "Rule.findAll", query = "SELECT r FROM Rule r"),
+    @NamedQuery(name = "Rule.findById", query = "SELECT r FROM Rule r WHERE r.id = :id"),
+    @NamedQuery(name = "Rule.findByName", query = "SELECT r FROM Rule r WHERE r.name = :name"),
+    @NamedQuery(name = "Rule.findByDespription", query = "SELECT r FROM Rule r WHERE r.despription = :despription")})
 public class Rule implements Serializable {
-
-    @Lob
-    @Column(name = "view")
-    private byte[] view;
-    @Lob
-    @Column(name = "insert")
-    private byte[] insert;
-    @Lob
-    @Column(name = "update")
-    private byte[] update;
-    @Lob
-    @Column(name = "delete")
-    private byte[] delete;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,6 +49,18 @@ public class Rule implements Serializable {
     @Size(max = 45)
     @Column(name = "despription")
     private String despription;
+    @Lob
+    @Column(name = "view")
+    private byte[] view;
+    @Lob
+    @Column(name = "insert")
+    private byte[] insert;
+    @Lob
+    @Column(name = "update")
+    private byte[] update;
+    @Lob
+    @Column(name = "delete")
+    private byte[] delete;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ruleId")
     private Collection<UserRule> userRuleCollection;
 
@@ -96,6 +95,37 @@ public class Rule implements Serializable {
         this.despription = despription;
     }
 
+    public byte[] getView() {
+        return view;
+    }
+
+    public void setView(byte[] view) {
+        this.view = view;
+    }
+
+    public byte[] getInsert() {
+        return insert;
+    }
+
+    public void setInsert(byte[] insert) {
+        this.insert = insert;
+    }
+
+    public byte[] getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(byte[] update) {
+        this.update = update;
+    }
+
+    public byte[] getDelete() {
+        return delete;
+    }
+
+    public void setDelete(byte[] delete) {
+        this.delete = delete;
+    }
 
     @XmlTransient
     public Collection<UserRule> getUserRuleCollection() {
@@ -129,38 +159,6 @@ public class Rule implements Serializable {
     @Override
     public String toString() {
         return "com.entity.Rule[ id=" + id + " ]";
-    }
-
-    public byte[] getView() {
-        return view;
-    }
-
-    public void setView(byte[] view) {
-        this.view = view;
-    }
-
-    public byte[] getInsert() {
-        return insert;
-    }
-
-    public void setInsert(byte[] insert) {
-        this.insert = insert;
-    }
-
-    public byte[] getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(byte[] update) {
-        this.update = update;
-    }
-
-    public byte[] getDelete() {
-        return delete;
-    }
-
-    public void setDelete(byte[] delete) {
-        this.delete = delete;
     }
     
 }

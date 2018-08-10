@@ -10,8 +10,11 @@ import com.entity.GlobalStatus;
 import com.entity.Media;
 import com.entity.MediaType;
 import com.entity.User;
+import com.service.EducationService;
 import com.service.EducationServiceImp;
+import com.service.FileService;
 import com.service.FileServiceImp;
+import com.service.LibraryService;
 import com.service.LibraryServiceImp;
 import java.io.File;
 import java.io.IOException;
@@ -160,17 +163,17 @@ public class libraryBean extends BaseBean{
     
     
     public List<Media> allMedia(){
-        LibraryServiceImp libraryService = new LibraryServiceImp();
+        LibraryService libraryService = new LibraryServiceImp();
         return libraryService.getAllLibrary();
     }
     
     public List<Media> allMediaByUser() {
-        LibraryServiceImp libraryService = new LibraryServiceImp();
+        LibraryService libraryService = new LibraryServiceImp();
         return libraryService.getUserLibrary(getUserID());
     }
     
     public void updateLibraryStatus() {
-        LibraryServiceImp libraryService = new LibraryServiceImp();
+        LibraryService libraryService = new LibraryServiceImp();
         libraryService.changeLibraryStatus(id);
         disable = true;
 
@@ -179,7 +182,7 @@ public class libraryBean extends BaseBean{
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((Media) event.getObject()).getId();
-        LibraryServiceImp libraryService = new LibraryServiceImp();
+        LibraryService libraryService = new LibraryServiceImp();
         Media media = libraryService.getLibraryById(id);
         vuser = media.getUserId().getName() + " " + media.getUserId().getFamily();
         try {
@@ -201,7 +204,7 @@ public class libraryBean extends BaseBean{
    
     
     public void handleFileUpload(FileUploadEvent event) throws IOException {
-        FileServiceImp fileService = new FileServiceImp();
+        FileService fileService = new FileServiceImp();
         FacesMessage message = new FacesMessage("آپلود شد", " آپلود شد.");
         FacesContext.getCurrentInstance().addMessage(null, message);
         ServletContext ctx = (ServletContext) FacesContext
@@ -213,7 +216,7 @@ public class libraryBean extends BaseBean{
     }
     
     public void saveToLibrary(){
-        LibraryServiceImp libraryService = new LibraryServiceImp();
+        LibraryService libraryService = new LibraryServiceImp();
         Media om = new Media();
         om.setDate(new Date());
         om.setName(name);
@@ -232,12 +235,12 @@ public class libraryBean extends BaseBean{
     }
     
     public List<MediaType> getAllMediaType(){
-        LibraryServiceImp libraryService = new LibraryServiceImp();
+        LibraryService libraryService = new LibraryServiceImp();
         return libraryService.getMediaType();
     }
     
     public List<Chapter> getAllChapter(){
-        EducationServiceImp educationService =  new EducationServiceImp();
+        EducationService educationService =  new EducationServiceImp();
         return educationService.getAllChapter();
     }
     

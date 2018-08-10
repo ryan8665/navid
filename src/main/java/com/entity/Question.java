@@ -31,22 +31,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "question")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q")
-    , @NamedQuery(name = "Question.findById", query = "SELECT q FROM Question q WHERE q.id = :id")
-    , @NamedQuery(name = "Question.findByQuestion", query = "SELECT q FROM Question q WHERE q.question = :question")
-    , @NamedQuery(name = "Question.findByAnswerA", query = "SELECT q FROM Question q WHERE q.answerA = :answerA")
-    , @NamedQuery(name = "Question.findByAnswerB", query = "SELECT q FROM Question q WHERE q.answerB = :answerB")
-    , @NamedQuery(name = "Question.findByAnswerC", query = "SELECT q FROM Question q WHERE q.answerC = :answerC")
-    , @NamedQuery(name = "Question.findByAnswerD", query = "SELECT q FROM Question q WHERE q.answerD = :answerD")
-    , @NamedQuery(name = "Question.findByDescription", query = "SELECT q FROM Question q WHERE q.description = :description")
-    , @NamedQuery(name = "Question.findByNote", query = "SELECT q FROM Question q WHERE q.note = :note")
-    , @NamedQuery(name = "Question.findByTime", query = "SELECT q FROM Question q WHERE q.time = :time")})
+    @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q"),
+    @NamedQuery(name = "Question.findById", query = "SELECT q FROM Question q WHERE q.id = :id"),
+    @NamedQuery(name = "Question.findByQuestion", query = "SELECT q FROM Question q WHERE q.question = :question"),
+    @NamedQuery(name = "Question.findByAnswerA", query = "SELECT q FROM Question q WHERE q.answerA = :answerA"),
+    @NamedQuery(name = "Question.findByAnswerB", query = "SELECT q FROM Question q WHERE q.answerB = :answerB"),
+    @NamedQuery(name = "Question.findByAnswerC", query = "SELECT q FROM Question q WHERE q.answerC = :answerC"),
+    @NamedQuery(name = "Question.findByAnswerD", query = "SELECT q FROM Question q WHERE q.answerD = :answerD"),
+    @NamedQuery(name = "Question.findByAnswer", query = "SELECT q FROM Question q WHERE q.answer = :answer"),
+    @NamedQuery(name = "Question.findByDescription", query = "SELECT q FROM Question q WHERE q.description = :description"),
+    @NamedQuery(name = "Question.findByNote", query = "SELECT q FROM Question q WHERE q.note = :note"),
+    @NamedQuery(name = "Question.findByTime", query = "SELECT q FROM Question q WHERE q.time = :time")})
 public class Question implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "answer")
-    private int answer;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -69,6 +65,10 @@ public class Question implements Serializable {
     @Size(max = 200)
     @Column(name = "answer_d")
     private String answerD;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "answer")
+    private int answer;
     @Size(max = 45)
     @Column(name = "description")
     private String description;
@@ -105,6 +105,11 @@ public class Question implements Serializable {
 
     public Question(Integer id) {
         this.id = id;
+    }
+
+    public Question(Integer id, int answer) {
+        this.id = id;
+        this.answer = answer;
     }
 
     public Integer getId() {
@@ -153,6 +158,14 @@ public class Question implements Serializable {
 
     public void setAnswerD(String answerD) {
         this.answerD = answerD;
+    }
+
+    public int getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(int answer) {
+        this.answer = answer;
     }
 
     public String getDescription() {
@@ -268,14 +281,6 @@ public class Question implements Serializable {
     @Override
     public String toString() {
         return "com.entity.Question[ id=" + id + " ]";
-    }
-
-    public int getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(int answer) {
-        this.answer = answer;
     }
     
 }

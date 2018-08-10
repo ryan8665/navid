@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import com.entity.GlobalStatus;
 import com.entity.User;
 import com.utility.HibernateUtil;
 import java.util.List;
@@ -69,6 +70,44 @@ public class UserServiceImp implements UserService{
             session.close();
 
         }
+    }
+
+    @Override
+    public List<Object[]> cuntUserGroupByUser() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Object[]> res =  (List<Object[]>) session.createSQLQuery("SELECT count(u.`id`) as count , ut.`name` as name  FROM `user` as u inner join user_type as ut on u.`user_type_id` = ut.`id`").list();
+        return res;
+    }
+    
+    @Override
+    public User getUserById(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            User user = (User) session.get(User.class, id);
+            return user;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            session.close();
+
+        }
+    }
+
+    @Override
+    public void changeUserStatus(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        User on = (User) session.get(User.class, id);
+
+        if (on.getGlobalStatusId().getId() == 1) {
+            on.setGlobalStatusId(new GlobalStatus(2));
+        } else {
+            on.setGlobalStatusId(new GlobalStatus(1));
+        }
+
+        session.beginTransaction();
+        session.update(on);
+        session.getTransaction().commit();
+        session.close();
     }
     
 }

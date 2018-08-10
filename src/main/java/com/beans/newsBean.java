@@ -11,11 +11,9 @@ import com.entity.NewsCat;
 import com.entity.User;
 import com.service.FileService;
 import com.service.FileServiceImp;
-import com.service.LogServiceImp;
+import com.service.NewsService;
 import com.service.NewsServiceImp;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +22,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
-import org.hibernate.Session;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 
@@ -163,7 +160,7 @@ public class newsBean extends BaseBean{
 
 
     public void updateNewsStatus() {
-        NewsServiceImp newsService = new NewsServiceImp();
+        NewsService newsService = new NewsServiceImp();
         newsService.changeNewsStatus(nid);
         disable = true;
         
@@ -173,19 +170,19 @@ public class newsBean extends BaseBean{
         disable = true;
     }
     public List<News> newsList() {
-        NewsServiceImp newsService = new NewsServiceImp();
+        NewsService newsService = new NewsServiceImp();
         return newsService.getNewsAll();
     }
     
     public List<NewsCat> newsCat() {
-        NewsServiceImp newsService = new NewsServiceImp();
+        NewsService newsService = new NewsServiceImp();
         return newsService.getNewsCat();
     }
     
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         nid = ((News) event.getObject()).getId();
-        NewsServiceImp newsService = new NewsServiceImp();
+        NewsService newsService = new NewsServiceImp();
         News newsO = newsService.getNewsById(nid);
         vuser = newsO.getUserId().getName() + " " + newsO.getUserId().getFamily();
         try {
@@ -216,7 +213,7 @@ public class newsBean extends BaseBean{
         on.setNewsCatId(onc);
         User ou = new User(getUserID());
         on.setUserId(ou);
-        NewsServiceImp newsService = new NewsServiceImp();
+        NewsService newsService = new NewsServiceImp();
         newsService.SaveNews(on);
         brif= news = title = "";
         
@@ -224,7 +221,7 @@ public class newsBean extends BaseBean{
     }
     
     public void handleFileUpload(FileUploadEvent event) throws IOException {
-        FileServiceImp fileService = new FileServiceImp();
+        FileService fileService = new FileServiceImp();
         FacesMessage message = new FacesMessage("آپلود شد", " آپلود شد.");
         FacesContext.getCurrentInstance().addMessage(null, message);
         ServletContext ctx = (ServletContext) FacesContext

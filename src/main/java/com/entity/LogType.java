@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "log_type")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "LogType.findAll", query = "SELECT l FROM LogType l")
-    , @NamedQuery(name = "LogType.findById", query = "SELECT l FROM LogType l WHERE l.id = :id")
-    , @NamedQuery(name = "LogType.findByName", query = "SELECT l FROM LogType l WHERE l.name = :name")})
+    @NamedQuery(name = "LogType.findAll", query = "SELECT l FROM LogType l"),
+    @NamedQuery(name = "LogType.findById", query = "SELECT l FROM LogType l WHERE l.id = :id"),
+    @NamedQuery(name = "LogType.findByName", query = "SELECT l FROM LogType l WHERE l.name = :name")})
 public class LogType implements Serializable {
 
     private static final long serialVersionUID = 1L;

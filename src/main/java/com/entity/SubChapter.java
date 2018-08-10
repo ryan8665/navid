@@ -31,11 +31,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "sub_chapter")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SubChapter.findAll", query = "SELECT s FROM SubChapter s")
-    , @NamedQuery(name = "SubChapter.findById", query = "SELECT s FROM SubChapter s WHERE s.id = :id")
-    , @NamedQuery(name = "SubChapter.findByName", query = "SELECT s FROM SubChapter s WHERE s.name = :name")
-    , @NamedQuery(name = "SubChapter.findByDescription", query = "SELECT s FROM SubChapter s WHERE s.description = :description")
-    , @NamedQuery(name = "SubChapter.findBySequence", query = "SELECT s FROM SubChapter s WHERE s.sequence = :sequence")})
+    @NamedQuery(name = "SubChapter.findAll", query = "SELECT s FROM SubChapter s"),
+    @NamedQuery(name = "SubChapter.findById", query = "SELECT s FROM SubChapter s WHERE s.id = :id"),
+    @NamedQuery(name = "SubChapter.findByName", query = "SELECT s FROM SubChapter s WHERE s.name = :name"),
+    @NamedQuery(name = "SubChapter.findByDescription", query = "SELECT s FROM SubChapter s WHERE s.description = :description"),
+    @NamedQuery(name = "SubChapter.findBySequence", query = "SELECT s FROM SubChapter s WHERE s.sequence = :sequence")})
 public class SubChapter implements Serializable {
 
     private static final long serialVersionUID = 1L;

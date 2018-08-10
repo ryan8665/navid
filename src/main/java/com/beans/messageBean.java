@@ -8,6 +8,7 @@ package com.beans;
 import com.entity.Message;
 import com.entity.Redeem;
 import com.service.FinanceServiceImp;
+import com.service.messageService;
 import com.service.messageServiceImp;
 import java.text.ParseException;
 import java.util.Date;
@@ -96,14 +97,14 @@ public class messageBean extends BaseBean{
     
     
     public List<Message> retriveAllInbox(){
-        messageServiceImp messageService = new messageServiceImp();
+        messageService messageService = new messageServiceImp();
         return messageService.getAllInboxMessageByUserId(getUserID());
     }
     
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((Message) event.getObject()).getId();
-        messageServiceImp messageService = new messageServiceImp();
+        messageService messageService = new messageServiceImp();
         Message message = messageService.getMessageDetail(id);
         try {
             vDate = message.getDate();

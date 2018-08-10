@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "user_rule")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UserRule.findAll", query = "SELECT u FROM UserRule u")
-    , @NamedQuery(name = "UserRule.findById", query = "SELECT u FROM UserRule u WHERE u.id = :id")})
+    @NamedQuery(name = "UserRule.findAll", query = "SELECT u FROM UserRule u"),
+    @NamedQuery(name = "UserRule.findById", query = "SELECT u FROM UserRule u WHERE u.id = :id")})
 public class UserRule implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -39,10 +39,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "News.findByDate", query = "SELECT n FROM News n WHERE n.date = :date")})
 public class News implements Serializable {
 
-    @JoinColumn(name = "global_status_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private GlobalStatus globalStatusId;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +57,9 @@ public class News implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+    @JoinColumn(name = "global_status_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private GlobalStatus globalStatusId;
     @JoinColumn(name = "news_cat_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private NewsCat newsCatId;
@@ -115,6 +114,14 @@ public class News implements Serializable {
         this.date = date;
     }
 
+    public GlobalStatus getGlobalStatusId() {
+        return globalStatusId;
+    }
+
+    public void setGlobalStatusId(GlobalStatus globalStatusId) {
+        this.globalStatusId = globalStatusId;
+    }
+
     public NewsCat getNewsCatId() {
         return newsCatId;
     }
@@ -154,14 +161,6 @@ public class News implements Serializable {
     @Override
     public String toString() {
         return "com.entity.News[ id=" + id + " ]";
-    }
-
-    public GlobalStatus getGlobalStatusId() {
-        return globalStatusId;
-    }
-
-    public void setGlobalStatusId(GlobalStatus globalStatusId) {
-        this.globalStatusId = globalStatusId;
     }
     
 }

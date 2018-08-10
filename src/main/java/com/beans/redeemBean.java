@@ -7,7 +7,7 @@ package com.beans;
 
 import com.entity.GlobalStatus;
 import com.entity.Redeem;
-import com.entity.Transaction;
+import com.service.FinanceService;
 import com.service.FinanceServiceImp;
 import java.text.ParseException;
 import java.util.Date;
@@ -185,14 +185,14 @@ public class redeemBean extends BaseBean{
     
     
     public List<Redeem> getAllRedeem(){
-        FinanceServiceImp of = new FinanceServiceImp();
+        FinanceService of = new FinanceServiceImp();
         return of.getAllRedeem();
     }
     
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((Redeem) event.getObject()).getId();
-        FinanceServiceImp financeService = new FinanceServiceImp();
+        FinanceService financeService = new FinanceServiceImp();
         Redeem redeem = financeService.geTredeemById(id);
         try {
             vdatecreat = redeem.getCreateDate();
@@ -212,7 +212,7 @@ public class redeemBean extends BaseBean{
     }
     
     public void saveRedeem(){
-        FinanceServiceImp financeService = new FinanceServiceImp();
+        FinanceService financeService = new FinanceServiceImp();
         Redeem redeem = new Redeem();
         redeem.setAmount(Amount);
         redeem.setCode(Code);
@@ -228,7 +228,7 @@ public class redeemBean extends BaseBean{
     }
     
     public void updateStatus() {
-        FinanceServiceImp financeService = new FinanceServiceImp();
+        FinanceService financeService = new FinanceServiceImp();
         financeService.changeRedeenStatus(id);
         disable = true;
 

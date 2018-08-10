@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "package_user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PackageUser.findAll", query = "SELECT p FROM PackageUser p")
-    , @NamedQuery(name = "PackageUser.findById", query = "SELECT p FROM PackageUser p WHERE p.id = :id")
-    , @NamedQuery(name = "PackageUser.findByPurchaseDate", query = "SELECT p FROM PackageUser p WHERE p.purchaseDate = :purchaseDate")})
+    @NamedQuery(name = "PackageUser.findAll", query = "SELECT p FROM PackageUser p"),
+    @NamedQuery(name = "PackageUser.findById", query = "SELECT p FROM PackageUser p WHERE p.id = :id"),
+    @NamedQuery(name = "PackageUser.findByPurchaseDate", query = "SELECT p FROM PackageUser p WHERE p.purchaseDate = :purchaseDate")})
 public class PackageUser implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -34,4 +34,6 @@ public interface FinanceService {
     
     public void saveRedeem(Redeem redeem);
     
+    public List<Transaction> getAllTransactionByUserId(int id);
+    
 }

@@ -35,13 +35,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "general_exam")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GeneralExam.findAll", query = "SELECT g FROM GeneralExam g")
-    , @NamedQuery(name = "GeneralExam.findById", query = "SELECT g FROM GeneralExam g WHERE g.id = :id")
-    , @NamedQuery(name = "GeneralExam.findByCreationDate", query = "SELECT g FROM GeneralExam g WHERE g.creationDate = :creationDate")
-    , @NamedQuery(name = "GeneralExam.findByExpireDate", query = "SELECT g FROM GeneralExam g WHERE g.expireDate = :expireDate")
-    , @NamedQuery(name = "GeneralExam.findByDueDate", query = "SELECT g FROM GeneralExam g WHERE g.dueDate = :dueDate")
-    , @NamedQuery(name = "GeneralExam.findByName", query = "SELECT g FROM GeneralExam g WHERE g.name = :name")
-    , @NamedQuery(name = "GeneralExam.findByDescription", query = "SELECT g FROM GeneralExam g WHERE g.description = :description")})
+    @NamedQuery(name = "GeneralExam.findAll", query = "SELECT g FROM GeneralExam g"),
+    @NamedQuery(name = "GeneralExam.findById", query = "SELECT g FROM GeneralExam g WHERE g.id = :id"),
+    @NamedQuery(name = "GeneralExam.findByCreationDate", query = "SELECT g FROM GeneralExam g WHERE g.creationDate = :creationDate"),
+    @NamedQuery(name = "GeneralExam.findByExpireDate", query = "SELECT g FROM GeneralExam g WHERE g.expireDate = :expireDate"),
+    @NamedQuery(name = "GeneralExam.findByDueDate", query = "SELECT g FROM GeneralExam g WHERE g.dueDate = :dueDate"),
+    @NamedQuery(name = "GeneralExam.findByName", query = "SELECT g FROM GeneralExam g WHERE g.name = :name"),
+    @NamedQuery(name = "GeneralExam.findByDescription", query = "SELECT g FROM GeneralExam g WHERE g.description = :description")})
 public class GeneralExam implements Serializable {
 
     private static final long serialVersionUID = 1L;

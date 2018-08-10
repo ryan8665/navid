@@ -16,7 +16,7 @@ import org.hibernate.criterion.Order;
  *
  * @author ryan
  */
-public class UserTypeServiceImp implements UserTypeService{
+public class UserTypeServiceImp implements UserTypeService {
 
     @Override
     public List<UserType> getAllUserTypes() {
@@ -37,5 +37,5 @@ public class UserTypeServiceImp implements UserTypeService{
     public UserType getUserTypeDetaile(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

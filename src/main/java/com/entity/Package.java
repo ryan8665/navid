@@ -45,9 +45,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Package.findByMonths", query = "SELECT p FROM Package p WHERE p.months = :months")})
 public class Package implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "packageId")
-    private Collection<PackageUser> packageUserCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,18 +67,20 @@ public class Package implements Serializable {
     private Date expireDate;
     @Column(name = "months")
     private Integer months;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne
-    private User userId;
-    @JoinColumn(name = "global_status_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private GlobalStatus globalStatusId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "packageId")
+    private Collection<PackageUser> packageUserCollection;
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @ManyToOne
     private Course courseId;
+    @JoinColumn(name = "global_status_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private GlobalStatus globalStatusId;
     @JoinColumn(name = "lesson_id", referencedColumnName = "id")
     @ManyToOne
     private Lesson lessonId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    private User userId;
 
     public Package() {
     }
@@ -146,20 +145,13 @@ public class Package implements Serializable {
         this.months = months;
     }
 
-    public User getUserId() {
-        return userId;
+    @XmlTransient
+    public Collection<PackageUser> getPackageUserCollection() {
+        return packageUserCollection;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public GlobalStatus getGlobalStatusId() {
-        return globalStatusId;
-    }
-
-    public void setGlobalStatusId(GlobalStatus globalStatusId) {
-        this.globalStatusId = globalStatusId;
+    public void setPackageUserCollection(Collection<PackageUser> packageUserCollection) {
+        this.packageUserCollection = packageUserCollection;
     }
 
     public Course getCourseId() {
@@ -170,12 +162,28 @@ public class Package implements Serializable {
         this.courseId = courseId;
     }
 
+    public GlobalStatus getGlobalStatusId() {
+        return globalStatusId;
+    }
+
+    public void setGlobalStatusId(GlobalStatus globalStatusId) {
+        this.globalStatusId = globalStatusId;
+    }
+
     public Lesson getLessonId() {
         return lessonId;
     }
 
     public void setLessonId(Lesson lessonId) {
         this.lessonId = lessonId;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -201,15 +209,6 @@ public class Package implements Serializable {
     @Override
     public String toString() {
         return "com.entity.Package[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<PackageUser> getPackageUserCollection() {
-        return packageUserCollection;
-    }
-
-    public void setPackageUserCollection(Collection<PackageUser> packageUserCollection) {
-        this.packageUserCollection = packageUserCollection;
     }
     
 }

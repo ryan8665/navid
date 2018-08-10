@@ -13,7 +13,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title>اخبار و اطلاعیه ها</title>
+        <title>کاربران</title>
         <h:outputScript name="js/layout.js" library="sentinel-layout" />
         <ui:insert name="head" />
         <style type="text/css">
@@ -38,6 +38,16 @@
                         <div class="ContainerIndent">
                             <div dir="rtl">
                                 <h:form id="menubar">
+                                    <p:commandButton styleClass="MainButton2" value="جدید" type="button" onclick="PF('dlg1').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formview" value="نمایش" type="button" onclick="PF('dlg2').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formmonitor" value="مانیتورینگ" type="button" onclick="PF('dlg3').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}"  value="ارسال پیامک" type="button" onclick="PF('dlg4').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}"  value="ارسال پیام" type="button" onclick="PF('dlg5').show();" />
+                                    <p:commandButton styleClass="MainButton2"   disabled="#{userBean.isNotStudent}" value="بسته ها" type="button" onclick="PF('dlg6').show();" />
+                                    <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}" value="تراکنش ها" type="button" onclick="PF('dlg7').show();" />
+                                    <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}" value="امتحانات جامع" type="button" onclick="PF('dlg8').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formmain :menubar"  action="#{userBean.updateStatus()}" 
+                                                     value="فعال/غیر فعال"  ajax="true"  /> 
                                     <p:commandButton  styleClass="MainButton2" ajax="false" style="float: left" value="Export" type="text" >
                                         <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
                                     </p:commandButton>
@@ -46,13 +56,310 @@
                             <div class="EmptyBox10"></div>  
                             <f:view>
                                 <h:form id="formmain">
+                                    <p:dataTable value="#{userBean.allUser}"   rowKey="#{item.id}"  var="item"  rowIndexVar="index" rendered="#{main.loginDto.userType eq 1}"
+                                                 selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+                                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
+                                        <p:ajax event="rowSelect" update=":menubar :formview :formmonitor :formsms :formmessage :formmpackage :formtransaction :formglobalexam"  listener="#{userBean.onRowSelect}" />
+                                        <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.globalStatusId.name}" 
+                                                  filterBy="#{item.globalStatusId.name}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="وضعیت"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.globalStatusId.name}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.mobile}" 
+                                                  filterBy="#{item.mobile}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="تلفن همراه"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.mobile}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.nationalcode}" 
+                                                  filterBy="#{item.nationalcode}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="کد ملی"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.nationalcode}"/>
+                                        </p:column>
 
+                                        <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.userTypeId.name}" 
+                                                  filterBy="#{item.userTypeId.name}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="سمت"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.userTypeId.name}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.name} #{item.family}" 
+                                                  filterBy="#{item.name} #{item.family}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="نام کاربر"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.name} #{item.family}"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="5%">
+                                            <f:facet name="header">
+                                                <h:outputText value="ردیف"/>
+                                            </f:facet>
+                                            <h:outputText value="#{index + 1}"/>
+                                        </p:column>
+                                    </p:dataTable>
                                 </h:form>
                             </f:view>
                         </div>
                     </p:panel>
 
                     <div class="EmptyBox20"></div>
+                    
+                    <p:dialog dir="rtl" header="جدید" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg1" modal="true"  width="300">
+                        <h:form id="formnew" class="fontIran">
+<!--                            <p:messages id="messages"  autoUpdate="true" closable="true" />-->
+                            <div class="EmptyBox5"></div>
+                            <p:inputText placeholder="نام" value="#{userBean.name}" requiredMessage="لطفا نام را وارد نمایید"  maxlength="15" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputText placeholder="نام خانوادگی" value="#{userBean.family}" requiredMessage="لطفا نام خانوادگی را وارد نمایید"  maxlength="15" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputText placeholder="آدرس" value="#{userBean.address}" requiredMessage="لطفا آدرس همراه را وارد نمایید"  maxlength="140" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputNumber placeholder="کد ملی" value="#{userBean.nationalcode}" requiredMessage="لطفا کد ملی را وارد نمایید"  maxlength="10" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputNumber placeholder="شماره همراه" value="#{userBean.mobile}" requiredMessage="لطفا شماره همراه را وارد نمایید"  maxlength="11" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputNumber placeholder="گذر واژه" value="#{userBean.password}" requiredMessage="لطفا گذر واژه را وارد نمایید"  maxlength="15" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <div class="EmptyBox10"></div>
+                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formnew :formmain" style="float: left"  actionListener="#{userBean.saveUser()}" />
+                            <div class="EmptyBox5"></div>
+                        </h:form> 
+                    </p:dialog>
+
+                    <p:dialog dir="rtl" header="مشخصات" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg2" modal="true"  width="600">
+                        <h:form id="formview" class="Fs12">
+                            نام: #{userBean.getvUser()}
+                            <div class="EmptyBox5"></div>
+                            گذرواژه: #{userBean.getvPassword()}
+                            <div class="EmptyBox5"></div>
+                            وضعیت: #{userBean.getvStatus()}
+                            <div class="EmptyBox5"></div>
+                            کد ملی: #{userBean.getvNationalcode()}
+                            <div class="EmptyBox5"></div>
+                            تلفن همراه: #{userBean.getvMobile()}
+                            <div class="EmptyBox5"></div>
+                            آدرس: #{userBean.getvAddress()}
+                        </h:form>  
+                    </p:dialog>
+
+                    <p:dialog  hideEffect="fade" showEffect="fade" 
+                               closable="true" closeOnEscape="true" widgetVar="dlg3" modal="true"  width="600">
+                        <h:form id="formmonitor" class="Fs12">
+                            <p:dataTable value="#{userBean.allUserLog}" var="item" rowIndexVar="index"
+                                         rows="7" lazy="true" paginator="true" paginatorPosition="bottom" paginatorTemplate="
+                                         {PreviousPageLink} {PageLinks} {NextPageLink}  "
+                                         resizableColumns="true" emptyMessage="No item found with given criteria">
+
+                                <p:column class="ClassRTL fontIran Fs11" width="20%">
+                                    <f:facet name="header">
+                                        <h:outputText value="تاریخ"/>
+                                    </f:facet>
+                                    <h:outputText value="#{dateTime.dashbordDate(item.date)}">
+                                    </h:outputText>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="50%">
+                                    <f:facet name="header">
+                                        <h:outputText value="عملیات"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.logTypeId.name}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="20%">
+                                    <f:facet name="header">
+                                        <h:outputText value="کاربر"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.userId.name} #{item.userId.family}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="10%">
+                                    <f:facet name="header">
+                                        <h:outputText value="ردیف"/>
+                                    </f:facet>
+                                    <h:outputText value="#{index + 1}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>  
+                    </p:dialog>
+
+                    <p:dialog dir="rtl" header="ارسال پیامک" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg4" modal="true"  width="300">
+                        <h:form id="formsms" class="fontIran">
+                            <p:messages id="messages"  autoUpdate="true" closable="true" />
+                            <div class="EmptyBox10"></div>
+                            <p:inputText placeholder="شماره همراه" value="#{userBean.getvMobile()}" disabled="true" requiredMessage="لطفا شماره همراه را وارد نمایید" id="value" maxlength="11" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputTextarea counter="d1" placeholder="متن پیام" value="#{userBean.sms}" requiredMessage="لطفا متن پیام را وارد نمایید" id="description" maxlength="140" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <h:outputText id="d1" style="float: left" />
+                            <div class="EmptyBox5"></div>
+                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ارسال" update="messages :menubar" 
+                                             style="float: left" actionListener="#{userBean.sendSms()}" />
+                        </h:form>
+                    </p:dialog>
+                    
+                    <p:dialog dir="rtl" header="ارسال پیام" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg5" modal="true"  width="600">
+                        <h:form id="formmessage">
+
+<!--                            <p:messages id="messages"  autoUpdate="true" closable="true" />-->
+                            <p:outputLabel for="msgto2"  value="گیرنده" />
+                            <p:inputText placeholder="پشتیبانی" value="#{userBean.getvUser()}" id="msgto2" class="Container85  Responsive"  disabled="true" label="msgto"/>
+                            <div  class="EmptyBox10"></div>
+                            <p:outputLabel for="msgSubject2"  value="موضوع" />
+                            <p:inputText id="msgSubject2" class="Container85 Responsive" maxlength="40" value="#{userBean.title}" label="msgSubject" required="true" requiredMessage="لطفا موضوع درخواست خود را وارد فرمائید"/>
+                            <div  class="EmptyBox10"></div>
+                          
+                            <p:inputTextarea id="bodyTxt2" class="Container96 Responsive" value="#{userBean.message}" rows="15" cols="25"  maxlength="300"  autoResize="false" required="true" requiredMessage="لطفا متن درخواست خود را وارد فرمائید"/>
+                            <div  class="EmptyBox20"></div>
+                            <div dir="ltr">
+                                <p:commandButton styleClass="MainButton2" actionListener="#{userBean.sendMessage()}" resetValues="true" value="ارسال"   />
+                            </div>
+
+                        </h:form>
+                    </p:dialog> 
+                    
+                    <p:dialog  hideEffect="fade" showEffect="fade" 
+                               closable="true" closeOnEscape="true" widgetVar="dlg6" modal="true"  width="600">
+                        <h:form id="formmpackage" class="Fs12">
+                            <p:dataTable value="#{userBean.package}" var="item" rowIndexVar="index"
+                                         rows="7" lazy="true" paginator="true" paginatorPosition="bottom" paginatorTemplate="
+                                         {PreviousPageLink} {PageLinks} {NextPageLink}  "
+                                         resizableColumns="true" emptyMessage="No item found with given criteria">
+
+                                <p:column class="ClassRTL fontIran Fs11" width="20%">
+                                    <f:facet name="header">
+                                        <h:outputText value="خرید"/>
+                                    </f:facet>
+                                    <h:outputText value="#{dateTime.dashbordDate(item.purchaseDate)}">
+                                    </h:outputText>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="20%">
+                                    <f:facet name="header">
+                                        <h:outputText value="درس"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.packageId.lessonId.name}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="20%">
+                                    <f:facet name="header">
+                                        <h:outputText value="استاد"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.packageId.userId.name} #{item.packageId.userId.family}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="20%">
+                                    <f:facet name="header">
+                                        <h:outputText value="نام بسته"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.packageId.name}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="15%">
+                                    <f:facet name="header">
+                                        <h:outputText value="کاربر"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.userId.name} #{item.userId.family}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="5%">
+                                    <f:facet name="header">
+                                        <h:outputText value="ردیف"/>
+                                    </f:facet>
+                                    <h:outputText value="#{index + 1}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>  
+                    </p:dialog>
+                    
+                    <p:dialog  hideEffect="fade" showEffect="fade" 
+                               closable="true" closeOnEscape="true" widgetVar="dlg7" modal="true"  width="600">
+                        <h:form id="formtransaction" class="Fs12">
+                            <p:dataTable value="#{userBean.transaction}" var="item" rowIndexVar="index"
+                                         rows="7" lazy="true" paginator="true" paginatorPosition="bottom" paginatorTemplate="
+                                         {PreviousPageLink} {PageLinks} {NextPageLink}  "
+                                         resizableColumns="true" emptyMessage="No item found with given criteria">
+
+                                <p:column class="ClassRTL fontIran Fs11" width="20%">
+                                    <f:facet name="header">
+                                        <h:outputText value="تاریخ"/>
+                                    </f:facet>
+                                    <h:outputText value="#{dateTime.dashbordDate(item.date)}">
+                                    </h:outputText>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="15%">
+                                    <f:facet name="header">
+                                        <h:outputText value="مبلغ"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.amount}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="30%">
+                                    <f:facet name="header">
+                                        <h:outputText value="عملیات"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.name}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="30%">
+                                    <f:facet name="header">
+                                        <h:outputText value="کاربر"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.userId.name} #{item.userId.family}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="5%">
+                                    <f:facet name="header">
+                                        <h:outputText value="ردیف"/>
+                                    </f:facet>
+                                    <h:outputText value="#{index + 1}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>  
+                    </p:dialog>
+                    
+                    
+                    <p:dialog  hideEffect="fade" showEffect="fade" 
+                               closable="true" closeOnEscape="true" widgetVar="dlg8" modal="true"  width="600">
+                        <h:form id="formglobalexam" class="Fs12">
+                            <p:dataTable value="#{userBean.generalExam}" var="item" rowIndexVar="index"
+                                         rows="7" lazy="true" paginator="true" paginatorPosition="bottom" paginatorTemplate="
+                                         {PreviousPageLink} {PageLinks} {NextPageLink}  "
+                                         resizableColumns="true" emptyMessage="No item found with given criteria">
+
+                                <p:column class="ClassRTL fontIran Fs11" width="20%">
+                                    <f:facet name="header">
+                                        <h:outputText value="تاریخ"/>
+                                    </f:facet>
+                                    <h:outputText value="#{dateTime.dashbordDate(item.date)}">
+                                    </h:outputText>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="15%">
+                                    <f:facet name="header">
+                                        <h:outputText value="نمره"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mark}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="30%">
+                                    <f:facet name="header">
+                                        <h:outputText value="آزمون"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.generalExamId.name}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="30%">
+                                    <f:facet name="header">
+                                        <h:outputText value="کاربر"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.userId.name} #{item.userId.family}"/>
+                                </p:column>
+                                <p:column class="ClassRTL fontIran Fs11" width="5%">
+                                    <f:facet name="header">
+                                        <h:outputText value="ردیف"/>
+                                    </f:facet>
+                                    <h:outputText value="#{index + 1}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>  
+                    </p:dialog>
 
                 </div>     
                 <ui:include src="/Template/footer.xhtml" />

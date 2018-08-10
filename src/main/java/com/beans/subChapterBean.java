@@ -6,6 +6,7 @@
 package com.beans;
 
 import com.entity.SubChapter;
+import com.service.SubChapterService;
 import com.service.SubChapterServiceImp;
 import java.text.ParseException;
 import java.util.List;
@@ -25,12 +26,12 @@ public class subChapterBean extends BaseBean {
     private int id;
 
     public List<SubChapter> getAllSubChapter() {
-        SubChapterServiceImp subChapterServiceImp = new SubChapterServiceImp();
+        SubChapterService subChapterServiceImp = new SubChapterServiceImp();
         return subChapterServiceImp.getAllSubChapter();
     }
 
     public SubChapter getSubChapterDetaile() {
-        SubChapterServiceImp subChapterServiceImp = new SubChapterServiceImp();
+        SubChapterService subChapterServiceImp = new SubChapterServiceImp();
         return subChapterServiceImp.getSubChapterDetaile(id);
     }
     
@@ -41,7 +42,7 @@ public class subChapterBean extends BaseBean {
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((SubChapter) event.getObject()).getId();
-        SubChapterServiceImp subChapterServiceImp = new SubChapterServiceImp();
+        SubChapterService subChapterServiceImp = new SubChapterServiceImp();
         SubChapter subChapter = subChapterServiceImp.getSubChapterDetaile(id);
 
     }

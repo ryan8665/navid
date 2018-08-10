@@ -35,23 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "GlobalStatus.findByName", query = "SELECT g FROM GlobalStatus g WHERE g.name = :name")})
 public class GlobalStatus implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
-    private Collection<PackageUser> packageUserCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
-    private Collection<Question> questionCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
-    private Collection<Package> packageCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
-    private Collection<Redeem> redeemCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
-    private Collection<Media> mediaCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
-    private Collection<News> newsCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +44,18 @@ public class GlobalStatus implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
+    private Collection<PackageUser> packageUserCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
+    private Collection<Media> mediaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
+    private Collection<Redeem> redeemCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
+    private Collection<News> newsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
+    private Collection<Package> packageCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
+    private Collection<Question> questionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
     private Collection<User> userCollection;
 
@@ -85,6 +80,60 @@ public class GlobalStatus implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @XmlTransient
+    public Collection<PackageUser> getPackageUserCollection() {
+        return packageUserCollection;
+    }
+
+    public void setPackageUserCollection(Collection<PackageUser> packageUserCollection) {
+        this.packageUserCollection = packageUserCollection;
+    }
+
+    @XmlTransient
+    public Collection<Media> getMediaCollection() {
+        return mediaCollection;
+    }
+
+    public void setMediaCollection(Collection<Media> mediaCollection) {
+        this.mediaCollection = mediaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Redeem> getRedeemCollection() {
+        return redeemCollection;
+    }
+
+    public void setRedeemCollection(Collection<Redeem> redeemCollection) {
+        this.redeemCollection = redeemCollection;
+    }
+
+    @XmlTransient
+    public Collection<News> getNewsCollection() {
+        return newsCollection;
+    }
+
+    public void setNewsCollection(Collection<News> newsCollection) {
+        this.newsCollection = newsCollection;
+    }
+
+    @XmlTransient
+    public Collection<Package> getPackageCollection() {
+        return packageCollection;
+    }
+
+    public void setPackageCollection(Collection<Package> packageCollection) {
+        this.packageCollection = packageCollection;
+    }
+
+    @XmlTransient
+    public Collection<Question> getQuestionCollection() {
+        return questionCollection;
+    }
+
+    public void setQuestionCollection(Collection<Question> questionCollection) {
+        this.questionCollection = questionCollection;
     }
 
     @XmlTransient
@@ -119,60 +168,6 @@ public class GlobalStatus implements Serializable {
     @Override
     public String toString() {
         return "com.entity.GlobalStatus[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<News> getNewsCollection() {
-        return newsCollection;
-    }
-
-    public void setNewsCollection(Collection<News> newsCollection) {
-        this.newsCollection = newsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Media> getMediaCollection() {
-        return mediaCollection;
-    }
-
-    public void setMediaCollection(Collection<Media> mediaCollection) {
-        this.mediaCollection = mediaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Redeem> getRedeemCollection() {
-        return redeemCollection;
-    }
-
-    public void setRedeemCollection(Collection<Redeem> redeemCollection) {
-        this.redeemCollection = redeemCollection;
-    }
-
-    @XmlTransient
-    public Collection<Package> getPackageCollection() {
-        return packageCollection;
-    }
-
-    public void setPackageCollection(Collection<Package> packageCollection) {
-        this.packageCollection = packageCollection;
-    }
-
-    @XmlTransient
-    public Collection<PackageUser> getPackageUserCollection() {
-        return packageUserCollection;
-    }
-
-    public void setPackageUserCollection(Collection<PackageUser> packageUserCollection) {
-        this.packageUserCollection = packageUserCollection;
-    }
-
-    @XmlTransient
-    public Collection<Question> getQuestionCollection() {
-        return questionCollection;
-    }
-
-    public void setQuestionCollection(Collection<Question> questionCollection) {
-        this.questionCollection = questionCollection;
     }
     
 }

@@ -34,10 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "redeem_user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "RedeemUser.findAll", query = "SELECT r FROM RedeemUser r")
-    , @NamedQuery(name = "RedeemUser.findById", query = "SELECT r FROM RedeemUser r WHERE r.id = :id")
-    , @NamedQuery(name = "RedeemUser.findByDescription", query = "SELECT r FROM RedeemUser r WHERE r.description = :description")
-    , @NamedQuery(name = "RedeemUser.findByDuoDate", query = "SELECT r FROM RedeemUser r WHERE r.duoDate = :duoDate")})
+    @NamedQuery(name = "RedeemUser.findAll", query = "SELECT r FROM RedeemUser r"),
+    @NamedQuery(name = "RedeemUser.findById", query = "SELECT r FROM RedeemUser r WHERE r.id = :id"),
+    @NamedQuery(name = "RedeemUser.findByDescription", query = "SELECT r FROM RedeemUser r WHERE r.description = :description"),
+    @NamedQuery(name = "RedeemUser.findByDuoDate", query = "SELECT r FROM RedeemUser r WHERE r.duoDate = :duoDate")})
 public class RedeemUser implements Serializable {
 
     private static final long serialVersionUID = 1L;

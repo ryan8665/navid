@@ -6,6 +6,7 @@
 package com.beans;
 
 import com.entity.Transaction;
+import com.service.FinanceService;
 import com.service.FinanceServiceImp;
 import java.text.ParseException;
 import java.util.Date;
@@ -98,14 +99,14 @@ public class financeBean extends BaseBean {
     }
 
     public List<Transaction> getAllTransaction() {
-        FinanceServiceImp of = new FinanceServiceImp();
+        FinanceService of = new FinanceServiceImp();
         return of.getAllTransaction();
     }
     
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((Transaction) event.getObject()).getId();
-        FinanceServiceImp financeService = new FinanceServiceImp();
+        FinanceService financeService = new FinanceServiceImp();
         Transaction transaction = financeService.GetTransactionById(id);
         vuser = transaction.getUserId().getName() + " " + transaction.getUserId().getFamily();
         try {

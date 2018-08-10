@@ -35,15 +35,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "redeem")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Redeem.findAll", query = "SELECT r FROM Redeem r")
-    , @NamedQuery(name = "Redeem.findById", query = "SELECT r FROM Redeem r WHERE r.id = :id")
-    , @NamedQuery(name = "Redeem.findByName", query = "SELECT r FROM Redeem r WHERE r.name = :name")
-    , @NamedQuery(name = "Redeem.findByDespription", query = "SELECT r FROM Redeem r WHERE r.despription = :despription")
-    , @NamedQuery(name = "Redeem.findByAmount", query = "SELECT r FROM Redeem r WHERE r.amount = :amount")
-    , @NamedQuery(name = "Redeem.findByCode", query = "SELECT r FROM Redeem r WHERE r.code = :code")
-    , @NamedQuery(name = "Redeem.findByMaxUser", query = "SELECT r FROM Redeem r WHERE r.maxUser = :maxUser")
-    , @NamedQuery(name = "Redeem.findByCreateDate", query = "SELECT r FROM Redeem r WHERE r.createDate = :createDate")
-    , @NamedQuery(name = "Redeem.findByExpireDate", query = "SELECT r FROM Redeem r WHERE r.expireDate = :expireDate")})
+    @NamedQuery(name = "Redeem.findAll", query = "SELECT r FROM Redeem r"),
+    @NamedQuery(name = "Redeem.findById", query = "SELECT r FROM Redeem r WHERE r.id = :id"),
+    @NamedQuery(name = "Redeem.findByName", query = "SELECT r FROM Redeem r WHERE r.name = :name"),
+    @NamedQuery(name = "Redeem.findByDespription", query = "SELECT r FROM Redeem r WHERE r.despription = :despription"),
+    @NamedQuery(name = "Redeem.findByAmount", query = "SELECT r FROM Redeem r WHERE r.amount = :amount"),
+    @NamedQuery(name = "Redeem.findByCode", query = "SELECT r FROM Redeem r WHERE r.code = :code"),
+    @NamedQuery(name = "Redeem.findByMaxUser", query = "SELECT r FROM Redeem r WHERE r.maxUser = :maxUser"),
+    @NamedQuery(name = "Redeem.findByCreateDate", query = "SELECT r FROM Redeem r WHERE r.createDate = :createDate"),
+    @NamedQuery(name = "Redeem.findByExpireDate", query = "SELECT r FROM Redeem r WHERE r.expireDate = :expireDate")})
 public class Redeem implements Serializable {
 
     private static final long serialVersionUID = 1L;

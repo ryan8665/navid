@@ -7,6 +7,7 @@ package com.beans;
 
 import com.entity.Redeem;
 import com.entity.RedeemUser;
+import com.service.FinanceService;
 import com.service.FinanceServiceImp;
 import java.text.ParseException;
 import java.util.Date;
@@ -89,14 +90,14 @@ public class redeemUserBean extends BaseBean{
     
     
     public List<RedeemUser> getAllRedeenUser(){
-        FinanceServiceImp financeService = new FinanceServiceImp();
+        FinanceService financeService = new FinanceServiceImp();
         return financeService.getAllRedeemUser();
     }
     
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((RedeemUser) event.getObject()).getId();
-        FinanceServiceImp financeService = new FinanceServiceImp();
+        FinanceService financeService = new FinanceServiceImp();
         RedeemUser redeemUser = financeService.getRedeemUserById(id);
         try {
             vDuoDate = redeemUser.getDuoDate();

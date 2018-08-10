@@ -6,6 +6,7 @@
 package com.beans;
 
 import com.entity.Logs;
+import com.service.LogService;
 import com.service.LogServiceImp;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -19,7 +20,7 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class logsBean extends BaseBean{
     public List<Logs> log() {
-        LogServiceImp logService = new LogServiceImp();
+        LogService logService = new LogServiceImp();
         return logService.getUserLogById(getUserID());
     }
     

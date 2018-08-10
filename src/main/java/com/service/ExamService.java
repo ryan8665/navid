@@ -5,17 +5,18 @@
  */
 package com.service;
 
-import com.entity.UserType;
+import com.entity.GeneralExam;
+import com.entity.GeneralExamUser;
 import java.util.List;
 
 /**
  *
  * @author ryan
  */
-public interface UserTypeService {
-
-    public List<UserType> getAllUserTypes();
+public interface ExamService {
     
-    public UserType getUserTypeDetaile(int id);
+    public List<GeneralExam> getGeneralExam();
+    
+    public List<GeneralExamUser> getGeneralExamByUserId(int id);
     
 }

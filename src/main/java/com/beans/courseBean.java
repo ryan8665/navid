@@ -6,6 +6,7 @@
 package com.beans;
 
 import com.entity.Course;
+import com.service.CourseService;
 import com.service.CourseServiceImp;
 import java.text.ParseException;
 import java.util.List;
@@ -25,12 +26,12 @@ public class courseBean extends BaseBean {
     private int id;
 
     public List<Course> getAllCourse() {
-        CourseServiceImp CourseServiceImp = new CourseServiceImp();
+        CourseService CourseServiceImp = new CourseServiceImp();
         return CourseServiceImp.getAllCourse();
     }
 
     public Course getCourseDetaile() {
-        CourseServiceImp CourseServiceImp = new CourseServiceImp();
+        CourseService CourseServiceImp = new CourseServiceImp();
         return CourseServiceImp.getCourseDetaile(id);
     }
     
@@ -41,7 +42,7 @@ public class courseBean extends BaseBean {
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((Course) event.getObject()).getId();
-        CourseServiceImp courseServiceImp = new CourseServiceImp();
+        CourseService courseServiceImp = new CourseServiceImp();
         Course course = courseServiceImp.getCourseDetaile(id);
 
     }

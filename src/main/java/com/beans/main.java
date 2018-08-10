@@ -6,22 +6,18 @@
 package com.beans;
 
 import com.dto.LoginDto;
-import com.entity.User;
 import com.entity.UserRule;
+import com.service.LoginService;
 import com.service.LoginServiceImp;
-import com.utility.HibernateUtil;
+import com.service.UserService;
+import com.service.UserServiceImp;
 import java.io.IOException;
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -74,8 +70,8 @@ public class main {
 
 
     public void doLogin() throws IOException {
-        LoginServiceImp ol = new LoginServiceImp();
-        
+        LoginService ol = new LoginServiceImp();
+
         loginDto = ol.doLogin(mobile, password);
         isLOgin = loginDto.getLogin();
         

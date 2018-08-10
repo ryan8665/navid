@@ -44,14 +44,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
     @NamedQuery(name = "User.findByNationalcode", query = "SELECT u FROM User u WHERE u.nationalcode = :nationalcode"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
-    @NamedQuery(name = "User.findByCreationDate", query = "SELECT u FROM User u WHERE u.creationDate = :creationDate")})
+    @NamedQuery(name = "User.findByCreationDate", query = "SELECT u FROM User u WHERE u.creationDate = :creationDate"),
+    @NamedQuery(name = "User.findByLastlogin", query = "SELECT u FROM User u WHERE u.lastlogin = :lastlogin")})
 public class User implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "lastlogin")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastlogin;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -80,6 +75,11 @@ public class User implements Serializable {
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "lastlogin")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastlogin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<PackageUser> packageUserCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
@@ -121,6 +121,11 @@ public class User implements Serializable {
 
     public User(Integer id) {
         this.id = id;
+    }
+
+    public User(Integer id, Date lastlogin) {
+        this.id = id;
+        this.lastlogin = lastlogin;
     }
 
     public Integer getId() {
@@ -185,6 +190,14 @@ public class User implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Date getLastlogin() {
+        return lastlogin;
+    }
+
+    public void setLastlogin(Date lastlogin) {
+        this.lastlogin = lastlogin;
     }
 
     @XmlTransient
@@ -351,14 +364,6 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.entity.User[ id=" + id + " ]";
-    }
-
-    public Date getLastlogin() {
-        return lastlogin;
-    }
-
-    public void setLastlogin(Date lastlogin) {
-        this.lastlogin = lastlogin;
     }
     
 }

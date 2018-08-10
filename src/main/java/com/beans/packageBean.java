@@ -4,19 +4,20 @@
  * and open the template in the editor.
  */
 package com.beans;
-import com.entity.Course;
 import com.entity.GlobalStatus;
 import com.entity.Package;
 import com.entity.PackageUser;
-import com.service.CourseServiceImp;
 import com.service.HardnessServiceImp;
 import com.service.PackageServiceImp;
-import java.text.ParseException;
 import java.util.Date;
 import com.entity.Hadrdness;
 import com.entity.Lesson;
 import com.entity.User;
+import com.service.HardnessService;
+import com.service.LessonService;
 import com.service.LessonServiceImp;
+import com.service.PackageService;
+import com.service.TeacherService;
 import com.service.TeacherServiceImp;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -234,27 +235,27 @@ public class packageBean extends BaseBean{
     
     
     public List<Package> allPackage(){
-        PackageServiceImp packageService = new PackageServiceImp();
+        PackageService packageService = new PackageServiceImp();
         return packageService.getAllPackage();
     }
     
     public List<Package> allPackageByUser() {
-        PackageServiceImp packageService = new PackageServiceImp();
+        PackageService packageService = new PackageServiceImp();
         return packageService.getAllPakageByUserId(getUserID());
     }
     
     public Package packageDetaile(){
-        PackageServiceImp packageService = new PackageServiceImp();
+        PackageService packageService = new PackageServiceImp();
         return packageService.getPackage(id);
     }
     
     public void updateStatus(){
-        PackageServiceImp packageService = new PackageServiceImp();
+        PackageService packageService = new PackageServiceImp();
         packageService.changePackageStatus(id);
     }
     
     public void savePackage(int type){
-        PackageServiceImp packageService = new PackageServiceImp();
+        PackageService packageService = new PackageServiceImp();
         Package op = new Package();
         op.setCreationDate(new Date());
         op.setDescrioption(Descrioption);
@@ -274,7 +275,7 @@ public class packageBean extends BaseBean{
     public void onRowSelect(SelectEvent event) throws Exception {
         disable = false;
         id = ((Package) event.getObject()).getId();
-        PackageServiceImp packageService = new PackageServiceImp();
+        PackageService packageService = new PackageServiceImp();
         Package packag= packageService.getPackage(id);
         try {
             vCreationDate = packag.getCreationDate();
@@ -300,22 +301,22 @@ public class packageBean extends BaseBean{
     }
     
     public List<PackageUser> allUserFromPackage(){
-        PackageServiceImp packageService = new PackageServiceImp();
+        PackageService packageService = new PackageServiceImp();
         return packageService.getUserFromPackage(id);
     }
     
     public List<Hadrdness> getAllHardness(){
-        HardnessServiceImp oh = new HardnessServiceImp();
+        HardnessService oh = new HardnessServiceImp();
         return oh.getAllHardness();
     }
     
     public List<Lesson> getAllLesson(){
-        LessonServiceImp ol = new LessonServiceImp();
+        LessonService ol = new LessonServiceImp();
         return ol.getAllLesson();
     }
     
     public List<User> AllTeacher() {
-        TeacherServiceImp ot = new TeacherServiceImp();
+        TeacherService ot = new TeacherServiceImp();
         return ot.getAllTeachers();
     }
 }

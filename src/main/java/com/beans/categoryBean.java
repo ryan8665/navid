@@ -6,6 +6,7 @@
 package com.beans;
 
 import com.entity.Category;
+import com.service.CategoryService;
 import com.service.CategoryServiceImp;
 import java.text.ParseException;
 import java.util.List;
@@ -24,12 +25,12 @@ public class categoryBean extends BaseBean{
         private int id;
         
     public List<Category> getAllcategory(){
-        CategoryServiceImp categoryServiceImp = new CategoryServiceImp();
+        CategoryService categoryServiceImp = new CategoryServiceImp();
         return categoryServiceImp.getAllCategory();
     }
     
     public Category getCategoryDetaile() {
-        CategoryServiceImp categoryServiceImp = new CategoryServiceImp();
+        CategoryService categoryServiceImp = new CategoryServiceImp();
         return categoryServiceImp.getCategoryDetaile(id);
     }
     
@@ -40,7 +41,7 @@ public class categoryBean extends BaseBean{
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((Category) event.getObject()).getId();
-        CategoryServiceImp categoryServiceImp = new CategoryServiceImp();
+        CategoryService categoryServiceImp = new CategoryServiceImp();
         Category category =categoryServiceImp.getCategoryDetaile(id);
 
     }

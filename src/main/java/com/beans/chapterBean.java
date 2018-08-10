@@ -6,6 +6,7 @@
 package com.beans;
 
 import com.entity.Chapter;
+import com.service.ChapterService;
 import com.service.ChapterServiceImp;
 import java.text.ParseException;
 import java.util.List;
@@ -25,12 +26,12 @@ public class chapterBean extends BaseBean {
     private int id;
 
     public List<Chapter> getAllChapter() {
-        ChapterServiceImp chapterServiceImp = new ChapterServiceImp();
+        ChapterService chapterServiceImp = new ChapterServiceImp();
         return chapterServiceImp.getAllChapter();
     }
 
     public Chapter getChapterDetaile() {
-        ChapterServiceImp chapterServiceImp = new ChapterServiceImp();
+        ChapterService chapterServiceImp = new ChapterServiceImp();
         return chapterServiceImp.getChapterDetaile(id);
     }
 
@@ -41,7 +42,7 @@ public class chapterBean extends BaseBean {
     public void onRowSelect(SelectEvent event) throws ParseException {
         disable = false;
         id = ((Chapter) event.getObject()).getId();
-        ChapterServiceImp chapterServiceImp = new ChapterServiceImp();
+        ChapterService chapterServiceImp = new ChapterServiceImp();
         Chapter chapter = chapterServiceImp.getChapterDetaile(id);
 
     }

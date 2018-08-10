@@ -7,6 +7,7 @@ package com.beans;
 
 import com.entity.Message;
 import com.entity.UserType;
+import com.service.UserTypeService;
 import com.service.UserTypeServiceImp;
 import com.service.messageServiceImp;
 import java.text.ParseException;
@@ -63,7 +64,7 @@ public class settingBean {
     
 
     public List<UserType> getUserType() {
-        UserTypeServiceImp userTypeServiceImp = new UserTypeServiceImp();
+        UserTypeService userTypeServiceImp = new UserTypeServiceImp();
         return userTypeServiceImp.getAllUserTypes();
     }
     
