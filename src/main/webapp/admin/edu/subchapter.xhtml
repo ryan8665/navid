@@ -38,6 +38,7 @@
                         <div class="ContainerIndent">
                             <div dir="rtl">
                                 <h:form id="menubar">
+                                    <p:commandButton styleClass="MainButton2"  value="جدید"  type="button" onclick="PF('dlg1').show();" />
                                     <p:commandButton  styleClass="MainButton2" ajax="false" style="float: left" value="Export" type="text" >
                                         <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
                                     </p:commandButton>
@@ -85,6 +86,25 @@
                     </p:panel>
 
                     <div class="EmptyBox20"></div>
+                    
+                    <p:dialog dir="rtl" header="جدید" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg1" modal="true"  width="300">
+                        <h:form id="formnew" class="fontIran">
+                            <p:messages id="messages"  autoUpdate="true" closable="true" />
+                            <p:selectOneMenu required="true" value="#{subChapterBean.chapterID}"   filter="true" filterMatchMode="contains" var="gid"   class=" Container90 ClassRTL Responsive" requiredMessage="لطفا بخش را وارد نمائید">
+                                <f:selectItem  itemLabel="بخش" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{chapterBean.allChapter}"  var="model" itemLabel="#{model.name} - #{model.lessonId.name}" itemValue="2"/>
+                            </p:selectOneMenu>
+                            <div class="EmptyBox10"></div>
+                            <p:inputText placeholder="نام زیر بخش " value="#{subChapterBean.name}" requiredMessage="لطفانام زیر بخش  را وارد نمایید"  maxlength="30" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputNumber placeholder="لول آموزشی" value="#{subChapterBean.sequence}"  maxValue="99999" required="true" />
+                            <div class="EmptyBox5"></div>
+                            <p:inputTextarea placeholder="توضیحات" value="#{subChapterBean.description}" requiredMessage="لطفا توضیحات را وارد نمایید" id="description" maxlength="120" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew messages :menubar" style="float: left" actionListener="#{subChapterBean.saveSubChapter()}" />
+                        </h:form>
+                    </p:dialog>
 
                 </div>     
                 <ui:include src="/Template/footer.xhtml" />

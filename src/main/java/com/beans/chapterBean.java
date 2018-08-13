@@ -6,6 +6,7 @@
 package com.beans;
 
 import com.entity.Chapter;
+import com.entity.Lesson;
 import com.service.ChapterService;
 import com.service.ChapterServiceImp;
 import java.text.ParseException;
@@ -24,6 +25,51 @@ public class chapterBean extends BaseBean {
 
     private boolean disable = true;
     private int id;
+    private String chapterName,chapterDescription;
+    private int subCourseID;
+
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getChapterName() {
+        return chapterName;
+    }
+
+    public void setChapterName(String chapterName) {
+        this.chapterName = chapterName;
+    }
+
+    public String getChapterDescription() {
+        return chapterDescription;
+    }
+
+    public void setChapterDescription(String chapterDescription) {
+        this.chapterDescription = chapterDescription;
+    }
+
+
+    public int getSubCourseID() {
+        return subCourseID;
+    }
+
+    public void setSubCourseID(int subCourseID) {
+        this.subCourseID = subCourseID;
+    }
+    
+    
 
     public List<Chapter> getAllChapter() {
         ChapterService chapterServiceImp = new ChapterServiceImp();
@@ -36,7 +82,12 @@ public class chapterBean extends BaseBean {
     }
 
     public void saveChapter() {
-
+        ChapterService chapterServiceImp = new ChapterServiceImp();
+        Chapter oc = new Chapter();
+        oc.setDescription(chapterName);
+        oc.setLessonId(new Lesson(subCourseID));
+        oc.setName(chapterName);
+        chapterServiceImp.saveChapter(oc);
     }
 
     public void onRowSelect(SelectEvent event) throws ParseException {

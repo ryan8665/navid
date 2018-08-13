@@ -18,6 +18,8 @@ import com.service.ExamService;
 import com.service.ExamServiceImp;
 import com.service.FinanceService;
 import com.service.FinanceServiceImp;
+import com.service.HardnessService;
+import com.service.HardnessServiceImp;
 import com.service.LogService;
 import com.service.LogServiceImp;
 import com.service.PackageService;
@@ -55,6 +57,80 @@ public class userBean extends BaseBean {
     private String vPassword, Password;
     private String sms, message, title;
     private int userTypeId;
+    private String examName, examDescription, examHardness, examChapter, examSubChapter, examLesson, examType, examPackage;
+    private Date examDueDate;
+
+    public String getExamPackage() {
+        return examPackage;
+    }
+
+    public void setExamPackage(String examPackage) {
+        this.examPackage = examPackage;
+    }
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
+
+    public String getExamDescription() {
+        return examDescription;
+    }
+
+    public void setExamDescription(String examDescription) {
+        this.examDescription = examDescription;
+    }
+
+    public String getExamHardness() {
+        return examHardness;
+    }
+
+    public void setExamHardness(String examHardness) {
+        this.examHardness = examHardness;
+    }
+
+    public String getExamChapter() {
+        return examChapter;
+    }
+
+    public void setExamChapter(String examChapter) {
+        this.examChapter = examChapter;
+    }
+
+    public String getExamSubChapter() {
+        return examSubChapter;
+    }
+
+    public void setExamSubChapter(String examSubChapter) {
+        this.examSubChapter = examSubChapter;
+    }
+
+    public String getExamLesson() {
+        return examLesson;
+    }
+
+    public void setExamLesson(String examLesson) {
+        this.examLesson = examLesson;
+    }
+
+    public String getExamType() {
+        return examType;
+    }
+
+    public void setExamType(String examType) {
+        this.examType = examType;
+    }
+
+    public Date getExamDueDate() {
+        return examDueDate;
+    }
+
+    public void setExamDueDate(Date examDueDate) {
+        this.examDueDate = examDueDate;
+    }
 
     public int getUserTypeId() {
         return userTypeId;
@@ -63,8 +139,6 @@ public class userBean extends BaseBean {
     public void setUserTypeId(int userTypeId) {
         this.userTypeId = userTypeId;
     }
-    
-    
 
     public String getTitle() {
         return title;
@@ -295,8 +369,6 @@ public class userBean extends BaseBean {
 
     }
 
-   
-
     public List<PackageUser> getPackage() {
         PackageService packageService = new PackageServiceImp();
         return packageService.getUserFromPackage(id);
@@ -308,8 +380,8 @@ public class userBean extends BaseBean {
         return financeService.getAllTransactionByUserId(id);
 
     }
-    
-    public  List<UserType> getAlluserType(){
+
+    public List<UserType> getAlluserType() {
         UserTypeService userTypeService = new UserTypeServiceImp();
         return userTypeService.getAllUserTypes();
     }
@@ -319,10 +391,10 @@ public class userBean extends BaseBean {
         return examService.getGeneralExamByUserId(id);
 
     }
-    
+
     public void saveUser() {
 
-        UserService userService = new UserServiceImp();    
+        UserService userService = new UserServiceImp();
         if (userService.chackUserisExist(Mobile)) {
             User ou = new User();
             ou.setAddress(Address);
@@ -338,6 +410,64 @@ public class userBean extends BaseBean {
             userService.saveUser(ou);
         }
 
+    }
+
+    public void saveExam() {
+
+    }
+    private boolean subchap = false, chap = false, lesso = false;
+
+    private String examFrom;
+
+    public String getExamFrom() {
+        return examFrom;
+    }
+
+    public void setExamFrom(String examFrom) {
+        this.examFrom = examFrom;
+    }
+
+    public boolean isSubchap() {
+        return subchap;
+    }
+
+    public boolean isChap() {
+        return chap;
+    }
+
+    public boolean isLesso() {
+        return lesso;
+    }
+
+    public void examFrom() {
+        switch (examFrom) {
+            case "1":
+                lesso = true;
+                chap = false;
+                subchap = false;
+                break;
+            case "2":
+                lesso = false;
+                chap = true;
+                subchap = false;
+                break;
+            case "3":
+                lesso = false;
+                chap = false;
+                subchap = true;
+                break;
+        }
+
+    }
+    
+    public List<com.entity.Hadrdness> getHardness(){
+        HardnessService hardnessService = new HardnessServiceImp();
+        return hardnessService.getAllHardness();
+    }
+    
+    public List<com.entity.ExamType> getAllExamType() {
+        ExamService examService = new ExamServiceImp();
+        return examService.getAllExamType();
     }
 
 }

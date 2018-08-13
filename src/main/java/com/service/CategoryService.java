@@ -15,6 +15,8 @@ import java.util.List;
 public interface CategoryService {
     public List<Category> getAllCategory();
     
+    public List<Category> getAllCategorySorted();
+    
     public Category getCategoryDetaile(int id);
     
     public void saveCategory(Category category);

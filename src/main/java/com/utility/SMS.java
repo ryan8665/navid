@@ -35,12 +35,12 @@ public class SMS {
                     + "در " + com.utility.DateTime.todayDay() + "");
         } catch (com.kavenegar.sdk.excepctions.ApiException ex) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطارخ می دهد.
-            System.out.print("Message 11111111111111: " + ex.toString());
+            System.out.print("Message SMS: " + ex.toString());
         } catch (com.kavenegar.sdk.excepctions.HttpException ex) {
             // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-            System.out.print("Message 11111111111111112: " + ex.toString());
+            System.out.print("Message SMS: " + ex.toString());
         } catch (Exception ex) {
-            System.out.print("Message 11111111111111113: " + ex.toString());
+            System.out.print("Message SMS: " + ex.toString());
         }
     }
 
@@ -54,12 +54,12 @@ public class SMS {
                     + "گذرواژه: " + pass + "");
         } catch (com.kavenegar.sdk.excepctions.ApiException ex) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطارخ می دهد.
-            System.out.print("Message 11111111111111: " + ex.toString());
+            System.out.print("Message SMS: " + ex.toString());
         } catch (com.kavenegar.sdk.excepctions.HttpException ex) {
             // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-            System.out.print("Message 11111111111111113: " + ex.toString());
+            System.out.print("Message SMS: " + ex.toString());
         } catch (Exception ex) {
-            System.out.print("Message 11111111111111113: " + ex.toString());
+            System.out.print("Message SMS: " + ex.toString());
         }
     }
     

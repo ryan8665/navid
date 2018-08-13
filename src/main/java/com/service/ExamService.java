@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import com.entity.ExamType;
 import com.entity.GeneralExam;
 import com.entity.GeneralExamUser;
 import java.util.List;
@@ -18,5 +19,7 @@ public interface ExamService {
     public List<GeneralExam> getGeneralExam();
     
     public List<GeneralExamUser> getGeneralExamByUserId(int id);
+    
+    public List<ExamType> getAllExamType();
     
 }

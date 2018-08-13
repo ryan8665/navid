@@ -90,7 +90,7 @@ public class main {
             userRule = ol.getUserRule(loginDto.getUserType());
             ol.updateLastLoginById(loginDto.getUserType());
             com.loger.log.newLog(1);
-            com.utility.SMS.sendWelcome(mobile, loginDto.getName()+" "+loginDto.getFamily());
+          //  com.utility.SMS.sendWelcome(mobile, loginDto.getName()+" "+loginDto.getFamily());
             FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "نام کاربری  یا پسورد اشتباه می باشد", "نام کاربری  یا پسورد اشتباه می باشد"));

@@ -56,4 +56,19 @@ public class CategoryServiceImp implements CategoryService{
         session.close();
     }
 
+    @Override
+    public List<Category> getAllCategorySorted() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<Category> categoryList = session.createCriteria(Category.class)
+                    .addOrder(Order.desc("id"))
+                    .list();
+            return categoryList;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
 }

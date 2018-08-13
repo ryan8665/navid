@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import com.entity.Chapter;
 import com.entity.GlobalStatus;
 import com.entity.Package;
 import com.entity.PackageUser;
@@ -113,6 +114,11 @@ public class PackageServiceImp implements PackageService{
             session.close();
 
         }
+    }
+
+    @Override
+    public List<Chapter> getChapterFromPackage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

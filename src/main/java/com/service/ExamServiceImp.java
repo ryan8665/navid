@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import com.entity.ExamType;
 import com.entity.GeneralExam;
 import com.entity.GeneralExamUser;
 import com.utility.HibernateUtil;
@@ -48,6 +49,22 @@ public class ExamServiceImp implements ExamService{
                     .addOrder(Order.desc("id"))
                     .list();
             return generalExamList;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            session.close();
+
+        }
+    }
+
+    @Override
+    public List<ExamType> getAllExamType() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<ExamType> examTypeList = session.createCriteria(ExamType.class)
+                    .addOrder(Order.desc("id"))
+                    .list();
+            return examTypeList;
         } catch (Exception e) {
             return null;
         } finally {

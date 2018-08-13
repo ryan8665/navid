@@ -24,9 +24,50 @@ public class categoryBean extends BaseBean{
         private boolean disable =true;
         private int id;
         
+        private String catName,catDescription;
+
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCatName() {
+        return catName;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
+    }
+
+    public String getCatDescription() {
+        return catDescription;
+    }
+
+    public void setCatDescription(String catDescription) {
+        this.catDescription = catDescription;
+    }
+        
+        
+        
     public List<Category> getAllcategory(){
         CategoryService categoryServiceImp = new CategoryServiceImp();
         return categoryServiceImp.getAllCategory();
+    }
+    
+    public List<Category> getAllcategorySorted() {
+        CategoryService categoryServiceImp = new CategoryServiceImp();
+        return categoryServiceImp.getAllCategorySorted();
     }
     
     public Category getCategoryDetaile() {
@@ -35,6 +76,11 @@ public class categoryBean extends BaseBean{
     }
     
     public void saveCategory(){
+        CategoryService categoryServiceImp = new CategoryServiceImp();
+        Category oc = new Category();
+        oc.setDescription(catDescription);
+        oc.setName(catName);
+        categoryServiceImp.saveCategory(oc);
         
     }
     

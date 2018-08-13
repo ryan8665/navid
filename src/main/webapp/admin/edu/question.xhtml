@@ -38,6 +38,10 @@
                         <div class="ContainerIndent">
                             <div dir="rtl">
                                 <h:form id="menubar">
+                                    <p:commandButton styleClass="MainButton2"  value="جدید" type="button" onclick="PF('dlg1').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{questionBean.disable}"  value="نمایش" type="button" onclick="PF('dlg2').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{questionBean.disable}" update=":formmain :menubar"  action="#{questionBean.updateStatus()}" 
+                                                     value="فعال/غیر فعال"  ajax="true"  /> 
                                     <p:commandButton  styleClass="MainButton2" ajax="false" style="float: left" value="Export" type="text" >
                                         <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
                                     </p:commandButton>
@@ -92,6 +96,51 @@
                     </p:panel>
 
                     <div class="EmptyBox20"></div>
+                    
+                    <p:dialog dir="rtl" header="جدید" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg1" modal="true"  width="500" height="500">
+                        <h:form id="formnew" class="fontIran">
+                            <p:messages id="messages"  autoUpdate="true" closable="true" />
+                            <p:inputText id="a" placeholder="سوال" value="#{questionBean.question}"   maxlength="300" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputText id="b" placeholder="جواب  اول" value="#{questionBean.answerA}"   maxlength="300" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputText id="c" placeholder="جواب دوم" value="#{questionBean.answerB}"   maxlength="300" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputText id="d" placeholder="جواب سوم" value="#{questionBean.answerC}"   maxlength="300" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputText id="e" placeholder="جوای چهار" value="#{questionBean.answerD}"   maxlength="300" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputText id="f" placeholder="جواب درست" value="#{questionBean.rightAnswer}"   maxlength="300" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputText id="g" placeholder="زمان" value="#{questionBean.time}"   maxlength="300" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputTextarea id="h" placeholder="راهنما" value="#{questionBean.description}"  maxlength="500" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:inputTextarea id="k" placeholder="نکته" value="#{questionBean.note}"  maxlength="500" required="true" class="Container96"/>
+                            <div class="EmptyBox5"></div>
+                            <p:selectOneMenu id="l" required="true" value="#{questionBean.subchapter}"    filter="true" filterMatchMode="contains" var="gid"   class=" Container90 ClassRTL Responsive" >
+                                <f:selectItem  itemLabel="زیر بخش" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{subChapterBean.allSubChapter}"  var="cc" itemLabel="#{cc.name} - #{cc.chapterId.lessonId.name}" itemValue="#{cc.id}"/>
+                            </p:selectOneMenu>
+                            <div class="EmptyBox5"></div>
+                            <p:selectOneMenu id="m" required="true" value="#{questionBean.importance}"    filter="true" filterMatchMode="contains" var="gid"   class=" Container90 ClassRTL Responsive" >
+                                <f:selectItem  itemLabel="اهمیت" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{questionBean.allImportance}"  var="im" itemLabel="#{im.name}" itemValue="#{im.id}"/>
+                            </p:selectOneMenu>
+                            <div class="EmptyBox5"></div>
+                            <p:selectOneMenu id="n" required="true" value="#{questionBean.hardness}"    filter="true" filterMatchMode="contains" var="gid"   class=" Container90 ClassRTL Responsive" >
+                                <f:selectItem  itemLabel="سختی" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{questionBean.allHardness}"  var="ha" itemLabel="#{ha.name}" itemValue="#{ha.id}"/>
+                            </p:selectOneMenu>
+                            <div class="EmptyBox5"></div>
+                            <p:chips id="o" value="#{questionBean.tag}" placeholder="تگ"  class=" Container96 ClassRTL Responsive" />
+                            <div class="EmptyBox5"></div>
+                            <!--<p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew  :menubar" style="float: left" actionListener="" />-->
+                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت"  style="float: left"  actionListener="#{questionBean.saveQuestion()}" />
+                            <div class="EmptyBox5"></div>
+                        </h:form>
+                    </p:dialog>
 
                 </div>     
                 <ui:include src="/Template/footer.xhtml" />

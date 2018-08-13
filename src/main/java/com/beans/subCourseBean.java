@@ -5,6 +5,7 @@
  */
 package com.beans;
 
+import com.entity.Course;
 import com.entity.Lesson;
 import com.service.LessonService;
 import com.service.LessonServiceImp;
@@ -24,6 +25,50 @@ public class subCourseBean extends BaseBean {
 
     private boolean disable = true;
     private int id;
+    private String subCourseName,subCourseDescription;
+    private int CourseId;
+
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getSubCourseName() {
+        return subCourseName;
+    }
+
+    public void setSubCourseName(String subCourseName) {
+        this.subCourseName = subCourseName;
+    }
+
+    public String getSubCourseDescription() {
+        return subCourseDescription;
+    }
+
+    public void setSubCourseDescription(String subCourseDescription) {
+        this.subCourseDescription = subCourseDescription;
+    }
+
+    public int getCourseId() {
+        return CourseId;
+    }
+
+    public void setCourseId(int CourseId) {
+        this.CourseId = CourseId;
+    }
+    
+    
 
     public List<Lesson> getAllLesson() {
         LessonService LessonServiceImp = new LessonServiceImp();
@@ -36,6 +81,12 @@ public class subCourseBean extends BaseBean {
     }
     
     public void saveLesson() {
+        LessonService LessonService = new LessonServiceImp();
+        Lesson ol = new Lesson();
+        ol.setCourseId(new Course(CourseId));
+        ol.setDescription(subCourseDescription);
+        ol.setName(subCourseName);
+        LessonService.saveLesson(ol);
 
     }
     

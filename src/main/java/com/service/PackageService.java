@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import com.entity.Chapter;
 import com.entity.Package;
 import com.entity.PackageUser;
 import java.util.List;
@@ -26,5 +27,7 @@ public interface PackageService {
     public void changePackageStatus(int id);
     
     public List<PackageUser> getUserFromPackage(int id);
+    
+    public List<Chapter> getChapterFromPackage();
     
 }
