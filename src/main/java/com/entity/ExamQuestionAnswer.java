@@ -36,15 +36,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ExamQuestionAnswer.findByDueDate", query = "SELECT e FROM ExamQuestionAnswer e WHERE e.dueDate = :dueDate")})
 public class ExamQuestionAnswer implements Serializable {
 
+    @Lob
+    @Column(name = "answer")
+    private byte[] answer;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Lob
-    @Column(name = "answer")
-    private byte[] answer;
     @Column(name = "due_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dueDate;
@@ -70,13 +71,6 @@ public class ExamQuestionAnswer implements Serializable {
         this.id = id;
     }
 
-    public byte[] getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(byte[] answer) {
-        this.answer = answer;
-    }
 
     public Date getDueDate() {
         return dueDate;
@@ -125,6 +119,14 @@ public class ExamQuestionAnswer implements Serializable {
     @Override
     public String toString() {
         return "com.entity.ExamQuestionAnswer[ id=" + id + " ]";
+    }
+
+    public byte[] getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(byte[] answer) {
+        this.answer = answer;
     }
     
 }

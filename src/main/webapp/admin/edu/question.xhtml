@@ -100,7 +100,7 @@
                     <p:dialog dir="rtl" header="جدید" hideEffect="fade" showEffect="fade" 
                               closable="true" closeOnEscape="true" widgetVar="dlg1" modal="true"  width="500" height="500">
                         <h:form id="formnew" class="fontIran">
-                            <p:messages id="messages"  autoUpdate="true" closable="true" />
+                            
                             <p:inputText id="a" placeholder="سوال" value="#{questionBean.question}"   maxlength="300" required="true" class="Container96"/>
                             <div class="EmptyBox5"></div>
                             <p:inputText id="b" placeholder="جواب  اول" value="#{questionBean.answerA}"   maxlength="300" required="true" class="Container96"/>
@@ -137,7 +137,7 @@
                             <p:chips id="o" value="#{questionBean.tag}" placeholder="تگ"  class=" Container96 ClassRTL Responsive" />
                             <div class="EmptyBox5"></div>
                             <!--<p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew  :menubar" style="float: left" actionListener="" />-->
-                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت"  style="float: left"  actionListener="#{questionBean.saveQuestion()}" />
+                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew  :menubar" style="float: left"  actionListener="#{questionBean.saveQuestion()}" />
                             <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>
