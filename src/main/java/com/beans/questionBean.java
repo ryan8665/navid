@@ -12,16 +12,24 @@ import com.entity.Question;
 import com.entity.QuestionType;
 import com.entity.SubChapter;
 import com.entity.User;
+import com.service.FileService;
+import com.service.FileServiceImp;
 import com.service.HardnessService;
 import com.service.HardnessServiceImp;
 import com.service.ImportanceService;
 import com.service.ImportanceServiceImp;
 import com.service.QuestionService;
 import com.service.QuestionServiceImp;
+import com.utility.XlsParser;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -199,7 +207,10 @@ public class questionBean extends BaseBean {
         
     }
     
-    public void doSave(){
+    public void doSave(Question oq){
+        System.out.println("com.beans.questionBean.saveQuestion()ssssssssssssssssssssssssssssssssssssssssssss");
+        QuestionServiceImp questionServiceImp = new QuestionServiceImp();
+        questionServiceImp.saveQuestion(oq);
      
     }
     
@@ -224,6 +235,22 @@ public class questionBean extends BaseBean {
     public List<Importance> getAllImportance() {
         ImportanceService importanceService = new ImportanceServiceImp();
         return importanceService.getAllImportance();
+    }
+    
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
+        FileService fileService = new FileServiceImp();
+        FacesMessage message = new FacesMessage("آپلود شد", " آپلود شد.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        ServletContext ctx = (ServletContext) FacesContext
+                .getCurrentInstance().getExternalContext().getContext();
+        String absoluteDiskPath = ctx.getRealPath("/resources/files/");
+        System.out.println("----------- " + absoluteDiskPath);
+        fileService.copyStream(event.getFile().getInputstream(), absoluteDiskPath + "/"+getUserID() ,"xls");
+        List<Question> qList =  XlsParser.doPars(absoluteDiskPath + "/"+getUserID()+".xls");
+        for (Question question1 : qList) {
+            doSave(question1);
+        }
+
     }
     
 }

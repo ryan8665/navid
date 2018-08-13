@@ -42,6 +42,7 @@
                                     <p:commandButton styleClass="MainButton2" disabled="#{questionBean.disable}"  value="نمایش" type="button" onclick="PF('dlg2').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{questionBean.disable}" update=":formmain :menubar"  action="#{questionBean.updateStatus()}" 
                                                      value="فعال/غیر فعال"  ajax="true"  /> 
+                                    <p:commandButton styleClass="MainButton2"  value="import" type="button" style="float: left" onclick="PF('dlg4').show();" />
                                     <p:commandButton  styleClass="MainButton2" ajax="false" style="float: left" value="Export" type="text" >
                                         <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
                                     </p:commandButton>
@@ -139,6 +140,15 @@
                             <!--<p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew  :menubar" style="float: left" actionListener="" />-->
                             <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew  :menubar" style="float: left"  actionListener="#{questionBean.saveQuestion()}" />
                             <div class="EmptyBox5"></div>
+                        </h:form>
+                    </p:dialog>
+                    
+                    <p:dialog dir="rtl" header="آپلود فایل" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg4" modal="true" >
+                        <h:form id="formphoto">
+                            <p:fileUpload styleClass="MainButton2" fileUploadListener="#{questionBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                                          update="messages" sizeLimit="1500000"  allowTypes="/(\.|\/)(xls)$/" />
+                            <p:growl id="messages" showDetail="false"  />
                         </h:form>
                     </p:dialog>
 
