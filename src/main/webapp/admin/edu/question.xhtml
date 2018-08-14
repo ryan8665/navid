@@ -147,7 +147,7 @@
                               closable="true" closeOnEscape="true" widgetVar="dlg4" modal="true" >
                         <h:form id="formphoto">
                             <p:fileUpload styleClass="MainButton2" fileUploadListener="#{questionBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                                          update="messages" sizeLimit="1500000"  allowTypes="/(\.|\/)(xls)$/" />
+                                          update="messages :formmain" sizeLimit="1500000"  allowTypes="/(\.|\/)(xls)$/" />
                             <p:growl id="messages" showDetail="false"  />
                         </h:form>
                     </p:dialog>

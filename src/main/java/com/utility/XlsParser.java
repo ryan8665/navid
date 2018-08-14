@@ -5,9 +5,11 @@
  */
 package com.utility;
 
+import com.entity.GlobalStatus;
 import com.entity.Hadrdness;
 import com.entity.Importance;
 import com.entity.Question;
+import com.entity.QuestionType;
 import com.entity.SubChapter;
 import com.entity.User;
 import java.io.FileInputStream;
@@ -26,6 +28,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 public class XlsParser {
 
     public static List<Question> doPars(String file) {
+        int subchapter, importance = 1, userid, hardness = 1, time, answer, qType;
         try {
             POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(file));
             HSSFWorkbook wb = new HSSFWorkbook(fs);
@@ -51,9 +54,11 @@ public class XlsParser {
                     }
                 }
             }
-
+            Question ou = new Question();
+            boolean flag = false;
             for (int r = 0; r < rows; r++) {
                 System.out.println("row " + r);
+                ou = new Question();
                 row = sheet.getRow(r);
                 if (row != null) {
                     for (int c = 0; c < cols; c++) {
@@ -68,13 +73,26 @@ public class XlsParser {
                                     System.out.println("chapter = " + cell);
                                     chapter = cell.toString();
                                 }
+                                if (c == 2) {
+                                    System.out.println("importance = " + cell);
+                                    importance = (int) Double.parseDouble(cell.toString());
+                                }
+                                if (c == 3) {
+                                    System.out.println("hardness = " + cell);
+                                    hardness = (int) Double.parseDouble(cell.toString());
+                                }
+                                if (c == 4) {
+                                    System.out.println("qType = " + cell);
+                                    qType = (int) Double.parseDouble(cell.toString());
+                                }
                             }
+
                             if (r > 0) {
-                                Question ou = new Question();
+
                                 switch (c) {
                                     case 0:
                                         System.out.println("subchapter = " + cell);
-                                        ou.setSubChapterId(new SubChapter(Integer.parseInt(cell.toString())));
+                                        ou.setSubChapterId(new SubChapter((int) Double.parseDouble(cell.toString())));
                                         break;
                                     case 1:
                                         System.out.println("soal = " + cell);
@@ -97,8 +115,12 @@ public class XlsParser {
                                         ou.setAnswerD(cell.toString());
                                         break;
                                     case 6:
-                                        System.out.println("javabe dorost = " + cell);
-                                        ou.setAnswer(Integer.parseInt(cell.toString()));
+                                        try {
+                                            answer = (int) Double.parseDouble(cell.toString());
+                                            ou.setAnswer(answer);
+                                            System.out.println("javabe dorost = " + answer);
+                                        } catch (Exception e) {
+                                        }
                                         break;
                                     case 7:
                                         System.out.println("description = " + cell);
@@ -109,26 +131,46 @@ public class XlsParser {
                                         ou.setNote(cell.toString());
                                         break;
                                     case 9:
-                                        System.out.println("time = " + cell);
-                                        ou.setTime(Integer.parseInt(cell.toString()));
+                                        try {
+                                            time = (int) Double.parseDouble(cell.toString());
+                                            ou.setTime(time);
+                                            System.out.println("time = " + time);
+                                        } catch (Exception e) {
+                                        }
+
                                         break;
                                     case 10:
-                                        System.out.println("hardness = " + cell);
-                                        ou.setHadrdnessId(new Hadrdness(Integer.parseInt(cell.toString())));
+                                        try {
+                                            hardness = (int) Double.parseDouble(cell.toString());
+                                            System.out.println("hardness = " + hardness);
+                                        } catch (Exception e) {
+                                        }
                                         break;
                                     case 11:
-                                        System.out.println("importance = " + cell);
-                                        ou.setImportanceId(new Importance(Integer.parseInt(cell.toString())));
+                                        try {
+                                            importance = (int) Double.parseDouble(cell.toString());
+                                            System.out.println("importance = " + importance);
+                                        } catch (Exception e) {
+                                        }
                                         break;
 
                                 }
-                                ou.setUserId(new User(Integer.parseInt(user)));
-                                qList.add(ou);
+
                             }
 
                         }
                     }
                 }
+                if (flag) {
+                    ou.setUserId(new User((int) Double.parseDouble(user)));
+                    ou.setHadrdnessId(new Hadrdness(hardness));
+                    ou.setImportanceId(new Importance(importance));
+                    ou.setQuestionTypeId(new QuestionType(1));
+                    ou.setGlobalStatusId(new GlobalStatus(1));
+                    ou.setSubChapterId(new SubChapter(1));
+                    qList.add(ou);
+                }
+                flag = true;
             }
             return qList;
         } catch (Exception ioe) {
