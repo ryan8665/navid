@@ -81,6 +81,8 @@ public class Package implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private User userId;
+    @OneToMany(mappedBy = "packageId")
+    private Collection<Room> roomCollection;
 
     public Package() {
     }
@@ -184,6 +186,15 @@ public class Package implements Serializable {
 
     public void setUserId(User userId) {
         this.userId = userId;
+    }
+
+    @XmlTransient
+    public Collection<Room> getRoomCollection() {
+        return roomCollection;
+    }
+
+    public void setRoomCollection(Collection<Room> roomCollection) {
+        this.roomCollection = roomCollection;
     }
 
     @Override

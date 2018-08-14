@@ -46,5 +46,7 @@
         <mapping class="com.entity.News"/>
         <mapping class="com.entity.NewsCat"/>
         <mapping class="com.entity.Message"/>
+        <mapping class="com.entity.Room"/>
+        <mapping class="com.entity.RoomUser"/>
     </session-factory>
 </hibernate-configuration>

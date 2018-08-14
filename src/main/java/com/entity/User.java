@@ -85,6 +85,8 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Media> mediaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<RoomUser> roomUserCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<GeneralExamUser> generalExamUserCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Logs> logsCollection;
@@ -216,6 +218,15 @@ public class User implements Serializable {
 
     public void setMediaCollection(Collection<Media> mediaCollection) {
         this.mediaCollection = mediaCollection;
+    }
+
+    @XmlTransient
+    public Collection<RoomUser> getRoomUserCollection() {
+        return roomUserCollection;
+    }
+
+    public void setRoomUserCollection(Collection<RoomUser> roomUserCollection) {
+        this.roomUserCollection = roomUserCollection;
     }
 
     @XmlTransient
