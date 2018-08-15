@@ -35,7 +35,7 @@ public class RoomServiceImp implements RoomService{
     }
 
     @Override
-    public List<Room> getAllQuestionByPackage(int id) {
+    public List<Room> getAllRoomByPackage(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             List<Room> rooms = session.createCriteria(Room.class)

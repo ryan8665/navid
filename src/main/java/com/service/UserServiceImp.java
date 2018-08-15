@@ -75,7 +75,7 @@ public class UserServiceImp implements UserService{
     @Override
     public List<Object[]> cuntUserGroupByUser() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Object[]> res =  (List<Object[]>) session.createSQLQuery("SELECT count(u.`id`) as count , ut.`name` as name  FROM `user` as u inner join user_type as ut on u.`user_type_id` = ut.`id`").list();
+        List<Object[]> res =  (List<Object[]>) session.createSQLQuery("SELECT count(ut.`name`) as count , ut.`name` as name  FROM `user` as u inner join user_type as ut on u.`user_type_id` = ut.`id` group by `user_type_id`").list();
         return res;
     }
     
