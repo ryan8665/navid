@@ -94,4 +94,11 @@ public class roomBean extends BaseBean{
     
 
     }
+    public void deleteRoom() {
+        disable = true;
+        RoomService roomService = new RoomServiceImp();
+        Room or = new Room(id);
+        roomService.deleteRoom(or);
+
+    }
 }

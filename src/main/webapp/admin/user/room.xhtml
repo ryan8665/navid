@@ -13,7 +13,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title>کاربران</title>
+        <title>گروه ها</title>
         <h:outputScript name="js/layout.js" library="sentinel-layout" />
         <ui:insert name="head" />
         <style type="text/css">
@@ -39,6 +39,8 @@
                             <div dir="rtl">
                                 <h:form id="menubar">
                                     <p:commandButton styleClass="MainButton2"  value="جدید" type="button" onclick="PF('dlg1').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{roomBean.disable}" update=":formmain :menubar"  action="#{roomBean.deleteRoom()}" 
+                                                     value="حذف گروه"  ajax="true"  /> 
                                     <p:commandButton styleClass="MainButton2" disabled="#{roomBean.disable}"  value="ارسال پیامک" type="button" onclick="PF('dlg4').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{roomBean.disable}"  value="ارسال پیام" type="button" onclick="PF('dlg5').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{roomBean.disable}"  value="عملیات" type="button" onclick="PF('dlg6').show();" />
@@ -57,7 +59,7 @@
                                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
                                         <p:ajax event="rowSelect" update=":menubar" listener="#{roomBean.onRowSelect}" />
-                                        <p:column class="ClassRTL fontIran Fs12" width="25%" sortBy="#{item.date}" 
+                                        <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.date}" 
                                                   filterBy="#{item.date}" filterMatchMode="contains" style="text-align: center" >
                                             <f:facet name="header">
                                                 <h:outputText value="تاریخ"/>
@@ -65,7 +67,7 @@
                                             <h:outputText value="#{dateTime.getCurrentShamsidate(item.date)}">
                                             </h:outputText>
                                         </p:column>
-                                        <p:column class="ClassRTL fontIran Fs12" width="35%" sortBy="#{item.name}" 
+                                        <p:column class="ClassRTL fontIran Fs12" width="45%" sortBy="#{item.name}" 
                                                   filterBy="#{item.name}" filterMatchMode="contains">
                                             <f:facet name="header">
                                                 <h:outputText value="نام گروه"/>

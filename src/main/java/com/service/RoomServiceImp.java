@@ -9,6 +9,7 @@ import com.entity.Room;
 import com.entity.RoomUser;
 import com.utility.HibernateUtil;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -62,7 +63,13 @@ public class RoomServiceImp implements RoomService{
     @Override
     public void deleteRoom(Room room) {
         Session session = HibernateUtil.getSessionFactory().openSession();
+        session.flush();
+        session.clear();
+        Query query = session.createQuery("DELETE FROM RoomUser AS r WHERE r.roomId = " + room.getId());
+
+     
         session.beginTransaction();
+        query.executeUpdate();
         session.delete(room);
         session.getTransaction().commit();
         session.close();
