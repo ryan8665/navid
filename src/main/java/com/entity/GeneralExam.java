@@ -6,10 +6,8 @@
 package com.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,13 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -59,14 +55,12 @@ public class GeneralExam implements Serializable {
     @Column(name = "due_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dueDate;
+    @Size(max = 45)
     @Column(name = "name")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date name;
+    private String name;
     @Size(max = 500)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generalExamId")
-    private Collection<GeneralExamUser> generalExamUserCollection;
     @JoinColumn(name = "lesson_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Lesson lessonId;
@@ -110,11 +104,11 @@ public class GeneralExam implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public Date getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Date name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -124,15 +118,6 @@ public class GeneralExam implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @XmlTransient
-    public Collection<GeneralExamUser> getGeneralExamUserCollection() {
-        return generalExamUserCollection;
-    }
-
-    public void setGeneralExamUserCollection(Collection<GeneralExamUser> generalExamUserCollection) {
-        this.generalExamUserCollection = generalExamUserCollection;
     }
 
     public Lesson getLessonId() {
