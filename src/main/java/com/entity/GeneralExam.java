@@ -46,9 +46,9 @@ public class GeneralExam implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
     @Column(name = "creation_date")
-    private String creationDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
     @Column(name = "expire_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date expireDate;
@@ -80,11 +80,11 @@ public class GeneralExam implements Serializable {
         this.id = id;
     }
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
