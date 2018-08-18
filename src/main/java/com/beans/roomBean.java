@@ -5,15 +5,15 @@
  */
 package com.beans;
 
-import com.entity.PackageUser;
 import com.entity.Room;
-import com.entity.User;
+import com.entity.RoomUser;
 import com.service.PackageService;
 import com.service.PackageServiceImp;
 import com.service.RoomService;
 import com.service.RoomServiceImp;
-import com.service.UserService;
-import com.service.UserServiceImp;
+import com.service.messageService;
+import com.service.messageServiceImp;
+import com.utility.SMS;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +31,34 @@ public class roomBean extends BaseBean{
     private boolean disable = true;
     private int id;
     private String pack,gropName;
+    private String sms;
+    private String msgSubject,message;
+
+    public String getSms() {
+        return sms;
+    }
+
+    public void setSms(String sms) {
+        this.sms = sms;
+    }
+
+    public String getMsgSubject() {
+        return msgSubject;
+    }
+
+    public void setMsgSubject(String msgSubject) {
+        this.msgSubject = msgSubject;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    
 
     public boolean isDisable() {
         return disable;
@@ -100,5 +128,22 @@ public class roomBean extends BaseBean{
         Room or = new Room(id);
         roomService.deleteRoom(or);
 
+    }
+    
+    public void sensSMS(){
+        RoomService roomService = new RoomServiceImp();
+        List<RoomUser>  users = roomService.getUsersOfRoom(id);
+        for (RoomUser user : users) {
+            SMS._send(user.getUserId().getMobile(), sms);
+        }
+        
+    }
+    
+    public void sendMsg(){
+        RoomService roomService = new RoomServiceImp();
+        List<RoomUser> users = roomService.getUsersOfRoom(id);
+        messageService  messageService = new messageServiceImp();
+        messageService.saveBatchMsg(users, message, msgSubject, getUserID());
+        
     }
 }

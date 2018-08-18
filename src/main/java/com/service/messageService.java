@@ -6,7 +6,7 @@
 package com.service;
 
 import com.entity.Message;
-import java.math.BigInteger;
+import com.entity.RoomUser;
 import java.util.List;
 
 /**
@@ -26,4 +26,6 @@ public interface messageService {
     public void updateMessageFlag(int id);
     
     public Long countUnreadMessage(int id);
+    
+    public void saveBatchMsg(List<RoomUser> users ,String msg ,String title,int sender);
 }

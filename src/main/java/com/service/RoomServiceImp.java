@@ -111,5 +111,21 @@ public class RoomServiceImp implements RoomService{
         session.getTransaction().commit();
         session.close();
     }
+
+    @Override
+    public List<RoomUser> getUsersOfRoom(int room) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<RoomUser> roomUser = session.createCriteria(RoomUser.class)
+                    .add(Restrictions.eq("roomId.id", room))
+                    .addOrder(Order.desc("id"))
+                    .list();
+            return roomUser;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
     
 }

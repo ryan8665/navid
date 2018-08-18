@@ -30,4 +30,6 @@ public interface RoomService {
     
     public void removeUserFromRoom(RoomUser roomUser);
     
+    public List<RoomUser> getUsersOfRoom(int room);
+
 }

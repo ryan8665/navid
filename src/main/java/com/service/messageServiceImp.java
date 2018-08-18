@@ -6,9 +6,14 @@
 package com.service;
 
 import com.entity.Message;
+import com.entity.RoomUser;
+import com.entity.User;
+import com.entity.UserRule;
 import com.utility.HibernateUtil;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -99,6 +104,27 @@ public class messageServiceImp implements messageService {
         Session session = HibernateUtil.getSessionFactory().openSession();
         BigInteger temp =  (BigInteger) session.createSQLQuery("SELECT count(`id`) FROM `message` WHERE `message_flag_id` = 0 and `reciver` = " + id).uniqueResult();
         return temp.longValue();
+    }
+
+    @Override
+    public void saveBatchMsg(List<RoomUser> users, String message , String title , int sender) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Message om;
+        for (RoomUser user : users) {
+            om = new Message();
+            om.setDate(new Date());
+            om.setMessage(message);
+            om.setMessageFlagId(0);
+            om.setReciver(user.getUserId());
+            om.setSender(new User(sender));
+            om.setTitle(title);
+            session.save(om);
+            session.flush();
+            session.clear();
+        }
+        session.getTransaction().commit();
+        session.close();
     }
 
 }

@@ -38,7 +38,7 @@
                         <div class="ContainerIndent">
                             <div dir="rtl">
                                 <h:form id="menubar">
-                                    <p:fieldset legend="عملیات ها" toggleable="true" toggleSpeed="500" style="direction: rtl">
+                                    <p:fieldset collapsed="true" legend="عملیات ها" toggleable="true" toggleSpeed="500" style="direction: rtl">
                                     <p:commandButton styleClass="MainButton2" value="جدید" type="button" onclick="PF('dlg1').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formview" value="نمایش" type="button" onclick="PF('dlg2').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formmonitor" value="مانیتورینگ" type="button" onclick="PF('dlg3').show();" />
