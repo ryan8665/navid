@@ -24,6 +24,7 @@
             <c:if test="#{main.loginDto.userType eq 1}">
             <li onclick="location.href = '/admin/setting/index.xhtml';"  class="Fleft BordRadHalf TexAlCenter "><i class="icon-cog-1"></i> </li>
             </c:if>
+            <c:if test="#{main.isUserAccess(300)}">
             <li onclick="location.href = '/admin/message/inbox.xhtml';" class="Fleft BordRadHalf TexAlCenter "><i class="icon-mail"></i>
                 <span class="alertBubble BordRad10 Fs9">
                     <h:form>
@@ -35,6 +36,7 @@
 
                 </ul>
             </li>
+            </c:if>
             <li class="Fleft BordRadHalf TexAlCenter"><i class="icon-user-male"></i>
                 <ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
                     <li class="Animated05"><a href="/admin/profile/index.xhtml" class="white Unselectable"><i class="icon-user-male Fs26 OvHidden"></i><span class="fontIran Fs15"><h:outputText value="#{main.loginDto.name}" escape="false"/><h:outputText value=" " escape="false"/><h:outputText value="#{main.loginDto.family}" escape="false"/>

@@ -6,22 +6,18 @@
 package com.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,21 +30,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Rule.findAll", query = "SELECT r FROM Rule r"),
     @NamedQuery(name = "Rule.findById", query = "SELECT r FROM Rule r WHERE r.id = :id"),
     @NamedQuery(name = "Rule.findByName", query = "SELECT r FROM Rule r WHERE r.name = :name"),
-    @NamedQuery(name = "Rule.findByDespription", query = "SELECT r FROM Rule r WHERE r.despription = :despription")})
+    @NamedQuery(name = "Rule.findByDespription", query = "SELECT r FROM Rule r WHERE r.despription = :despription"),
+    @NamedQuery(name = "Rule.findByAccess", query = "SELECT r FROM Rule r WHERE r.access = :access")})
 public class Rule implements Serializable {
-
-    @Lob
-    @Column(name = "view")
-    private byte[] view;
-    @Lob
-    @Column(name = "insert")
-    private byte[] insert;
-    @Lob
-    @Column(name = "update")
-    private byte[] update;
-    @Lob
-    @Column(name = "delete")
-    private byte[] delete;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,14 +46,21 @@ public class Rule implements Serializable {
     @Size(max = 45)
     @Column(name = "despription")
     private String despription;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ruleId")
-    private Collection<UserRule> userRuleCollection;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "access")
+    private boolean access;
 
     public Rule() {
     }
 
     public Rule(Integer id) {
         this.id = id;
+    }
+
+    public Rule(Integer id, boolean access) {
+        this.id = id;
+        this.access = access;
     }
 
     public Integer getId() {
@@ -96,14 +87,12 @@ public class Rule implements Serializable {
         this.despription = despription;
     }
 
-
-    @XmlTransient
-    public Collection<UserRule> getUserRuleCollection() {
-        return userRuleCollection;
+    public boolean getAccess() {
+        return access;
     }
 
-    public void setUserRuleCollection(Collection<UserRule> userRuleCollection) {
-        this.userRuleCollection = userRuleCollection;
+    public void setAccess(boolean access) {
+        this.access = access;
     }
 
     @Override
@@ -129,38 +118,6 @@ public class Rule implements Serializable {
     @Override
     public String toString() {
         return "com.entity.Rule[ id=" + id + " ]";
-    }
-
-    public byte[] getView() {
-        return view;
-    }
-
-    public void setView(byte[] view) {
-        this.view = view;
-    }
-
-    public byte[] getInsert() {
-        return insert;
-    }
-
-    public void setInsert(byte[] insert) {
-        this.insert = insert;
-    }
-
-    public byte[] getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(byte[] update) {
-        this.update = update;
-    }
-
-    public byte[] getDelete() {
-        return delete;
-    }
-
-    public void setDelete(byte[] delete) {
-        this.delete = delete;
     }
     
 }

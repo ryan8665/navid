@@ -12,9 +12,9 @@ import com.service.LoginServiceImp;
 import com.service.messageService;
 import com.service.messageServiceImp;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -30,7 +30,8 @@ public class main {
 
     private LoginDto loginDto;
     private String mobile, password ;
-    private List<UserRule> userRule;
+
+    Map<Integer, String> map = new HashMap();
     boolean isLOgin;
     private long messageCount = 0 ;
 
@@ -76,7 +77,7 @@ public class main {
     }
     public main() {
         loginDto = new LoginDto();
-        userRule = new ArrayList<>();
+        
     }
 
 
@@ -87,8 +88,12 @@ public class main {
         isLOgin = loginDto.getLogin();
         
         if(isLOgin){
-            userRule = ol.getUserRule(loginDto.getUserType());
-            ol.updateLastLoginById(loginDto.getUserType());
+            List<UserRule> userRule = ol.getUserRule(loginDto.getUserType());
+          
+            for (UserRule i : userRule) {
+                map.put(i.getRuleId().getId(), i.getRuleId().getName());
+            }
+            ol.updateLastLoginById(loginDto.getId());
             com.loger.log.newLog(1);
           //  com.utility.SMS.sendWelcome(mobile, loginDto.getName()+" "+loginDto.getFamily());
             FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
@@ -106,6 +111,12 @@ public class main {
     public void unreadMessageCount(){
         messageService s = new messageServiceImp();
         messageCount = s.countUnreadMessage(loginDto.getId());
+    }
+    
+    public boolean isUserAccess(int authority){
+
+       return  map.containsKey(authority);
+       
     }
 
 }

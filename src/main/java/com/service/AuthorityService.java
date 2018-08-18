@@ -17,6 +17,8 @@ public interface AuthorityService {
     
     public List<Rule> getAllAuthority();
     
-    public List<UserRule> getUserAuthority(int user);
+    public List<UserRule> getUserAuthority(int type);
+    
+    public void saveUserAuthority(List<UserRule> rule,int id);
     
 }

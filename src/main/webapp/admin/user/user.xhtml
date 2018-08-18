@@ -38,6 +38,7 @@
                         <div class="ContainerIndent">
                             <div dir="rtl">
                                 <h:form id="menubar">
+                                    <p:fieldset legend="عملیات ها" toggleable="true" toggleSpeed="500" style="direction: rtl">
                                     <p:commandButton styleClass="MainButton2" value="جدید" type="button" onclick="PF('dlg1').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formview" value="نمایش" type="button" onclick="PF('dlg2').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formmonitor" value="مانیتورینگ" type="button" onclick="PF('dlg3').show();" />
@@ -49,6 +50,11 @@
                                     <p:commandButton styleClass="MainButton2"   value="عملیات" type="button" onclick="PF('dlg9').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formmain :menubar"  action="#{userBean.updateStatus()}" 
                                                      value="فعال/غیر فعال"  ajax="true"  /> 
+                                    
+                                    <p:commandButton  styleClass="MainButton2" ajax="false"  value="Export" type="text" >
+                                        <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
+                                    </p:commandButton>
+                                    </p:fieldset>
                                 </h:form>
                             </div>
                             <div class="EmptyBox10"></div>  

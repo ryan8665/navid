@@ -38,11 +38,14 @@
                         <div class="ContainerIndent">
                             <div dir="rtl">
                                 <h:form id="menubar">
-                                    <p:commandButton styleClass="MainButton2"  value="ویرایش دسترسی" type="button" onclick="PF('dlg1').show();" />
-                                    <p:commandButton styleClass="MainButton2"  value="نمایش دسترسی" type="button" onclick="PF('dlg2').show();" />
-                                    <p:commandButton  styleClass="MainButton2" ajax="false" style="float: left" value="Export" type="text" >
-                                        <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
-                                    </p:commandButton>
+                                  
+                                    <p:fieldset  legend="دسترسی ها" toggleable="true" toggleSpeed="500" style="direction: rtl" collapsed="true" class="ClassRTL IranSans">
+                                        <p:selectManyCheckbox id="multiple" value="#{settingBean.userRule}" layout="responsive" disabled="#{settingBean.disable}" columns="3">
+                                            <f:selectItems value="#{settingBean.allRule}" var="rule" itemLabel="#{rule.name}" itemValue="#{rule.id}" />
+                                        </p:selectManyCheckbox>
+                                        <p:commandButton styleClass="MainButton2" disabled="#{settingBean.disable}" update=":formmain :menubar"  action="#{settingBean.saveRule()}" 
+                                                         value="ثبت"  ajax="true"  /> 
+                                    </p:fieldset>
                                 </h:form>
                             </div>
                             <div class="EmptyBox10"></div>  
@@ -52,7 +55,7 @@
                                                  selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
                                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
-                                        <p:ajax event="rowSelect" update=":menubar"  listener="#{settingBean.onRowSelect}" />
+                                        <p:ajax event="rowSelect" update=":menubar:multiple"  listener="#{settingBean.onRowSelect}" />
                                         <p:column class="ClassRTL fontIran Fs12" width="70%" sortBy="#{item.description}" 
                                                   filterBy="#{item.description}" filterMatchMode="contains">
                                                 <f:facet name="header">

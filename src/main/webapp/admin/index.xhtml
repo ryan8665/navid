@@ -71,7 +71,7 @@
                         <div class="Container100">
                             <div class="Container25 Responsive">
                                 <div class="ContainerIndent">
-                                    <p:panel style="min-height: 300px;" class="fontIran">
+                                    <p:panel style="min-height: 300px;" class="fontIran" rendered="#{main.isUserAccess(1)}">
 
                                         <i class=" icon-users-1 Fs50 Fright Wid25 yellow TexAlCenter MarRight10" ></i>
                                         <div class="Fs18 Fright MarTop10 leaden Wid70" dir="rtl">کاربران در یک نگاه</div>
@@ -79,7 +79,7 @@
                                         <div class="EmptyBox10"></div>
                                         <p:separator styleClass="Wid100"></p:separator>
                                         <div class="Container100">
-                                            <p:chart type="pie" model="#{chartBean.pieModel}" style="height:200px;" responsive="true"/>
+                                            <p:chart type="pie" model="#{chartBean.pieModel}" style="height:200px;"  responsive="true"/>
                                         </div>
 
 
@@ -88,7 +88,7 @@
                             </div>
                             <div class="Container25 Responsive">
                                 <div class="ContainerIndent">
-                                    <p:panel style="min-height: 300px;" class="fontIran">
+                                    <p:panel style="min-height: 300px;" class="fontIran" rendered="#{main.isUserAccess(1)}">
 
                                         <div class="Container">
                                             <i class=" icon-rocket Fs50 Fright Wid25 red TexAlCenter MarRight10" ></i>
@@ -110,7 +110,7 @@
                             </div>
                             <div class="Container25 Responsive">
                                 <div class="ContainerIndent">
-                                    <p:panel style="min-height: 300px;" class="fontIran">
+                                    <p:panel style="min-height: 300px;" class="fontIran" rendered="#{main.isUserAccess(1)}">
                                         <div class="Container">
                                             <i class=" icon-data-science-inv Fs50 Fright Wid25 orange TexAlCenter MarRight10" ></i>
                                             <div class="Fs18 Fright MarTop10 leaden Wid70" dir="rtl">امروز در یک نگاه</div>
@@ -142,11 +142,12 @@
                                         <div class="EmptyBox10"></div>
                                         <div class="Fs16 Fright">
 
-
+                                            <p:panelGrid rendered="#{main.isUserAccess(1)}">
                                             <a href="/admin/finance/transaction.xhtml" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> (<h:outputText id="txt_count22" value="0" />) تراکنش</i>  <i class="icon-bell-alt hardblue"></i></a>
                                             <div class="EmptyBox5"></div>
+                                         
                                             <a href="/admin/setting/index.xhtml" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> تنظیمات</i>  <i class="icon-cog-alt hardblue"></i></a>
-
+                                            </p:panelGrid>
 
                                         </div>
                                         <div class="EmptyBox10"></div>
@@ -215,7 +216,7 @@
                             </div>
                             <div class="Container50 Responsive100 ui-fluid" >
                                 <div class="ContainerIndent">
-                                    <p:panel style="min-height: 350px;" class="fontIran" >
+                                    <p:panel style="min-height: 350px;" class="fontIran" rendered="#{main.isUserAccess(1)}">
                                         <div class="Container100 Responsive ClassRTL Fs16 fontIran">
                                             <i class="icon-chart-bar"></i> گزارش اجمالی
                                         </div>
