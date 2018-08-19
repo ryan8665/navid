@@ -55,7 +55,7 @@
                                                  selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
                                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
-                                        <p:ajax event="rowSelect" update=":menubar:multiple"  listener="#{settingBean.onRowSelect}" />
+                                        <p:ajax event="rowSelect" update=":menubar"  listener="#{settingBean.onRowSelect}" />
                                         <p:column class="ClassRTL fontIran Fs12" width="70%" sortBy="#{item.description}" 
                                                   filterBy="#{item.description}" filterMatchMode="contains">
                                                 <f:facet name="header">

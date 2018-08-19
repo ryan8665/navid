@@ -6,16 +6,14 @@
 package com.service;
 
 import com.entity.GlobalStatus;
-import com.entity.Logs;
 import com.entity.News;
 import com.entity.NewsCat;
 import com.utility.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
-/**
+/**ó
  *
  * @author ryan
  */

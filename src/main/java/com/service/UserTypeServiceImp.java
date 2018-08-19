@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import com.entity.News;
 import com.entity.SubChapter;
 import com.entity.UserType;
 import com.utility.HibernateUtil;
@@ -35,7 +36,16 @@ public class UserTypeServiceImp implements UserTypeService {
 
     @Override
     public UserType getUserTypeDetaile(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            UserType userType = (UserType) session.get(UserType.class, id);
+            return userType;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            session.close();
+
+        }
     }
 
 }

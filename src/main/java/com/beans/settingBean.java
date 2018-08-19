@@ -36,6 +36,12 @@ public class settingBean extends BaseBean{
     private List<UserRule> selectedRule;
     private List<String> userRule;
 
+    public settingBean() {
+        selectedRule = new ArrayList<>();
+    }
+    
+    
+
     public List<String> getUserRule() {
         return userRule;
     }
@@ -100,14 +106,8 @@ public class settingBean extends BaseBean{
         id = ((UserType) event.getObject()).getId();
         UserTypeServiceImp userTypeServiceImp = new UserTypeServiceImp();
         UserType userType = userTypeServiceImp.getUserTypeDetaile(id);
-        AuthorityService service = new AuthorityServiceImp();
-        List<UserRule> temp = service.getUserAuthority(userType.getId());
-     
-       
-
         vName = userType.getName();
         vDescription = userType.getDescription();
-        
 
 
     }
@@ -119,7 +119,7 @@ public class settingBean extends BaseBean{
     
     public void saveRule(){
         AuthorityService service = new AuthorityServiceImp();
-        selectedRule = new ArrayList<>();
+        
         for (int i = 0 ;i< userRule.size() ;i++) {
             int r = Integer.parseInt(userRule.get(i));
             int t = id;
