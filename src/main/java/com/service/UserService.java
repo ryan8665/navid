@@ -5,13 +5,12 @@
  */
 package com.service;
 
-import com.dto.UserTypeDto;
 import com.entity.User;
 import java.util.List;
 
 /**
  *
- * @author ryan
+ * @author ryanó
  */
 public interface UserService {
 
@@ -30,6 +29,8 @@ public interface UserService {
     public void saveUser(User user);
     
     public boolean chackUserisExist(String mobile);
+    
+    public void changePassword(int user,String password);
 
 
 }

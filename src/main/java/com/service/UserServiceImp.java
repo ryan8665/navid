@@ -134,5 +134,18 @@ public class UserServiceImp implements UserService{
 
         }
     }
+
+    @Override
+    public void changePassword(int user,String password) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        User on = (User) session.get(User.class, user);
+
+        on.setPassword(password);
+
+        session.beginTransaction();
+        session.update(on);
+        session.getTransaction().commit();
+        session.close();
+    }
     
 }

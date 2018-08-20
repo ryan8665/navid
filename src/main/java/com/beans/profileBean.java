@@ -8,6 +8,8 @@ package com.beans;
 import com.entity.Logs;
 import com.service.LogService;
 import com.service.LogServiceImp;
+import com.service.UserService;
+import com.service.UserServiceImp;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -52,7 +54,10 @@ public class profileBean extends BaseBean {
     }
     
     public void changPassword(){
-        
+        UserService service = new UserServiceImp();
+        if(reNewPassword.equals(newPassword) && reNewPassword.length() >= 6){
+            service.changePassword(getUserID(), reNewPassword);
+        }
     }
 
 }

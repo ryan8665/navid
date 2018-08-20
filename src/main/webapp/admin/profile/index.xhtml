@@ -106,8 +106,7 @@
                     <h:form id="ChangPassDialog">
                         <p:panel>
                             <p:messages id="messages"  autoUpdate="true" closable="true" />
-                            <p:password placeholder="پسورد فعلی" id="oldPassword" maxlength="10" value="#{profileBean.password}"  required="true" />
-                            <p:separator styleClass="Wid100"></p:separator>
+                            
                             <p:password placeholder="پسورد جدید" id="newPassword" match="rePassword" validatorMessage="گذر واژهای وارد شده مطابقت ندارند" maxlength="10" value="#{profileBean.newPassword}" feedback="true" requiredMessage="لطفا فیلدها را با دقت پر کنید" required="true" />
                             <div class="EmptyBox5"></div>
                             <p:password placeholder="تکرار پسورد جدید" id="rePassword" validatorMessage="گذر واژهای وارد شده مطابقت ندارند" maxlength="10" value="#{profileBean.reNewPassword}"  required="true" />

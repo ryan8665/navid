@@ -37,6 +37,10 @@
         <servlet-name>LogoutService</servlet-name>
         <servlet-class>com.service.LogoutService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CallBack</servlet-name>
+        <servlet-class>com.utility.CallBack</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
@@ -48,6 +52,10 @@
     <servlet-mapping>
         <servlet-name>LogoutService</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CallBack</servlet-name>
+        <url-pattern>/CallBack</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -61,10 +69,11 @@
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/index.xhtml</location>
     </error-page>
-        <error-page>
+    <error-page>
         <error-code>404</error-code>
         <location>/Error/404.xhtml</location>
-    </error-page><!--
+    </error-page>
+    <!--
     <error-page>
         <error-code>400</error-code>
         <location>/Error/404.xhtml</location>
