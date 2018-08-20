@@ -31,7 +31,7 @@ import org.primefaces.model.chart.PieChartModel;
 @ManagedBean
 @ViewScoped
 public class chartBean extends BaseBean {
-    
+    DashbordService service;
     private int visitCount = 0;
     private int transactionCount = 0;
     private int userCount = 0;
@@ -48,7 +48,7 @@ public class chartBean extends BaseBean {
     }
 
     public chartBean() {
-        DashbordService service = new DashbordServiceImp();
+        service = new DashbordServiceImp();
         visitCount = service.countVisits();
         transactionCount = service.countTransaction();
         userCount = service.countUsers();
@@ -138,7 +138,8 @@ public class chartBean extends BaseBean {
         //yAxis.setMax(10);
         String a = "", b = "", c = "", d = "", e = "";
         LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("فروش");
+        LineChartSeries series2 = new LineChartSeries();
+        LineChartSeries series3 = new LineChartSeries();
         Calendar cal = Calendar.getInstance();
 
         try {
@@ -156,15 +157,31 @@ public class chartBean extends BaseBean {
         } catch (ParseException ex) {
 
         }
-        series1.set(e, 34);
-        series1.set(d, 64);
-        series1.set(c, 34);
-        series1.set(b, 36);
-        series1.set(a, 87);
+        series1.setLabel("فروش");
+        series1.set(e, service.getListofSell(4));
+        series1.set(d, service.getListofSell(3));
+        series1.set(c, service.getListofSell(2));
+        series1.set(b, service.getListofSell(1));
+        series1.set(a, service.getListofSell(0));
+        
+        series2.setLabel("بازدید");
+        series2.set(e, service.getListofVisit(4));
+        series2.set(d, service.getListofVisit(3));
+        series2.set(c, service.getListofVisit(2));
+        series2.set(b, service.getListofVisit(1));
+        series2.set(a, service.getListofVisit(0));
 
+        series3.setLabel("کاربر جدید");
+        series3.set(e, service.getListofUsers(4));
+        series3.set(d, service.getListofUsers(3));
+        series3.set(c, service.getListofUsers(2));
+        series3.set(b, service.getListofUsers(1));
+        series3.set(a, service.getListofUsers(0));
 
 
         lineModel.addSeries(series1);
+        lineModel.addSeries(series2);
+        lineModel.addSeries(series3);
 
     }
 

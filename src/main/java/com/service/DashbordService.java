@@ -19,4 +19,10 @@ public interface DashbordService {
     public int countTransaction();
     
     public int countPackage();
+    
+    public int getListofSell(int day);
+    
+    public int getListofVisit(int day);
+    
+    public int getListofUsers(int day);
 }
