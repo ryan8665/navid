@@ -28,7 +28,8 @@
             <li onclick="location.href = '/admin/message/inbox.xhtml';" class="Fleft BordRadHalf TexAlCenter "><i class="icon-mail"></i>
                 <span class="alertBubble BordRad10 Fs9">
                     <h:form>
-                        <h:outputText id="alarm_count" value="0" />
+                        <h:outputText id="alarm_count" value="#{main.messageCount}" />
+                        <p:poll interval="30" ignoreAutoUpdate="true" listener="#{main.unreadMessageCount()}" update="alarm_count" />
                     </h:form>
 
                 </span> 

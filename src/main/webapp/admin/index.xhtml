@@ -93,13 +93,13 @@
                                         <div class="Container">
                                             <i class=" icon-rocket Fs50 Fright Wid25 red TexAlCenter MarRight10" ></i>
                                             <div class="Fs18 Fright MarTop10 leaden Wid70" dir="rtl">بازدید های امروز</div>
-                                            <div class="Fs12 Fright leaden Wid70" dir="rtl"><span class="red">بازدید کل امروز  <h:outputText value="#{chart.allVisite}" escape="false"/></span></div>
+                                            <div class="Fs12 Fright leaden Wid70" dir="rtl"><span class="red">بازدید کل امروز  <h:outputText value="#{chartBean.visitCount}" escape="false"/></span></div>
                                             <div class="EmptyBox10"></div>
                                             <p:separator styleClass="Wid100"></p:separator>
                                             <div class="EmptyBox10"></div>
                                             <div class="Fs12 Fright leaden Wid50 TexAlCenter Responsive fontIran">اندروید<br/><span class="Fs24 orange"><h:outputText value="0" escape="false"/></span></div>
                                             <div class="Fs12 Fright leaden Wid50 TexAlCenter Responsive fontIran">آی او اس<br/><span class="Fs24 red"><h:outputText value="0" escape="false"/></span></div>
-                                            <div class="Fs12 Fright leaden Wid100 TexAlCenter fontIran">وب سایت<br/><span class="Fs24 hardblue"><h:outputText value="0" escape="false"/></span></div>
+                                            <div class="Fs12 Fright leaden Wid100 TexAlCenter fontIran">وب سایت<br/><span class="Fs24 hardblue"><h:outputText value="#{chartBean.visitCount}" escape="false"/></span></div>
                                             <div class="EmptyBox10"></div>
                                             <p:separator styleClass="Wid100"></p:separator>
 
@@ -118,9 +118,9 @@
                                             <div class="EmptyBox10"></div>
                                             <p:separator styleClass="Wid100"></p:separator>
                                             <div class="EmptyBox10"></div>
-                                            <div class="Fs12 Fright leaden Wid50 TexAlCenter Responsive fontIran">کاربر جدید<br/><span class="Fs24 orange"><h:outputText value="0" escape="false"/></span></div>
-                                            <div class="Fs12 Fright leaden Wid50 TexAlCenter Responsive fontIran">کسب و کار<br/><span class="Fs24 red"><h:outputText value="" escape="false"/>0</span></div>
-                                            <div class="Fs12 Fright leaden Wid100 TexAlCenter fontIran">فروش<br/><span class="Fs24 hardblue">0</span></div>
+                                            <div class="Fs12 Fright leaden Wid50 TexAlCenter Responsive fontIran">کاربران<br/><span class="Fs24 orange"><h:outputText value="#{chartBean.userCount}" escape="false"/></span></div>
+                                            <div class="Fs12 Fright leaden Wid50 TexAlCenter Responsive fontIran">سوالات<br/><span class="Fs24 red"><h:outputText value="" escape="false"/>#{chartBean.questionCount}</span></div>
+                                            <div class="Fs12 Fright leaden Wid100 TexAlCenter fontIran">بسته ها<br/><span class="Fs24 hardblue">#{chartBean.packageCount}</span></div>
                                             <div class="EmptyBox10"></div>
                                             <p:separator styleClass="Wid100"></p:separator>
 
@@ -143,7 +143,7 @@
                                         <div class="Fs16 Fright">
 
                                             <p:panelGrid rendered="#{main.isUserAccess(1)}">
-                                            <a href="/admin/finance/transaction.xhtml" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> (<h:outputText id="txt_count22" value="0" />) تراکنش</i>  <i class="icon-bell-alt hardblue"></i></a>
+                                                <a href="/admin/finance/transaction.xhtml" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> (<h:outputText id="txt_count22" value="#{chartBean.transactionCount}" />) تراکنش</i>  <i class="icon-bell-alt hardblue"></i></a>
                                             <div class="EmptyBox5"></div>
                                          
                                             <a href="/admin/setting/index.xhtml" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> تنظیمات</i>  <i class="icon-cog-alt hardblue"></i></a>

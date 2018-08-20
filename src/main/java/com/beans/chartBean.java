@@ -6,6 +6,8 @@
 package com.beans;
 
 import com.dto.UserTypeDto;
+import com.service.DashbordService;
+import com.service.DashbordServiceImp;
 import com.service.UserService;
 import com.service.UserServiceImp;
 import java.text.ParseException;
@@ -30,6 +32,12 @@ import org.primefaces.model.chart.PieChartModel;
 @ViewScoped
 public class chartBean extends BaseBean {
     
+    private int visitCount = 0;
+    private int transactionCount = 0;
+    private int userCount = 0;
+    private int questionCount = 0;
+    private int packageCount = 0;
+    
     private PieChartModel pieModel;
     private int countAllUser;
     private LineChartModel lineModel;
@@ -38,6 +46,58 @@ public class chartBean extends BaseBean {
         initLinearModel();
         initPieModel();
     }
+
+    public chartBean() {
+        DashbordService service = new DashbordServiceImp();
+        visitCount = service.countVisits();
+        transactionCount = service.countTransaction();
+        userCount = service.countUsers();
+        questionCount = service.countQuestion();
+        packageCount = service.countPackage();
+    }
+   
+
+    public int getPackageCount() {
+        return packageCount;
+    }
+
+    public void setPackageCount(int packageCount) {
+        this.packageCount = packageCount;
+    }
+
+    public int getVisitCount() {
+        return visitCount;
+    }
+
+    public void setVisitCount(int visitCount) {
+        this.visitCount = visitCount;
+    }
+
+    public int getTransactionCount() {
+        return transactionCount;
+    }
+
+    public void setTransactionCount(int transactionCount) {
+        this.transactionCount = transactionCount;
+    }
+
+    public int getUserCount() {
+        return userCount;
+    }
+
+    public void setUserCount(int userCount) {
+        this.userCount = userCount;
+    }
+
+    public int getQuestionCount() {
+        return questionCount;
+    }
+
+    public void setQuestionCount(int questionCount) {
+        this.questionCount = questionCount;
+    }
+    
+    
     public LineChartModel getLineModel() {
         return lineModel;
     }
