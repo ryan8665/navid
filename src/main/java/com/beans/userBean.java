@@ -10,7 +10,8 @@ import com.entity.GlobalStatus;
 import com.entity.Logs;
 import com.entity.Message;
 import com.entity.PackageUser;
-import com.entity.Redeem;
+import com.entity.Room;
+import com.entity.RoomUser;
 import com.entity.Transaction;
 import com.entity.User;
 import com.entity.UserType;
@@ -24,6 +25,8 @@ import com.service.LogService;
 import com.service.LogServiceImp;
 import com.service.PackageService;
 import com.service.PackageServiceImp;
+import com.service.RoomService;
+import com.service.RoomServiceImp;
 import com.service.UserService;
 import com.service.UserServiceImp;
 import com.service.UserTypeService;
@@ -59,10 +62,32 @@ public class userBean extends BaseBean {
     private int userTypeId;
     private String examName, examDescription, examHardness, examChapter, examSubChapter, examLesson, examType, examPackage;
     private Date examDueDate;
+    private int UserpackageID = 0;
+    private int RoomID = 0;
+
+    public int getRoomID() {
+        return RoomID;
+    }
+
+    public void setRoomID(int RoomID) {
+        this.RoomID = RoomID;
+    }
+    
+    
+
+    public int getUserpackageID() {
+        return UserpackageID;
+    }
+
+    public void setUserpackageID(int UserpackageID) {
+        this.UserpackageID = UserpackageID;
+    }
 
     public String getExamPackage() {
         return examPackage;
     }
+    
+    
 
     public void setExamPackage(String examPackage) {
         this.examPackage = examPackage;
@@ -336,6 +361,9 @@ public class userBean extends BaseBean {
         vMobile = user.getMobile();
         vNationalcode = user.getNationalcode();
         vPassword = user.getPassword();
+        if(user.getUserTypeId().getId() == 3){
+            isNotStudent = false;
+        }
 
     }
 
@@ -459,15 +487,46 @@ public class userBean extends BaseBean {
         }
 
     }
-    
-    public List<com.entity.Hadrdness> getHardness(){
+
+    public List<com.entity.Hadrdness> getHardness() {
         HardnessService hardnessService = new HardnessServiceImp();
         return hardnessService.getAllHardness();
     }
-    
+
     public List<com.entity.ExamType> getAllExamType() {
         ExamService examService = new ExamServiceImp();
         return examService.getAllExamType();
+    }
+    
+    public List<PackageUser> getAllStudentPackage() {
+        try {
+            PackageService service = new PackageServiceImp();
+            return service.getAllStudentPackageById(id);
+        } catch (Exception e) {
+            return null;
+        }
+       
+    }
+
+    public List<Room> getAllRoomsByUser() {
+      
+        try {
+            RoomService service = new RoomServiceImp();
+            List<Room> room = service.getAllRoomByUsers(id, UserpackageID);
+            return room;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+    
+    public void saveUserRoom(){
+        RoomService service = new RoomServiceImp();
+        RoomUser our = new RoomUser();
+        our.setDate(new Date());
+        our.setRoomId(new Room(RoomID));
+        our.setUserId(new User(id));
+        service.addUserToRoom(our);
     }
 
 }

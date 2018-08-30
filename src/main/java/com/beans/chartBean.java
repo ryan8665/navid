@@ -5,7 +5,6 @@
  */
 package com.beans;
 
-import com.dto.UserTypeDto;
 import com.service.DashbordService;
 import com.service.DashbordServiceImp;
 import com.service.UserService;

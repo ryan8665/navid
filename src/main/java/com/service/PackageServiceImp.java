@@ -120,5 +120,22 @@ public class PackageServiceImp implements PackageService{
     public List<Chapter> getChapterFromPackage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<PackageUser> getAllStudentPackageById(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<PackageUser> PackageList = session.createCriteria(PackageUser.class)
+                    .add(Restrictions.eq("userId.id", id))
+                    .addOrder(Order.desc("id"))
+                    .list();
+            return PackageList;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            session.close();
+
+        }
+    }
     
 }

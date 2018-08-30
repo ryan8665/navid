@@ -30,4 +30,6 @@ public interface PackageService {
     
     public List<Chapter> getChapterFromPackage();
     
+    public List<PackageUser> getAllStudentPackageById(int id);
+    
 }

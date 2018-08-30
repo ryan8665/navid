@@ -38,13 +38,14 @@
                         <div class="ContainerIndent">
                             <div dir="rtl">
                                 <h:form id="menubar">
-                                    <p:fieldset collapsed="true" legend="عملیات ها" toggleable="true" toggleSpeed="500" style="direction: rtl">
+                                    <p:fieldset  legend="عملیات ها" toggleable="true" toggleSpeed="500" style="direction: rtl">
                                     <p:commandButton styleClass="MainButton2" value="جدید" type="button" onclick="PF('dlg1').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formview" value="نمایش" type="button" onclick="PF('dlg2').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formmonitor" value="مانیتورینگ" type="button" onclick="PF('dlg3').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}"  value="ارسال پیامک" type="button" onclick="PF('dlg4').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}"  value="ارسال پیام" type="button" onclick="PF('dlg5').show();" />
                                     <p:commandButton styleClass="MainButton2"   disabled="#{userBean.isNotStudent}" value="بسته ها" type="button" onclick="PF('dlg6').show();" />
+                                    <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}"  value="افزودن به گروه" type="button" onclick="PF('dlg10').show();" />
                                     <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}" value="تراکنش ها" type="button" onclick="PF('dlg7').show();" />
                                     <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}" value="امتحانات جامع" type="button" onclick="PF('dlg8').show();" />
                                     <p:commandButton styleClass="MainButton2"   value="عملیات" type="button" onclick="PF('dlg9').show();" />
@@ -64,7 +65,7 @@
                                                  selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
                                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
-                                        <p:ajax event="rowSelect" update=":menubar :formview :formmonitor :formsms :formmessage :formmpackage :formtransaction :formglobalexam :formdo"  listener="#{userBean.onRowSelect}" />
+                                        <p:ajax event="rowSelect" update=":menubar :formview :formmonitor :formsms :formmessage :formmpackage :formtransaction :formglobalexam :formdo :formroom"  listener="#{userBean.onRowSelect}" />
                                         <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.globalStatusId.name}" 
                                                   filterBy="#{item.globalStatusId.name}" filterMatchMode="contains">
                                             <f:facet name="header">
@@ -419,6 +420,26 @@
                             <div class="EmptyBox10"></div>
                             <p:commandButton styleClass="MainButton2" value="ثبت" update="formdo :formmain" style="float: left" 
                                              actionListener="#{userBean.saveExam()}" />
+                            <div class="EmptyBox5"></div>
+                        </h:form>
+                    </p:dialog>
+                    
+                    <p:dialog  hideEffect="fade" showEffect="fade" 
+                               closable="true" closeOnEscape="true" widgetVar="dlg10" modal="true"  width="300">
+                        <h:form id="formroom" class="Fs12">
+                            <p:selectOneMenu  required="true" value="#{userBean.userpackageID}"    var="items"  style="direction: ltr"  class=" Container90  Responsive" >
+                                <p:ajax event="change" update="rooms"></p:ajax>
+                                <f:selectItem  itemLabel="بسته های کاربر" itemValue="" noSelectionOption="true" />
+                                <f:selectItems  value="#{userBean.allStudentPackage}" var="p" itemLabel="#{p.packageId.name} - #{p.packageId.courseId.name}" itemValue="#{p.packageId.id}"/>
+                            </p:selectOneMenu>
+                            <div class="EmptyBox5"></div>
+                            <p:selectOneMenu  required="true" value="#{userBean.roomID}"  id="rooms"  var="items"  style="direction: ltr"  class=" Container90  Responsive" >
+                                <f:selectItem  itemLabel="نام گروه" itemValue="" noSelectionOption="true" />
+                                <f:selectItems  value="#{userBean.allRoomsByUser}" var="r" itemLabel="#{r.name}" itemValue="#{r.id}"/>
+                            </p:selectOneMenu>
+                            <div class="EmptyBox10"></div>
+                            <p:commandButton styleClass="MainButton2" value="ثبت" resetValues="true" update="formroom :formmain" style="float: left" 
+                                             actionListener="#{userBean.saveUserRoom()}" />
                             <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>

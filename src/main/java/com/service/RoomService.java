@@ -18,6 +18,8 @@ public interface RoomService {
     
     public List<Room> getAllRoomByPackage(int id);
     
+    public List<Room> getAllRoomByUsers(int id, int packageID);
+    
     public void saveRoom(Room room);
     
     public void deleteRoom(Room room);

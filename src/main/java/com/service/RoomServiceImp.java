@@ -127,5 +127,22 @@ public class RoomServiceImp implements RoomService{
             session.close();
         }
     }
+
+    @Override
+    public List<Room> getAllRoomByUsers(int id , int packageID) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<Room> rooms = session.createQuery("SELECT E FROM Room AS E WHERE E.packageId.userId.id = "+id+" and E.packageId.id ="+ packageID)
+                    .list();
+            return rooms;
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    
     
 }
