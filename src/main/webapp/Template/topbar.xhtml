@@ -22,7 +22,12 @@
                 </ul>
             </li>
             <c:if test="#{main.loginDto.userType eq 1}">
-            <li onclick="location.href = '/admin/setting/index.xhtml';"  class="Fleft BordRadHalf TexAlCenter "><i class="icon-cog-1"></i> </li>
+            <li   class="Fleft BordRadHalf TexAlCenter "><i class="icon-cog-1"></i> 
+                <ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+                    <li class="Animated05"><a href="/admin/setting/index.xhtml"  class="white Unselectable fontIran Fs12"><i class="icon-sliders"></i>دسترسی ها</a></li>
+                    <li class="Animated05"><a href="/admin/setting/defaults.xhtml"  class="white Unselectable fontIran Fs12"><i class="icon-sliders"></i>مقادیر پیش فرض</a></li>
+                </ul>
+            </li>
             </c:if>
             <c:if test="#{main.isUserAccess(300)}">
             <li onclick="location.href = '/admin/message/inbox.xhtml';" class="Fleft BordRadHalf TexAlCenter "><i class="icon-mail"></i>

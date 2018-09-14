@@ -51,5 +51,6 @@
         <mapping class="com.entity.RoomUser"/>
         <mapping class="com.entity.UserFav"/>
         <mapping class="com.entity.Fav"/>
+        <mapping class="com.entity.HardnessDefaults"/>
     </session-factory>
 </hibernate-configuration>

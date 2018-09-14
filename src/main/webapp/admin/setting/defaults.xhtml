@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="refresh" content="#{facesContext.externalContext.sessionMaxInactiveInterval};url=#{request.contextPath}/login.xhtml"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>تنظیمات دسترسی</title>
+        <h:outputScript name="js/layout.js" library="sentinel-layout" />
+        <ui:insert name="head" />
+        <style type="text/css">
+            .ui-growl {
+                left: 20px;
+            }
+
+        </style>
+    </h:head>
+
+    <h:body class="ui-sentinel-rtl" >        
+        <ui:include src="/Template/topbar.xhtml" />
+
+        <ui:include src="/Template/leftmenu.xhtml" />
+
+        <div id="layout-portlets-cover" class="fontRegular">
+            <ui:insert name="content">
+                <div class="ContainerIndent">
+
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
+                    <p:panel style="min-height: 500px" class="IranSans " >
+                        <div class="ContainerIndent">
+                            <div dir="rtl">
+                                <h:form id="menubar">
+                                  
+                                   
+                                </h:form>
+                            </div>
+                            <div class="EmptyBox10"></div>  
+                            <f:view>
+                                <h:form id="formmain">
+                                    <p:dataTable id="tbmain" value="#{defaultsBean.allDefaults}" rowKey="#{item.id}"  var="item"  rowIndexVar="index"
+                                                 selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+                                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
+<!--                                        <p:ajax event="rowSelect" update=":menubar"  listener="#{settingBean.onRowSelect}" />-->
+                                        <p:column class="ClassRTL fontIran Fs12" width="25%" sortBy="#{item.veryHard}" 
+                                                  filterBy="#{item.veryHard}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="دشوار"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.veryHard}%"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="25%" sortBy="#{item.hard}" 
+                                                  filterBy="#{item.hard}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="سخت"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.hard}%"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="25%" sortBy="#{item.medume}" 
+                                                  filterBy="#{item.medume}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="متوسط"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.medume}%"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="25%" sortBy="#{item.easy}" 
+                                                  filterBy="#{item.easy}" filterMatchMode="contains">
+                                            <f:facet name="header">
+                                                <h:outputText value="آسان"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.easy}%"/>
+                                        </p:column>
+                                        <p:column class="ClassRTL fontIran Fs12" width="5%">
+                                            <f:facet name="header">
+                                                <h:outputText value="ردیف"/>
+                                            </f:facet>
+                                            <h:outputText value="#{index + 1}"/>
+                                        </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+                            </f:view>
+                        </div>
+                    </p:panel>
+
+                    <div class="EmptyBox20"></div>
+
+                </div>     
+                <ui:include src="/Template/footer.xhtml" />
+            </ui:insert>
+        </div>
+
+
+        <p:ajaxStatus style="width:32px; height:32px; position:fixed; left:12px; bottom:10px">
+            <f:facet name="start">
+                <p:graphicImage name="images/preloader.gif" library="sentinel-layout"/>
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+
+        <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+    </h:body>
+
+</html>

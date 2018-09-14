@@ -31,6 +31,8 @@ public class LoginServiceImp implements LoginService{
         String p = null, u = null;
         int t = 0;
         Session session = HibernateUtil.getSessionFactory().openSession();
+        session.flush();
+        session.clear();
         User user = (User) session.createCriteria(User.class)
                 .add(Restrictions.eq("mobile", mobile))
                 .add(Restrictions.eq("password", password))
