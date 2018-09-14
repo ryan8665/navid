@@ -204,7 +204,7 @@ public class questionBean extends BaseBean {
         oq.setTime(time);
         oq.setUserId(new User(getUserID()));
         questionServiceImp.saveQuestion(oq);
-        
+        info("ثبت شد.");
     }
     
     public void doSave(Question oq){
@@ -250,6 +250,7 @@ public class questionBean extends BaseBean {
         for (Question question1 : qList) {
             doSave(question1);
         }
+        info("ثبت شد.");
 
     }
     

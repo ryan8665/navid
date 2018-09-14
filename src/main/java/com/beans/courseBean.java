@@ -87,6 +87,7 @@ public class courseBean extends BaseBean {
         oc.setDescription(courseDescription);
         oc.setName(courseName);
         courseServiceImp.saveCourse(oc);
+        info("ثبت شد.");
 
     }
     

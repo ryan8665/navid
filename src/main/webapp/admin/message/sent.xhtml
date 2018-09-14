@@ -34,7 +34,7 @@
             <ui:insert name="content">
                 <div class="ContainerIndent">
 
-
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -122,7 +122,8 @@
                                 <div class="EmptyBox5"></div>
                             </p:textEditor>
                             <div class="EmptyBox10"></div>
-                            <p:commandButton styleClass="MainButton2" value="ارسال" update="formnew :formmain" style="float: left"  actionListener="#{sentMessageBean.sendMessage()}" />
+                            <p:commandButton styleClass="MainButton2" value="ارسال" update="formnew :formmain :messagePanel" 
+                                             style="float: left"  actionListener="#{sentMessageBean.sendMessage()}" onclick="dlg1.hide();" />
                             <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>

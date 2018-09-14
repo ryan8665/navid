@@ -33,7 +33,7 @@
             <ui:insert name="content">
                 <div class="ContainerIndent">
 
-
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -138,7 +138,9 @@
                             <p:chips id="o" value="#{questionBean.tag}" placeholder="تگ"  class=" Container96 ClassRTL Responsive" />
                             <div class="EmptyBox5"></div>
                             <!--<p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew  :menubar" style="float: left" actionListener="" />-->
-                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew  :menubar" style="float: left"  actionListener="#{questionBean.saveQuestion()}" />
+                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" 
+                                             update=":formmain formnew  :menubar :messagePanel" style="float: left"  
+                                             onclick="dlg1.hide();" actionListener="#{questionBean.saveQuestion()}" />
                             <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>
@@ -147,8 +149,8 @@
                               closable="true" closeOnEscape="true" widgetVar="dlg4" modal="true" >
                         <h:form id="formphoto">
                             <p:fileUpload styleClass="MainButton2" fileUploadListener="#{questionBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                                          update="messages :formmain" sizeLimit="1500000"  allowTypes="/(\.|\/)(xls)$/" />
-                            <p:growl id="messages" showDetail="false"  />
+                                          update="messages :formmain :messagePanel" sizeLimit="1500000"  allowTypes="/(\.|\/)(xls)$/" />
+                            <p:growl id="messages " showDetail="false"  />
                         </h:form>
                     </p:dialog>
 

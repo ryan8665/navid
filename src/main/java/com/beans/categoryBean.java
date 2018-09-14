@@ -81,6 +81,7 @@ public class categoryBean extends BaseBean{
         oc.setDescription(catDescription);
         oc.setName(catName);
         categoryServiceImp.saveCategory(oc);
+        info("ثبت شد.");
         
     }
     

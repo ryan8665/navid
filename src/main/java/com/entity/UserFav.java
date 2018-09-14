@@ -6,34 +6,34 @@
 package com.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author ryan
  */
 @Entity
-@Table(name = "global_status")
+@Table(name = "user_fav")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GlobalStatus.findAll", query = "SELECT g FROM GlobalStatus g"),
-    @NamedQuery(name = "GlobalStatus.findById", query = "SELECT g FROM GlobalStatus g WHERE g.id = :id"),
-    @NamedQuery(name = "GlobalStatus.findByName", query = "SELECT g FROM GlobalStatus g WHERE g.name = :name")})
-public class GlobalStatus implements Serializable {
+    @NamedQuery(name = "UserFav.findAll", query = "SELECT u FROM UserFav u"),
+    @NamedQuery(name = "UserFav.findById", query = "SELECT u FROM UserFav u WHERE u.id = :id"),
+    @NamedQuery(name = "UserFav.findByDate", query = "SELECT u FROM UserFav u WHERE u.date = :date")})
+public class UserFav implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,16 +41,20 @@ public class GlobalStatus implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
-    @Column(name = "name")
-    private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "globalStatusId")
-    private Collection<User> userCollection;
+    @Column(name = "date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User userId;
+    @JoinColumn(name = "user_id1", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User userId1;
 
-    public GlobalStatus() {
+    public UserFav() {
     }
 
-    public GlobalStatus(Integer id) {
+    public UserFav(Integer id) {
         this.id = id;
     }
 
@@ -62,21 +66,28 @@ public class GlobalStatus implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Date getDate() {
+        return date;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public User getUserId1() {
+        return userId1;
+    }
+
+    public void setUserId1(User userId1) {
+        this.userId1 = userId1;
     }
 
     @Override
@@ -89,10 +100,10 @@ public class GlobalStatus implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GlobalStatus)) {
+        if (!(object instanceof UserFav)) {
             return false;
         }
-        GlobalStatus other = (GlobalStatus) object;
+        UserFav other = (UserFav) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -101,7 +112,7 @@ public class GlobalStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entity.GlobalStatus[ id=" + id + " ]";
+        return "com.entity.UserFav[ id=" + id + " ]";
     }
     
 }

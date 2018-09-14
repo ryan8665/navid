@@ -33,7 +33,7 @@
             <ui:insert name="content">
                 <div class="ContainerIndent">
 
-
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -43,7 +43,7 @@
                                         <p:selectManyCheckbox id="multiple" value="#{settingBean.userRule}" layout="responsive" disabled="#{settingBean.disable}" columns="3">
                                             <f:selectItems value="#{settingBean.allRule}" var="rule" itemLabel="#{rule.name}" itemValue="#{rule.id}" />
                                         </p:selectManyCheckbox>
-                                        <p:commandButton styleClass="MainButton2" disabled="#{settingBean.disable}" update=":formmain :menubar"  action="#{settingBean.saveRule()}" 
+                                        <p:commandButton styleClass="MainButton2" disabled="#{settingBean.disable}" update=":formmain :menubar :messagePanel"  action="#{settingBean.saveRule()}" 
                                                          value="ثبت"  ajax="true"  /> 
                                     </p:fieldset>
                                 </h:form>

@@ -106,6 +106,7 @@ public class roomBean extends BaseBean{
         or.setName(gropName);
         or.setPackageId(new com.entity.Package(Integer.parseInt(pack)));
         roomService.saveRoom(or);
+        info("ثبت شد.");
         
     }
     public List<com.entity.Package> getPackage() {
@@ -127,6 +128,7 @@ public class roomBean extends BaseBean{
         RoomService roomService = new RoomServiceImp();
         Room or = new Room(id);
         roomService.deleteRoom(or);
+        info("حذف شد.");
 
     }
     
@@ -136,6 +138,7 @@ public class roomBean extends BaseBean{
         for (RoomUser user : users) {
             SMS._send(user.getUserId().getMobile(), sms);
         }
+        info("ثبت شد.");
         
     }
     
@@ -144,6 +147,7 @@ public class roomBean extends BaseBean{
         List<RoomUser> users = roomService.getUsersOfRoom(id);
         messageService  messageService = new messageServiceImp();
         messageService.saveBatchMsg(users, message, msgSubject, getUserID());
+        info("ثبت شد.");
         
     }
 }

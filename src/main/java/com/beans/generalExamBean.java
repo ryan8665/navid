@@ -128,6 +128,7 @@ public class generalExamBean extends BaseBean {
         og.setName(name);
         og.setLessonId(new Lesson(Integer.parseInt(course)));
         generalExamService.saveGeneralExam(og);
+        info("ثبت شد.");
     }
 
     public void onRowSelect(SelectEvent event) throws ParseException {

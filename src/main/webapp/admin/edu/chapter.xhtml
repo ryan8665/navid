@@ -33,7 +33,7 @@
             <ui:insert name="content">
                 <div class="ContainerIndent">
 
-
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -100,7 +100,9 @@
                             <div class="EmptyBox5"></div>
                             <p:inputTextarea placeholder="توضیحات" value="#{chapterBean.chapterDescription}" requiredMessage="لطفا توضیحات را وارد نمایید" id="description" maxlength="120" required="true" class="Container96"/>
                             <div class="EmptyBox5"></div>
-                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":formmain formnew messages :menubar" style="float: left" actionListener="#{chapterBean.saveChapter()}" />
+                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" 
+                                             update=":formmain formnew messages :menubar :messagePanel" style="float: left" 
+                                             onclick="dlg1.hide();" actionListener="#{chapterBean.saveChapter()}" />
                         </h:form>
                     </p:dialog>
 

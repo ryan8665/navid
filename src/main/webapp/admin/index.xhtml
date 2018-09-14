@@ -45,6 +45,12 @@
         .jqplot-target, .jqplot-axis {
             color: #9fadb5;
         }
+        .ui-accordion-header{
+            direction: rtl ;
+        }
+        .ui-accordion-content{
+            direction: rtl ;
+        }
     </style>
     <h:head>
         <f:facet name="first">
@@ -104,10 +110,11 @@
                                             <p:separator styleClass="Wid100"></p:separator>
 
                                         </div>
-                                            
+
                                     </p:panel>
                                 </div>
                             </div>
+                            
                             <div class="Container25 Responsive">
                                 <div class="ContainerIndent">
                                     <p:panel style="min-height: 300px;" class="fontIran" rendered="#{main.isUserAccess(1)}">
@@ -128,7 +135,53 @@
                                     </p:panel>
                                 </div>
                             </div>
+                            
+                            <c:if test="#{!main.isUserAccess(1)}">
+                            <div class="Container50 Responsive">
+                                <div class="ContainerIndent">
+                                    <p:panel style="min-height: 300px;" class="fontIran" rendered="#{!main.isUserAccess(1)}">
+                                        <div class="Container100 Responsive ClassRTL Fs16 fontIran">
+                                            <i class="icon-eye-2"></i> نکات مفید
+                                        </div>
+                                        <div class="EmptyBox20"></div>
+                                        <div class="Container100">
+                                            <f:view>
+                                                <p:accordionPanel multiple="false"  >
+                                                    <p:tab  title="نکته" >
+                                                        <h:outputText class="fontIran Fs11" 
+                                                                      value="اولین مساله اینست که رهبری انقلاب 2 اصل کلیدی را در هر برهه تاریخی و تحت هر شرایطی به عنوان محکمات اداره کشور مدنظر دارند. اول اصل مردم سالاری است تا حرمت رای مردم حفظ شود. دوم اینکه هیچ امری خارج از ساختارهای قانونی کشور اجرا نشود. چنانچه در همین جلسه نیز تاکید دارند، کار جهادی نیز درون همین دولت باید باشد و نهاد موازی در کنار دولت نیز نباید تشکیل شود." />
+                                                    </p:tab>
+                                                    <p:tab  title="نکته">
+                                                        <h:outputText class="fontIran Fs11" 
+                                                                      value="اولین مساله اینست که رهبری انقلاب 2 اصل کلیدی را در هر برهه تاریخی و تحت هر شرایطی به عنوان محکمات اداره کشور مدنظر دارند. اول اصل مردم سالاری است تا حرمت رای مردم حفظ شود. دوم اینکه هیچ امری خارج از ساختارهای قانونی کشور اجرا نشود. چنانچه در همین جلسه نیز تاکید دارند، کار جهادی نیز درون همین دولت باید باشد و نهاد موازی در کنار دولت نیز نباید تشکیل شود." />
+                                                    </p:tab>
+                                                    <p:tab  title="نکته">
+                                                        <h:outputText class="fontIran Fs11" 
+                                                                      value="اولین مساله اینست که رهبری انقلاب 2 اصل کلیدی را در هر برهه تاریخی و تحت هر شرایطی به عنوان محکمات اداره کشور مدنظر دارند. اول اصل مردم سالاری است تا حرمت رای مردم حفظ شود. دوم اینکه هیچ امری خارج از ساختارهای قانونی کشور اجرا نشود. چنانچه در همین جلسه نیز تاکید دارند، کار جهادی نیز درون همین دولت باید باشد و نهاد موازی در کنار دولت نیز نباید تشکیل شود." />
+                                                    </p:tab>
+                                                </p:accordionPanel>
+                                            </f:view>
+                                        </div>
+                                    </p:panel>                 
+                                </div>
+                            </div>
+                            
+                            <div class="Container25 Responsive">
+                                <div class="ContainerIndent">
+                                    <p:panel style="min-height: 300px;" class="fontIran" rendered="#{!main.isUserAccess(1)}">
+                                        <div class="Container100 Responsive ClassRTL Fs16 fontIran">
+                                            <i class="icon-eye-2"></i>در یک نگاه
+                                        </div>
+                                        <div class="EmptyBox20"></div>
+                                        <div class="Container100">
+                                            <f:view>
 
+                                            </f:view>
+                                        </div>
+                                    </p:panel>                 
+                                </div>
+                            </div>
+                            </c:if>
                             <div class="Container25 Responsive" >
                                 <div class="ContainerIndent">
                                     <p:panel style="min-height: 300px;" class="fontIran" >
@@ -144,9 +197,9 @@
 
                                             <p:panelGrid rendered="#{main.isUserAccess(1)}">
                                                 <a href="/admin/finance/transaction.xhtml" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> (<h:outputText id="txt_count22" value="#{chartBean.transactionCount}" />) تراکنش</i>  <i class="icon-bell-alt hardblue"></i></a>
-                                            <div class="EmptyBox5"></div>
-                                         
-                                            <a href="/admin/setting/index.xhtml" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> تنظیمات</i>  <i class="icon-cog-alt hardblue"></i></a>
+                                                <div class="EmptyBox5"></div>
+
+                                                <a href="/admin/setting/index.xhtml" class="DispInlBlock Fright Fs13 MarRight20"><i class="hardblue"> تنظیمات</i>  <i class="icon-cog-alt hardblue"></i></a>
                                             </p:panelGrid>
 
                                         </div>
@@ -214,6 +267,23 @@
                                     </p:panel>                 
                                 </div>
                             </div>
+                            <c:if test="#{!main.isUserAccess(1)}">
+                            <div class="Container50 Responsive">
+                                <div class="ContainerIndent">
+                                    <p:panel style="min-height: 350px;" class="fontIran" rendered="#{!main.isUserAccess(1)}">
+                                        <div class="Container100 Responsive ClassRTL Fs16 fontIran">
+                                            <i class="icon-eye-2"></i> گزارش اجمالی
+                                        </div>
+                                        
+                                        <div class="Container100">
+                                      
+                                                <p:chart type="line" model="#{chartBean.lineModel2}" style="width: 100%;height:300px;margin-top:10px" responsive="true" />
+                                
+                                        </div>
+                                    </p:panel>                 
+                                </div>
+                            </div>
+                            </c:if>
                             <div class="Container50 Responsive100 ui-fluid" >
                                 <div class="ContainerIndent">
                                     <p:panel style="min-height: 350px;" class="fontIran" rendered="#{main.isUserAccess(1)}">

@@ -14,6 +14,7 @@ import com.entity.Room;
 import com.entity.RoomUser;
 import com.entity.Transaction;
 import com.entity.User;
+import com.entity.UserFav;
 import com.entity.UserType;
 import com.service.ExamService;
 import com.service.ExamServiceImp;
@@ -27,6 +28,7 @@ import com.service.PackageService;
 import com.service.PackageServiceImp;
 import com.service.RoomService;
 import com.service.RoomServiceImp;
+import com.service.UserFavImp;
 import com.service.UserService;
 import com.service.UserServiceImp;
 import com.service.UserTypeService;
@@ -50,7 +52,7 @@ public class userBean extends BaseBean {
 
     private boolean disable = true;
     private boolean isNotStudent = true;
-    private int id;
+    private int id ;
     private String vUser, Name, Family;
     private String vAddress, Address;
     private Date vCreationDate, CreationDate;
@@ -64,6 +66,17 @@ public class userBean extends BaseBean {
     private Date examDueDate;
     private int UserpackageID = 0;
     private int RoomID = 0;
+    private String upweUser;
+
+    public String getUpweUser() {
+        return upweUser;
+    }
+
+    public void setUpweUser(String upweUser) {
+        this.upweUser = upweUser;
+    }
+    
+    
 
     public int getRoomID() {
         return RoomID;
@@ -337,6 +350,11 @@ public class userBean extends BaseBean {
         UserService userService = new UserServiceImp();
         return userService.getAllUser();
     }
+    
+    public List<User> getAllUserExeptStudent() {
+        UserService userService = new UserServiceImp();
+        return userService.getAllUserExptStudent();
+    }
 
     public List<User> getAllStudent() {
         UserService userService = new UserServiceImp();
@@ -382,6 +400,7 @@ public class userBean extends BaseBean {
 
     public void sendSms() {
         com.utility.SMS._send(vMobile, sms);
+        info("ثبت شد.");
     }
 
     public void sendMessage() {
@@ -394,6 +413,7 @@ public class userBean extends BaseBean {
         om.setSender(new User(getUserID()));
         om.setTitle(title);
         messageService.saveMessage(om);
+        info("ثبت شد.");
 
     }
 
@@ -436,12 +456,13 @@ public class userBean extends BaseBean {
             ou.setNationalcode(Nationalcode);
             ou.setUserTypeId(new UserType(userTypeId));
             userService.saveUser(ou);
+            info("ثبت شد.");
         }
 
     }
 
     public void saveExam() {
-
+        info("ثبت شد.");
     }
     private boolean subchap = false, chap = false, lesso = false;
 
@@ -527,6 +548,18 @@ public class userBean extends BaseBean {
         our.setRoomId(new Room(RoomID));
         our.setUserId(new User(id));
         service.addUserToRoom(our);
+        info("ثبت شد.");
+  
+    }
+    
+    public void saveSubUser(){
+        UserFav ou = new UserFav();
+        ou.setDate(new Date());
+        ou.setUserId(new User(Integer.parseInt(upweUser)));
+        ou.setUserId1(new User(id));
+        UserFavImp userFavImp = new UserFavImp();
+        userFavImp.addUser(ou);
+        info("ثبت شد.");
     }
 
 }

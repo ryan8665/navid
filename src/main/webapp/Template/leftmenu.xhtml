@@ -26,6 +26,7 @@
                 <p:submenu id="sm_user" label="کاربران" icon="icon-inbox" rendered="#{main.isUserAccess(400) or main.isUserAccess(401)}" >
                     <p:menuitem  id="sm_user_guser" value="کاربران" rendered="#{main.isUserAccess(400)}" icon="icon-home-outline" outcome="/admin/user/user" containerStyleClass="layout-menubar-active"/>
                     <p:menuitem  id="sm_edu_room" value="گروه های کاربری" rendered="#{main.isUserAccess(401)}" icon="icon-home-outline" outcome="/admin/user/room" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_view" value="زیر مجموعه ها" rendered="#{main.isUserAccess(401)}" icon="icon-home-outline" outcome="/admin/user/view" containerStyleClass="layout-menubar-active"/>
                 </p:submenu>
                 <p:submenu id="sm_edu" label="آموزش" rendered="#{main.isUserAccess(500) or main.isUserAccess(501)}" icon="icon-inbox" >
                     <p:menuitem  id="sm_edu_category" rendered="#{main.isUserAccess(500)}" value="گروه درسی" icon="icon-home-outline" outcome="/admin/edu/category" containerStyleClass="layout-menubar-active"/>

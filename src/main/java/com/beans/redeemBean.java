@@ -223,6 +223,7 @@ public class redeemBean extends BaseBean{
         redeem.setName(Name);
         redeem.setGlobalStatusId(new GlobalStatus(1));
         financeService.saveRedeem(redeem);
+        info("ثبت شد.");
 
         
     }

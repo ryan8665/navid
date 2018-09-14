@@ -49,8 +49,6 @@ public class UserType implements Serializable {
     @Column(name = "description")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userTypeId")
-    private Collection<UserRule> userRuleCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userTypeId")
     private Collection<User> userCollection;
 
     public UserType() {
@@ -82,15 +80,6 @@ public class UserType implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @XmlTransient
-    public Collection<UserRule> getUserRuleCollection() {
-        return userRuleCollection;
-    }
-
-    public void setUserRuleCollection(Collection<UserRule> userRuleCollection) {
-        this.userRuleCollection = userRuleCollection;
     }
 
     @XmlTransient

@@ -216,6 +216,7 @@ public class newsBean extends BaseBean{
         NewsService newsService = new NewsServiceImp();
         newsService.SaveNews(on);
         brif= news = title = "";
+        info("ثبت شد.");
         
         
     }

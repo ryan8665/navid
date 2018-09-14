@@ -33,7 +33,7 @@
             <ui:insert name="content">
                 <div class="ContainerIndent">
 
-
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -106,8 +106,8 @@
                                 <f:selectItems  value="#{roomBean.package}" var="ty" itemLabel="#{ty.name}" itemValue="#{ty.id}"/>
                             </p:selectOneMenu>
                             <div class="EmptyBox5"></div>
-                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formdo :formmain" style="float: left" 
-                                             actionListener="#{roomBean.saveGroup()}" />
+                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formdo :formmain :messagePanel" style="float: left" 
+                                             onclick="dlg1.hide();" actionListener="#{roomBean.saveGroup()}" />
                             <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>
@@ -122,7 +122,7 @@
                             <h:outputText id="d1" style="float: left" />
                             <div class="EmptyBox5"></div>
                             <p:commandButton styleClass="MainButton2" resetValues="true" value="ارسال" update="messages :menubar" 
-                                             style="float: left" actionListener="#{roomBean.sensSMS()}" />
+                                             onclick="dlg4.hide();" style="float: left" actionListener="#{roomBean.sensSMS()}" />
                         </h:form>
                     </p:dialog>
 
@@ -139,7 +139,7 @@
                             <p:inputTextarea id="bodyTxt2" class="Container96 Responsive" value="#{roomBean.message}" rows="15" cols="25"  maxlength="300"  autoResize="false" required="true" requiredMessage="لطفا متن درخواست خود را وارد فرمائید"/>
                             <div  class="EmptyBox20"></div>
                             <div dir="ltr">
-                                <p:commandButton styleClass="MainButton2" actionListener="#{roomBean.sendMsg()}" resetValues="true" value="ارسال"  />
+                                <p:commandButton styleClass="MainButton2" onclick="dlg5.hide();" actionListener="#{roomBean.sendMsg()}" resetValues="true" value="ارسال"  />
                             </div>
 
                         </h:form>

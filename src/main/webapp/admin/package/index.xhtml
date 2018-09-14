@@ -32,7 +32,7 @@
             <ui:insert name="content">
                 <div class="ContainerIndent">
 
-
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -211,7 +211,9 @@
                                 <f:selectItems value="#{packageBean.AllTeacher()}" var="te" itemLabel="#{te.name} #{te.family}" itemValue="#{te.id}"/>
                             </p:selectOneMenu>
                             <div class="EmptyBox10"></div>
-                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formnew :formmain" style="float: left"  actionListener="#{packageBean.savePackage(main.loginDto.userType)}" />
+                            <p:commandButton styleClass="MainButton2" value="ثبت" 
+                                             update="formnew :formmain :messagePanel" style="float: left"  
+                                             onclick="dlg1.hide();" actionListener="#{packageBean.savePackage(main.loginDto.userType)}" />
                             <div class="EmptyBox5"></div>
                         </h:form> 
                     </p:dialog>

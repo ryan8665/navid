@@ -53,6 +53,24 @@ public class UserServiceImp implements UserService{
 
         }
     }
+    
+    @Override
+    public List<User> getAllUserExptStudent() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<User> userList = session.createCriteria(User.class)
+                    .add(Restrictions.ne("userTypeId.id", 3))
+                    .addOrder(Order.desc("id"))
+                    .list();
+            return userList;
+        } catch (Exception e) {
+            System.out.println("com.service.UserServiceImp.getAllUserExptStudent() " + e.toString());
+            return null;
+        } finally {
+            session.close();
+
+        }
+    }
 
     @Override
     public List<User> getAllUserNoAdmin() {

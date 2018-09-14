@@ -81,29 +81,9 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastlogin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<PackageUser> packageUserCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Media> mediaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<RoomUser> roomUserCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<GeneralExamUser> generalExamUserCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Logs> logsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<News> newsCollection;
-    @OneToMany(mappedBy = "userId")
-    private Collection<Package> packageCollection;
-    @OneToMany(mappedBy = "userId")
-    private Collection<Question> questionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<RedeemUser> redeemUserCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
-    private Collection<Message> messageCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reciver")
-    private Collection<Message> messageCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Exam> examCollection;
+    private Collection<UserFav> userFavCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId1")
+    private Collection<UserFav> userFavCollection1;
     @JoinColumn(name = "global_status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private GlobalStatus globalStatusId;
@@ -115,8 +95,6 @@ public class User implements Serializable {
     @JoinColumn(name = "user_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UserType userTypeId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Transaction> transactionCollection;
 
     public User() {
     }
@@ -203,111 +181,21 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PackageUser> getPackageUserCollection() {
-        return packageUserCollection;
+    public Collection<UserFav> getUserFavCollection() {
+        return userFavCollection;
     }
 
-    public void setPackageUserCollection(Collection<PackageUser> packageUserCollection) {
-        this.packageUserCollection = packageUserCollection;
-    }
-
-    @XmlTransient
-    public Collection<Media> getMediaCollection() {
-        return mediaCollection;
-    }
-
-    public void setMediaCollection(Collection<Media> mediaCollection) {
-        this.mediaCollection = mediaCollection;
+    public void setUserFavCollection(Collection<UserFav> userFavCollection) {
+        this.userFavCollection = userFavCollection;
     }
 
     @XmlTransient
-    public Collection<RoomUser> getRoomUserCollection() {
-        return roomUserCollection;
+    public Collection<UserFav> getUserFavCollection1() {
+        return userFavCollection1;
     }
 
-    public void setRoomUserCollection(Collection<RoomUser> roomUserCollection) {
-        this.roomUserCollection = roomUserCollection;
-    }
-
-    @XmlTransient
-    public Collection<GeneralExamUser> getGeneralExamUserCollection() {
-        return generalExamUserCollection;
-    }
-
-    public void setGeneralExamUserCollection(Collection<GeneralExamUser> generalExamUserCollection) {
-        this.generalExamUserCollection = generalExamUserCollection;
-    }
-
-    @XmlTransient
-    public Collection<Logs> getLogsCollection() {
-        return logsCollection;
-    }
-
-    public void setLogsCollection(Collection<Logs> logsCollection) {
-        this.logsCollection = logsCollection;
-    }
-
-    @XmlTransient
-    public Collection<News> getNewsCollection() {
-        return newsCollection;
-    }
-
-    public void setNewsCollection(Collection<News> newsCollection) {
-        this.newsCollection = newsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Package> getPackageCollection() {
-        return packageCollection;
-    }
-
-    public void setPackageCollection(Collection<Package> packageCollection) {
-        this.packageCollection = packageCollection;
-    }
-
-    @XmlTransient
-    public Collection<Question> getQuestionCollection() {
-        return questionCollection;
-    }
-
-    public void setQuestionCollection(Collection<Question> questionCollection) {
-        this.questionCollection = questionCollection;
-    }
-
-    @XmlTransient
-    public Collection<RedeemUser> getRedeemUserCollection() {
-        return redeemUserCollection;
-    }
-
-    public void setRedeemUserCollection(Collection<RedeemUser> redeemUserCollection) {
-        this.redeemUserCollection = redeemUserCollection;
-    }
-
-    @XmlTransient
-    public Collection<Message> getMessageCollection() {
-        return messageCollection;
-    }
-
-    public void setMessageCollection(Collection<Message> messageCollection) {
-        this.messageCollection = messageCollection;
-    }
-
-    @XmlTransient
-    public Collection<Message> getMessageCollection1() {
-        return messageCollection1;
-    }
-
-    public void setMessageCollection1(Collection<Message> messageCollection1) {
-        this.messageCollection1 = messageCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Exam> getExamCollection() {
-        return examCollection;
-    }
-
-    public void setExamCollection(Collection<Exam> examCollection) {
-        this.examCollection = examCollection;
+    public void setUserFavCollection1(Collection<UserFav> userFavCollection1) {
+        this.userFavCollection1 = userFavCollection1;
     }
 
     public GlobalStatus getGlobalStatusId() {
@@ -341,15 +229,6 @@ public class User implements Serializable {
 
     public void setUserTypeId(UserType userTypeId) {
         this.userTypeId = userTypeId;
-    }
-
-    @XmlTransient
-    public Collection<Transaction> getTransactionCollection() {
-        return transactionCollection;
-    }
-
-    public void setTransactionCollection(Collection<Transaction> transactionCollection) {
-        this.transactionCollection = transactionCollection;
     }
 
     @Override

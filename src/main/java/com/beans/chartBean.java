@@ -40,10 +40,12 @@ public class chartBean extends BaseBean {
     private PieChartModel pieModel;
     private int countAllUser;
     private LineChartModel lineModel;
+    private LineChartModel lineModel2;
     @PostConstruct
     public void init() {
         initLinearModel();
         initPieModel();
+        initLinearModel2();
     }
 
     public chartBean() {
@@ -53,6 +55,14 @@ public class chartBean extends BaseBean {
         userCount = service.countUsers();
         questionCount = service.countQuestion();
         packageCount = service.countPackage();
+    }
+
+    public LineChartModel getLineModel2() {
+        return lineModel2;
+    }
+
+    public void setLineModel2(LineChartModel lineModel2) {
+        this.lineModel2 = lineModel2;
     }
    
 
@@ -111,7 +121,7 @@ public class chartBean extends BaseBean {
     
     
     private void initPieModel() {
-
+        int temp = 0;
         pieModel = new PieChartModel();
         UserService UserService = new UserServiceImp();
         List<Object[]> list = UserService.cuntUserGroupByUser();
@@ -119,8 +129,10 @@ public class chartBean extends BaseBean {
         for (Object[] result : list) {
             pieModel.set(result[1].toString(), Integer.parseInt(result[0].toString()));
             countAllUser =+ Integer.parseInt(result[0].toString());
+            temp +=countAllUser;
 
         }
+        countAllUser = temp;
         pieModel.setExtender("skinPie");
 
     }
@@ -181,6 +193,50 @@ public class chartBean extends BaseBean {
         lineModel.addSeries(series1);
         lineModel.addSeries(series2);
         lineModel.addSeries(series3);
+
+    }
+    
+    private void initLinearModel2() {
+        lineModel2 = new LineChartModel();
+        // lineModel.setTitle("گزارش ۵ روز گذشته");
+        lineModel2.setLegendPosition("e");
+        lineModel2.setExtender("skinChart");
+        lineModel2.setAnimate(true);
+        lineModel2.getAxes().put(AxisType.X, new CategoryAxis(""));
+        Axis yAxis = lineModel2.getAxis(AxisType.Y);
+        yAxis.setMin(0);
+        //yAxis.setMax(10);
+        String a = "", b = "", c = "", d = "", e = "";
+        LineChartSeries series1 = new LineChartSeries();
+        LineChartSeries series2 = new LineChartSeries();
+        LineChartSeries series3 = new LineChartSeries();
+        Calendar cal = Calendar.getInstance();
+
+        try {
+
+            cal.add(Calendar.DATE, 0);
+            a = DateTime.justDay(cal.getTime());
+            cal.add(Calendar.DATE, -1);
+            b = DateTime.justDay(cal.getTime());
+            cal.add(Calendar.DATE, -1);
+            c = DateTime.justDay(cal.getTime());
+            cal.add(Calendar.DATE, -1);
+            d = DateTime.justDay(cal.getTime());
+            cal.add(Calendar.DATE, -1);
+            e = DateTime.justDay(cal.getTime());
+        } catch (ParseException ex) {
+
+        }
+        series1.setLabel("پیشرفت");
+        series1.set(e, 0);
+        series1.set(d, 0);
+        series1.set(c, 0);
+        series1.set(b, 0);
+        series1.set(a, 0);
+
+       
+
+        lineModel2.addSeries(series1);
 
     }
 

@@ -32,20 +32,20 @@ public class access implements Filter {
         String contextPath = ((HttpServletRequest) request).getContextPath();
         try {
             loginBean = (main) ((HttpServletRequest) request).getSession().getAttribute("main");
-            System.out.println("filter1    " + loginBean.getLoginDto().getLogin());
+           // System.out.println("filter1    " + loginBean.getLoginDto().getLogin());
             if (!loginBean.getLoginDto().getLogin()) {
                 ((HttpServletResponse) response).sendRedirect(contextPath + "/Error/access-denied.xhtml");
             }
         } catch (Exception e) {
-            System.out.println("filter1    " + e.toString());
+         //   System.out.println("filter1    " + e.toString());
             ((HttpServletResponse) response).sendRedirect(contextPath + "/Error/access-denied.xhtml");
         }
 
         try {
             if (loginBean.getLoginDto().getLogin() == false) {
-                System.out.println("filter2    false");
-                System.out.println("filter2    getIsLOgin " + loginBean.getLoginDto().getLogin());
-                System.out.println("filter2    contextPath " + contextPath.equals(""));
+              //  System.out.println("filter2    false");
+             //   System.out.println("filter2    getIsLOgin " + loginBean.getLoginDto().getLogin());
+              //  System.out.println("filter2    contextPath " + contextPath.equals(""));
                 ((HttpServletResponse) response).sendRedirect(contextPath + "/Error/access-denied.xhtml");
             } else {
                 // System.out.println("filter3    " + loginBean.getIsLOgin());

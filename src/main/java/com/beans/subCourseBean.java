@@ -87,6 +87,7 @@ public class subCourseBean extends BaseBean {
         ol.setDescription(subCourseDescription);
         ol.setName(subCourseName);
         LessonService.saveLesson(ol);
+        info("ثبت شد.");
 
     }
     

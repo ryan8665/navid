@@ -130,6 +130,7 @@ public class settingBean extends BaseBean{
             selectedRule.add(ou);
         }
         service.saveUserAuthority(selectedRule,id);
+        info("ثبت شد.");
     }
 
 }

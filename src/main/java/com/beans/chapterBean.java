@@ -88,6 +88,7 @@ public class chapterBean extends BaseBean {
         oc.setLessonId(new Lesson(subCourseID));
         oc.setName(chapterName);
         chapterServiceImp.saveChapter(oc);
+        info("ثبت شد.");
     }
 
     public void onRowSelect(SelectEvent event) throws ParseException {

@@ -33,7 +33,7 @@
             <ui:insert name="content">
                 <div class="ContainerIndent">
 
-
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -51,6 +51,7 @@
                                     <p:commandButton styleClass="MainButton2"   value="عملیات" type="button" onclick="PF('dlg9').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formmain :menubar"  action="#{userBean.updateStatus()}" 
                                                      value="فعال/غیر فعال"  ajax="true"  /> 
+                                    <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}" value="زیرمجموعه" type="button" onclick="PF('dlg11').show();" />
                                     
                                     <p:commandButton  styleClass="MainButton2" ajax="false"  value="Export" type="text" >
                                         <p:dataExporter id="exporter" type="xls" target=":formmain:tbmain" fileName="exporte" />
@@ -65,7 +66,7 @@
                                                  selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
                                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
-                                        <p:ajax event="rowSelect" update=":menubar :formview :formmonitor :formsms :formmessage :formmpackage :formtransaction :formglobalexam :formdo :formroom"  listener="#{userBean.onRowSelect}" />
+                                        <p:ajax event="rowSelect" update=":menubar :formview :formmonitor :formsms :formmessage :formmpackage :formtransaction :formglobalexam :formdo :formroom :formsub"  listener="#{userBean.onRowSelect}" />
                                         <p:column class="ClassRTL fontIran Fs12" width="15%" sortBy="#{item.globalStatusId.name}" 
                                                   filterBy="#{item.globalStatusId.name}" filterMatchMode="contains">
                                             <f:facet name="header">
@@ -139,7 +140,8 @@
                             <p:inputNumber placeholder="گذر واژه" value="#{userBean.password}" requiredMessage="لطفا گذر واژه را وارد نمایید"  maxlength="15" required="true" class="Container96"/>
 
                             <div class="EmptyBox10"></div>
-                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formnew :formmain" style="float: left"  actionListener="#{userBean.saveUser()}" />
+                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formnew :formmain :messagePanel" style="float: left"
+                                             onclick="dlg1.hide();" actionListener="#{userBean.saveUser()}" />
                             <div class="EmptyBox5"></div>
                         </h:form> 
                     </p:dialog>
@@ -210,7 +212,7 @@
                             <h:outputText id="d1" style="float: left" />
                             <div class="EmptyBox5"></div>
                             <p:commandButton styleClass="MainButton2" resetValues="true" value="ارسال" update="messages :menubar" 
-                                             style="float: left" actionListener="#{userBean.sendSms()}" />
+                                             onclick="dlg4.hide();"  style="float: left" actionListener="#{userBean.sendSms()}" />
                         </h:form>
                     </p:dialog>
 
@@ -229,7 +231,7 @@
                             <p:inputTextarea id="bodyTxt2" class="Container96 Responsive" value="#{userBean.message}" rows="15" cols="25"  maxlength="300"  autoResize="false" required="true" requiredMessage="لطفا متن درخواست خود را وارد فرمائید"/>
                             <div  class="EmptyBox20"></div>
                             <div dir="ltr">
-                                <p:commandButton styleClass="MainButton2" actionListener="#{userBean.sendMessage()}" resetValues="true" value="ارسال"  />
+                                <p:commandButton styleClass="MainButton2" onclick="dlg5.hide();" actionListener="#{userBean.sendMessage()}" resetValues="true" value="ارسال"  />
                             </div>
 
                         </h:form>
@@ -419,7 +421,7 @@
                             </p:selectOneMenu>
                             <div class="EmptyBox10"></div>
                             <p:commandButton styleClass="MainButton2" value="ثبت" update="formdo :formmain" style="float: left" 
-                                             actionListener="#{userBean.saveExam()}" />
+                                             onclick="dlg9.hide();" actionListener="#{userBean.saveExam()}" />
                             <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>
@@ -439,8 +441,21 @@
                             </p:selectOneMenu>
                             <div class="EmptyBox10"></div>
                             <p:commandButton styleClass="MainButton2" value="ثبت" resetValues="true" update="formroom :formmain" style="float: left" 
-                                             actionListener="#{userBean.saveUserRoom()}" />
+                                             onclick="dlg10.hide();" actionListener="#{userBean.saveUserRoom()}" />
                             <div class="EmptyBox5"></div>
+                        </h:form>
+                    </p:dialog>
+                    
+                    <p:dialog  hideEffect="fade" showEffect="fade" 
+                               closable="true" closeOnEscape="true" widgetVar="dlg11" modal="true"  width="300">
+                        <h:form id="formsub" class="Fs12">
+                            <p:selectOneMenu  required="true" value="#{userBean.upweUser}" filter="true"  var="items"  style="direction: ltr"  class=" Container90  Responsive" >
+                                <f:selectItem  itemLabel="نوع کاربر" itemValue="" noSelectionOption="true" />
+                                <f:selectItems  value="#{userBean.allUserExeptStudent}" var="ty" itemLabel="#{ty.name} #{ty.family}" itemValue="#{ty.id}"/>
+                            </p:selectOneMenu>
+                            <div class="EmptyBox5"></div>
+                            <p:commandButton styleClass="MainButton2" resetValues="true" value="ثبت" update=":menubar" 
+                                             onclick="dlg11.hide();" style="float: left" actionListener="#{userBean.saveSubUser()}" />
                         </h:form>
                     </p:dialog>
 

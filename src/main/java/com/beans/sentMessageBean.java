@@ -136,6 +136,7 @@ public class sentMessageBean extends BaseBean{
         om.setTitle(title);
         messageService messageService = new messageServiceImp();
         messageService.saveMessage(om);
+        info("ثبت شد.");
     }
     
     public List<User> userLIst(){

@@ -232,6 +232,7 @@ public class libraryBean extends BaseBean{
         libraryService.saveMedia(om);
                 
         mediatype = chapter = description = name = "";
+        info("ثبت شد.");
     }
     
     public List<MediaType> getAllMediaType(){

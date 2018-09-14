@@ -5,6 +5,7 @@
  */
 package com.beans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,22 @@ public class BaseBean {
         String contextPath = ((HttpServletRequest) request).getContextPath();
         main loginBean = (main) ((HttpServletRequest) request).getSession().getAttribute("main");
         return loginBean.getLoginDto().getId();
+    }
+    
+    public void info(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+    }
+
+    public void warn(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, message, message));
+    }
+
+    public void error(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+    }
+
+    public void fatal(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, message, message));
     }
     
 }

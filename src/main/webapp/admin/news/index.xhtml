@@ -33,7 +33,7 @@
             <ui:insert name="content">
                 <div class="ContainerIndent">
 
-
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -115,7 +115,8 @@
                                 <f:selectItems value="#{newsBean.newsCat()}" var="ncat" itemLabel="#{ncat.name}" itemValue="#{ncat.id}"/>
                             </p:selectOneMenu>
                             <div class="EmptyBox10"></div>
-                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formnew :formmain:tbmain :formview" style="float: left"  actionListener="#{newsBean.addNews()}" />
+                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formnew :formmain:tbmain :formview" 
+                                             style="float: left"  actionListener="#{newsBean.addNews()}" onclick="dlg1.hide();"/>
                             <div class="EmptyBox5"></div>
                         </h:form> 
                     </p:dialog>
@@ -144,8 +145,8 @@
                               closable="true" closeOnEscape="true" widgetVar="dlg4" modal="true" >
                         <h:form id="formphoto">
                             <p:fileUpload styleClass="MainButton2" fileUploadListener="#{newsBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                                          update="messages" sizeLimit="1500000"  allowTypes="/(\.|\/)(jpg)$/" />
-                            <p:growl id="messages" showDetail="false"  />
+                                          update=":messagePanel" sizeLimit="1500000"  allowTypes="/(\.|\/)(jpg)$/" />
+                         
                         </h:form>
                     </p:dialog>
 

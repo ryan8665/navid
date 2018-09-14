@@ -32,6 +32,8 @@
         <div id="layout-portlets-cover" class="fontRegular">
             <ui:insert name="content">
                 <div class="ContainerIndent">
+                    <p:messages id="messagePanel" showDetail="false"  closable="true" autoUpdate="true" escape="true" class="ClassRTL fontIran Fs9"/>
+
                     <p:panel style="min-height: 500px" class="IranSans " >
                         <div class="ContainerIndent">
                             <div dir="rtl">
@@ -99,7 +101,7 @@
                                         </p:column>
                                     </p:dataTable>
                                     
-                                    <p:dataTable value="#{libraryBean.allMediaByUser}"   rowKey="#{item.id}"  var="item"  rowIndexVar="index" rendered="#{main.loginDto.userType != 1}"
+                                    <p:dataTable value="#{libraryBean.allMediaByUser()}"   rowKey="#{item.id}"  var="item"  rowIndexVar="index" rendered="#{main.loginDto.userType != 1}"
                                                  selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
                                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No lib found with given criteria">
@@ -174,7 +176,8 @@
                                 <f:selectItems value="#{libraryBean.allMediaType}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat.id}"/>
                             </p:selectOneMenu>
                             <div class="EmptyBox10"></div>
-                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formnew :formmain" style="float: left"  actionListener="#{libraryBean.saveToLibrary()}" />
+                            <p:commandButton styleClass="MainButton2" value="ثبت" update="formnew :formmain :messagePanel" style="float: left"  
+                                             onclick="dlg1.hide();" actionListener="#{libraryBean.saveToLibrary()}" />
                             <div class="EmptyBox5"></div>
                         </h:form> 
                     </p:dialog>

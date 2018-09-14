@@ -269,7 +269,7 @@ public class packageBean extends BaseBean{
         packageService.savePackage(op);
         Descrioption = Name  = "";
         Months = Price = null;
-        
+        info("ثبت شد.");
     }
     
     public void onRowSelect(SelectEvent event) throws Exception {

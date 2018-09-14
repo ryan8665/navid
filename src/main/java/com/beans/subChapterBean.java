@@ -99,6 +99,7 @@ public class subChapterBean extends BaseBean {
         os.setName(name);
         os.setSequence(Sequence);
         subChapterServiceImp.saveSubChapter(os);
+        info("ثبت شد.");
 
     }
     

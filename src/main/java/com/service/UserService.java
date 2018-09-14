@@ -28,6 +28,8 @@ public interface UserService {
     
     public void saveUser(User user);
     
+    public List<User> getAllUserExptStudent();
+    
     public boolean chackUserisExist(String mobile);
     
     public void changePassword(int user,String password);

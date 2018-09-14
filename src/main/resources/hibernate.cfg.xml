@@ -49,5 +49,7 @@
         <mapping class="com.entity.Message"/>
         <mapping class="com.entity.Room"/>
         <mapping class="com.entity.RoomUser"/>
+        <mapping class="com.entity.UserFav"/>
+        <mapping class="com.entity.Fav"/>
     </session-factory>
 </hibernate-configuration>
