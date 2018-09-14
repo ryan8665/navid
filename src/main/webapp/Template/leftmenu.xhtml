@@ -18,37 +18,37 @@
         <h:form id="menuform"  >
             <ps:menu id="sm_leftmenu">
                 <p:menuitem  id="sm_dashboardsa" value="داشبورد" icon="icon-home-outline" outcome="/admin/index" containerStyleClass="layout-menubar-active"/>
-                <p:menuitem  id="sm_news" value="اخبار و اطلاعیه ها" rendered="#{main.isUserAccess(200)}" icon="icon-home-outline" outcome="/admin/news/index" containerStyleClass="layout-menubar-active"/>
+                <p:menuitem  id="sm_news" value="اخبار و اطلاعیه ها" rendered="#{main.isUserAccess(200)}" icon="icon-rss-squared" outcome="/admin/news/index" containerStyleClass="layout-menubar-active"/>
                 <p:submenu id="sm_message" label="پیام ها" icon="icon-inbox" rendered="#{main.isUserAccess(300) or main.isUserAccess(301)}">
-                    <p:menuitem  id="sm_inbox" value="پیام های دریافتی" rendered="#{main.isUserAccess(300)}" icon="icon-home-outline" outcome="/admin/message/inbox" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_outbox" value="پیام های ارسالی" rendered="#{main.isUserAccess(301)}" icon="icon-home-outline" outcome="/admin/message/sent" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_inbox" value="پیام های دریافتی" rendered="#{main.isUserAccess(300)}" icon="icon-download-1" outcome="/admin/message/inbox" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_outbox" value="پیام های ارسالی" rendered="#{main.isUserAccess(301)}" icon="icon-upload-1" outcome="/admin/message/sent" containerStyleClass="layout-menubar-active"/>
                 </p:submenu>
-                <p:submenu id="sm_user" label="کاربران" icon="icon-inbox" rendered="#{main.isUserAccess(400) or main.isUserAccess(401)}" >
-                    <p:menuitem  id="sm_user_guser" value="کاربران" rendered="#{main.isUserAccess(400)}" icon="icon-home-outline" outcome="/admin/user/user" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_edu_room" value="گروه های کاربری" rendered="#{main.isUserAccess(401)}" icon="icon-home-outline" outcome="/admin/user/room" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_edu_view" value="زیر مجموعه ها" rendered="#{main.isUserAccess(401)}" icon="icon-home-outline" outcome="/admin/user/view" containerStyleClass="layout-menubar-active"/>
+                <p:submenu id="sm_user" label="کاربران" icon="icon-user" rendered="#{main.isUserAccess(400) or main.isUserAccess(401)}" >
+                    <p:menuitem  id="sm_user_guser" value="کاربران" rendered="#{main.isUserAccess(400)}" icon="icon-user" outcome="/admin/user/user" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_room" value="گروه های کاربری" rendered="#{main.isUserAccess(401)}" icon="icon-user" outcome="/admin/user/room" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_view" value="زیر مجموعه ها" rendered="#{main.isUserAccess(402)}" icon="icon-user" outcome="/admin/user/view" containerStyleClass="layout-menubar-active"/>
                 </p:submenu>
-                <p:submenu id="sm_edu" label="آموزش" rendered="#{main.isUserAccess(500) or main.isUserAccess(501)}" icon="icon-inbox" >
-                    <p:menuitem  id="sm_edu_category" rendered="#{main.isUserAccess(500)}" value="گروه درسی" icon="icon-home-outline" outcome="/admin/edu/category" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_edu_course" rendered="#{main.isUserAccess(500)}" value="درس" icon="icon-home-outline" outcome="/admin/edu/course" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_edu_sub_course" rendered="#{main.isUserAccess(500)}" value="زیر درس" icon="icon-home-outline" outcome="/admin/edu/subcourse" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_edu_chapter" rendered="#{main.isUserAccess(500)}" value="بخش" icon="icon-home-outline" outcome="/admin/edu/chapter" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_edu_subchapter" rendered="#{main.isUserAccess(500)}" value="زیر بخش" icon="icon-home-outline" outcome="/admin/edu/subchapter" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_edu_question" rendered="#{main.isUserAccess(501)}" value="سئوالات" icon="icoسئوالاتn-home-outline" outcome="/admin/edu/question" containerStyleClass="layout-menubar-active"/>
+                <p:submenu id="sm_edu" label="آموزش" rendered="#{main.isUserAccess(500) or main.isUserAccess(501)}" icon="icon-graduation-cap" >
+                    <p:menuitem  id="sm_edu_category" rendered="#{main.isUserAccess(500)}" value="گروه درسی" icon="icon-graduation-cap" outcome="/admin/edu/category" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_course" rendered="#{main.isUserAccess(500)}" value="درس" icon="icon-graduation-cap" outcome="/admin/edu/course" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_sub_course" rendered="#{main.isUserAccess(500)}" value="زیر درس" icon="icon-graduation-cap" outcome="/admin/edu/subcourse" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_chapter" rendered="#{main.isUserAccess(500)}" value="بخش" icon="icon-graduation-cap" outcome="/admin/edu/chapter" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_subchapter" rendered="#{main.isUserAccess(500)}" value="زیر بخش" icon="icon-graduation-cap" outcome="/admin/edu/subchapter" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_edu_question" rendered="#{main.isUserAccess(501)}" value="سئوالات" icon="icon-graduation-cap" outcome="/admin/edu/question" containerStyleClass="layout-menubar-active"/>
                 </p:submenu>
-                <p:submenu id="sm_exam" label="امتحانات" rendered="#{main.isUserAccess(600)}" icon="icon-inbox" >
-                    <p:menuitem  id="sm_exam_general" rendered="#{main.isUserAccess(600)}" value="امتحان جامع" icon="icon-home-outline" outcome="/admin/exam/generalexam" containerStyleClass="layout-menubar-active"/>
+                <p:submenu id="sm_exam" label="امتحانات" rendered="#{main.isUserAccess(600)}" icon="icon-briefcase" >
+                    <p:menuitem  id="sm_exam_general" rendered="#{main.isUserAccess(600)}" value="امتحان جامع" icon="icon-briefcase" outcome="/admin/exam/generalexam" containerStyleClass="layout-menubar-active"/>
                
                 </p:submenu>
-                <p:menuitem  id="sm_package" value="بسته های آموزشی"  rendered="#{main.isUserAccess(700)}"  icon="icon-home-outline" outcome="/admin/package/index" containerStyleClass="layout-menubar-active"/>
-                <p:submenu id="sm_finance" label="مالی" rendered="#{main.isUserAccess(800) or main.isUserAccess(801) or main.isUserAccess(802)}" icon="icon-inbox" >
-                    <p:menuitem  id="sm_finance_transaction" rendered="#{main.isUserAccess(800)}" value="تراکنش ها" icon="icon-home-outline" outcome="/admin/finance/transaction" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_finance_redeem" rendered="#{main.isUserAccess(801)}" value="کارت تخفیف" icon="icon-home-outline" outcome="/admin/finance/redeem" containerStyleClass="layout-menubar-active"/>
-                    <p:menuitem  id="sm_finance_redeem_user" rendered="#{main.isUserAccess(802)}" value="تخفیف های استفاده شده" icon="icon-home-outline" outcome="/admin/finance/redeemuser" containerStyleClass="layout-menubar-active"/>
+                <p:menuitem  id="sm_package" value="بسته های آموزشی"  rendered="#{main.isUserAccess(700)}"  icon="icon-suitcase" outcome="/admin/package/index" containerStyleClass="layout-menubar-active"/>
+                <p:submenu id="sm_finance" label="مالی" rendered="#{main.isUserAccess(800) or main.isUserAccess(801) or main.isUserAccess(802)}" icon="icon-dollar" >
+                    <p:menuitem  id="sm_finance_transaction" rendered="#{main.isUserAccess(800)}" value="تراکنش ها" icon="icon-money" outcome="/admin/finance/transaction" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_finance_redeem" rendered="#{main.isUserAccess(801)}" value="کارت تخفیف" icon="icon-gift-1" outcome="/admin/finance/redeem" containerStyleClass="layout-menubar-active"/>
+                    <p:menuitem  id="sm_finance_redeem_user" rendered="#{main.isUserAccess(802)}" value="تخفیف های استفاده شده" icon="icon-gift-1" outcome="/admin/finance/redeemuser" containerStyleClass="layout-menubar-active"/>
                 </p:submenu>
-                <p:menuitem  id="sm_library" rendered="#{main.isUserAccess(900)}" value="کتابخانه" icon="icon-home-outline" outcome="/admin/library/index" containerStyleClass="layout-menubar-active"/>
-                <p:menuitem  id="sm_instraction" value="راهنما" icon="icon-home-outline" outcome="/admin/toterial/index" containerStyleClass="layout-menubar-active"/>
-                <p:menuitem  id="sm_about" value="درباره ما" icon="icon-home-outline" outcome="/admin/about/index" containerStyleClass="layout-menubar-active"/>
+                <p:menuitem  id="sm_library" rendered="#{main.isUserAccess(900)}" value="کتابخانه" icon="icon-tasks" outcome="/admin/library/index" containerStyleClass="layout-menubar-active"/>
+                <p:menuitem  id="sm_instraction" value="راهنما" icon="icon-help-circled" outcome="/admin/toterial/index" containerStyleClass="layout-menubar-active"/>
+                <p:menuitem  id="sm_about" value="درباره ما" icon="icon-info-circled" outcome="/admin/about/index" containerStyleClass="layout-menubar-active"/>
             </ps:menu>
         </h:form>
     </div>
