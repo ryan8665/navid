@@ -48,7 +48,7 @@
                                     <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}"  value="افزودن به گروه" type="button" onclick="PF('dlg10').show();" />
                                     <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}" value="تراکنش ها" type="button" onclick="PF('dlg7').show();" />
                                     <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}" value="امتحانات جامع" type="button" onclick="PF('dlg8').show();" />
-                                    <p:commandButton styleClass="MainButton2"   value="عملیات" type="button" onclick="PF('dlg9').show();" />
+                                    <p:commandButton styleClass="MainButton2" disabled="#{userBean.isNotStudent}"  value="عملیات" type="button" onclick="PF('dlg9').show();" />
                                     <p:commandButton styleClass="MainButton2" disabled="#{userBean.disable}" update=":formmain :menubar"  action="#{userBean.updateStatus()}" 
                                                      value="فعال/غیر فعال"  ajax="true"  /> 
                                     <p:commandButton styleClass="MainButton2"  disabled="#{userBean.isNotStudent}" value="زیرمجموعه" type="button" onclick="PF('dlg11').show();" />
