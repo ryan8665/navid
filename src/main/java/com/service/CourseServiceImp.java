@@ -58,4 +58,16 @@ public class CourseServiceImp implements CourseService {
         session.close();
     }
 
+    @Override
+    public int saveCourseRetriveID(Course course) {
+        int id = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(course);
+        id = course.getId();
+        session.getTransaction().commit();
+        session.close();
+        return id;
+    }
+
 }

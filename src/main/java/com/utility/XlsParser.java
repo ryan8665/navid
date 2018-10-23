@@ -5,13 +5,27 @@
  */
 package com.utility;
 
+import com.entity.Category;
+import com.entity.Chapter;
+import com.entity.Course;
 import com.entity.GlobalStatus;
 import com.entity.Hadrdness;
 import com.entity.Importance;
+import com.entity.Lesson;
 import com.entity.Question;
 import com.entity.QuestionType;
 import com.entity.SubChapter;
 import com.entity.User;
+import com.service.CategoryService;
+import com.service.CategoryServiceImp;
+import com.service.ChapterService;
+import com.service.ChapterServiceImp;
+import com.service.CourseService;
+import com.service.CourseServiceImp;
+import com.service.LessonService;
+import com.service.LessonServiceImp;
+import com.service.SubChapterService;
+import com.service.SubChapterServiceImp;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +43,12 @@ public class XlsParser {
 
     public static List<Question> doPars(String file) {
         int subchapter, importance = 1, userid, hardness = 1, time, answer, qType;
+        int categoryId = 0;
+        int LessonId = 0;
+        int courseId = 0;
+        int chapterID = 0;
+        int subChapterID = 0;
+        int level = 0;
         try {
             POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(file));
             HSSFWorkbook wb = new HSSFWorkbook(fs);
@@ -77,44 +97,112 @@ public class XlsParser {
                                     System.out.println("importance = " + cell);
                                     importance = (int) Double.parseDouble(cell.toString());
                                 }
-                                if (c == 3) {
-                                    System.out.println("hardness = " + cell);
-                                    hardness = (int) Double.parseDouble(cell.toString());
-                                }
+
                                 if (c == 4) {
                                     System.out.println("qType = " + cell);
                                     qType = (int) Double.parseDouble(cell.toString());
                                 }
+                                //
+                                if (c == 5) {
+                                    CategoryService categoryService = new CategoryServiceImp();
+                                    Category category = new Category();
+                                    category.setName(cell.toString());
+                                    category.setDescription(cell.toString());
+                                    categoryId = categoryService.saveCategoryRetriveId(category);
+                                    System.out.println("Lesson Group ID ======== " + categoryId);
+                                }
+                                if (c == 6) {
+                                    System.out.println("Course = " + cell);
+                                    CourseService courseService = new CourseServiceImp();
+                                    Course course = new Course();
+                                    course.setName(cell.toString());
+                                    course.setDescription(cell.toString());
+                                    course.setCategoryId(new Category(categoryId));
+                                    courseId = courseService.saveCourseRetriveID(course);
+                                    System.out.println("Course ID ======== " + courseId);
+                                    //  qType = (int) Double.parseDouble(cell.toString());
+                                }
+                                if (c == 7) {
+
+                                    // qType = (int) Double.parseDouble(cell.toString());
+                                    System.out.println("sub Course = " + cell);
+                                    LessonService lessonService = new LessonServiceImp();
+                                    Lesson lesson = new Lesson();
+                                    lesson.setCourseId(new Course(courseId));
+                                    lesson.setDescription(cell.toString());
+                                    lesson.setName(cell.toString());
+                                    LessonId = lessonService.saveLessonRetrive(lesson);
+                                    System.out.println("sub Course ID ======== " + LessonId);
+                                }
+
                             }
 
                             if (r > 0) {
 
                                 switch (c) {
                                     case 0:
-                                        System.out.println("subchapter = " + cell);
-                                        ou.setSubChapterId(new SubChapter((int) Double.parseDouble(cell.toString())));
+                                        
+                                        try {
+                                            level = Integer.parseInt(cell.toString());
+                                            System.out.println("level = " + cell);
+                                        } catch (Exception e) {
+                                            System.out.println("level -- = " + cell);
+                                        }
                                         break;
                                     case 1:
+                                        if (cell.toString().equals("-") || cell.toString() == null) {
+
+                                        } else {
+                                            ChapterService chapterService = new ChapterServiceImp();
+                                            Chapter chapte = new Chapter();
+                                            chapte.setDescription(cell.toString());
+                                            chapte.setName(cell.toString());
+                                            chapte.setLessonId(new Lesson(LessonId));
+                                            chapterID = chapterService.saveChapterRetriveID(chapte);
+
+                                        }
+                                        System.out.println("Chapter = " + cell);
+                                        System.out.println("chapterID = " + chapterID);
+                                        // ou.setSubChapterId(new SubChapter((int) Double.parseDouble(cell.toString())));
+                                        break;
+                                    case 2:
+                                        if (cell.toString().equals("-") || cell.toString() == null) {
+
+                                        } else {
+                                            SubChapterService chapterService = new SubChapterServiceImp();
+                                            SubChapter subChapter = new SubChapter();
+                                            subChapter.setDescription(cell.toString());
+                                            subChapter.setName(cell.toString());
+                                            subChapter.setChapterId(new Chapter(chapterID));
+                                            subChapter.setSequence(level);
+                                            subChapterID = chapterService.saveSubChapterRetriveID(subChapter);
+                                            // subChapterID =  chapterService.saveSubChapterRetriveID(chapterService);
+                                        }
+                                        System.out.println("subChapterID = " + subChapterID);
+                                        System.out.println("sub-Chapter = " + cell);
+                                        // ou.setSubChapterId(new SubChapter((int) Double.parseDouble(cell.toString())));
+                                        break;
+                                    case 3:
                                         System.out.println("soal = " + cell);
                                         ou.setQuestion(cell.toString());
                                         break;
-                                    case 2:
+                                    case 4:
                                         System.out.println("javab1 = " + cell);
                                         ou.setAnswerA(cell.toString());
                                         break;
-                                    case 3:
+                                    case 5:
                                         System.out.println("javab2 = " + cell);
                                         ou.setAnswerB(cell.toString());
                                         break;
-                                    case 4:
+                                    case 6:
                                         System.out.println("javab3 = " + cell);
                                         ou.setAnswerC(cell.toString());
                                         break;
-                                    case 5:
+                                    case 7:
                                         System.out.println("javab4 = " + cell);
                                         ou.setAnswerD(cell.toString());
                                         break;
-                                    case 6:
+                                    case 8:
                                         try {
                                             answer = (int) Double.parseDouble(cell.toString());
                                             ou.setAnswer(answer);
@@ -122,15 +210,15 @@ public class XlsParser {
                                         } catch (Exception e) {
                                         }
                                         break;
-                                    case 7:
+                                    case 9:
                                         System.out.println("description = " + cell);
                                         ou.setDescription(cell.toString());
                                         break;
-                                    case 8:
+                                    case 10:
                                         System.out.println("note = " + cell);
                                         ou.setNote(cell.toString());
                                         break;
-                                    case 9:
+                                    case 11:
                                         try {
                                             time = (int) Double.parseDouble(cell.toString());
                                             ou.setTime(time);
@@ -139,14 +227,14 @@ public class XlsParser {
                                         }
 
                                         break;
-                                    case 10:
+                                    case 12:
                                         try {
                                             hardness = (int) Double.parseDouble(cell.toString());
                                             System.out.println("hardness = " + hardness);
                                         } catch (Exception e) {
                                         }
                                         break;
-                                    case 11:
+                                    case 13:
                                         try {
                                             importance = (int) Double.parseDouble(cell.toString());
                                             System.out.println("importance = " + importance);
@@ -167,7 +255,7 @@ public class XlsParser {
                     ou.setImportanceId(new Importance(importance));
                     ou.setQuestionTypeId(new QuestionType(1));
                     ou.setGlobalStatusId(new GlobalStatus(1));
-                    ou.setSubChapterId(new SubChapter(1));
+                    ou.setSubChapterId(new SubChapter(subChapterID));
                     qList.add(ou);
                 }
                 flag = true;

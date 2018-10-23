@@ -21,6 +21,8 @@ public interface CategoryService {
     
     public void saveCategory(Category category);
     
+    public int saveCategoryRetriveId(Category category);
+    
  
     
 }

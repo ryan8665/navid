@@ -55,5 +55,17 @@ public class SubChapterServiceImp implements SubChapterService{
         session.getTransaction().commit();
         session.close();
     }
+
+    @Override
+    public int saveSubChapterRetriveID(SubChapter subChapter) {
+        int id = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(subChapter);
+        id = subChapter.getId();
+        session.getTransaction().commit();
+        session.close();
+        return id;
+    }
     
 }

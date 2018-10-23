@@ -56,5 +56,17 @@ public class ChapterServiceImp implements ChapterService{
         session.getTransaction().commit();
         session.close();
     }
+
+    @Override
+    public int saveChapterRetriveID(Chapter chapter) {
+        int id = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(chapter);
+        id = chapter.getId();
+        session.getTransaction().commit();
+        session.close();
+        return id;
+    }
     
 }

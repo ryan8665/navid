@@ -20,4 +20,6 @@ public interface SubChapterService {
 
     public void saveSubChapter(SubChapter subChapter);
     
+    int saveSubChapterRetriveID(SubChapter subChapter);
+    
 }

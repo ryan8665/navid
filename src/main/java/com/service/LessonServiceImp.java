@@ -57,5 +57,17 @@ public class LessonServiceImp implements  LessonService{
         session.getTransaction().commit();
         session.close();
     }
+
+    @Override
+    public int saveLessonRetrive(Lesson lesson) {
+        int id = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(lesson);
+        id = lesson.getId();
+        session.getTransaction().commit();
+        session.close();
+        return id;
+    }
     
 }

@@ -20,4 +20,6 @@ public interface CourseService {
 
     public void saveCourse(Course course);
     
+    int saveCourseRetriveID(Course course);
+    
 }

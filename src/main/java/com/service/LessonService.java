@@ -20,4 +20,6 @@ public interface LessonService {
 
     public void saveLesson(Lesson lesson);
     
+     int saveLessonRetrive(Lesson lesson);
+    
 }

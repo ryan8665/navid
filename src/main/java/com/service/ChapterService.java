@@ -20,4 +20,6 @@ public interface ChapterService {
 
     public void saveChapter(Chapter chapter);
     
+     int saveChapterRetriveID(Chapter chapter);
+    
 }

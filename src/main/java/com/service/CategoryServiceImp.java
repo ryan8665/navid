@@ -71,4 +71,16 @@ public class CategoryServiceImp implements CategoryService{
         }
     }
 
+    @Override
+    public int saveCategoryRetriveId(Category category) {
+        int id = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(category);
+        id = category.getId();
+        session.getTransaction().commit();
+        session.close();
+        return id;
+    }
+
 }
