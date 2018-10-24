@@ -118,5 +118,10 @@ public class main {
        return  map.containsKey(authority);
        
     }
+    
+    public void isUserAccessRet() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/Error/access-denied.xhtml");
+
+    }
 
 }
