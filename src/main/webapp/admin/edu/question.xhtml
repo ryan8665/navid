@@ -55,7 +55,7 @@
                                                  selectionMode="single" rows="10" lazy="false" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
                                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="10,25,50"  resizableColumns="true" emptyMessage="No item found with given criteria">
-                                        <p:ajax event="rowSelect" update=":menubar"  listener="#{questionBean.onRowSelect}" />
+                                        <p:ajax event="rowSelect" update=":menubar :formView"  listener="#{questionBean.onRowSelect}" />
                                         <p:column class="ClassRTL fontIran Fs12" width="10%" sortBy="#{item.globalStatusId.name}"
                                                   filterBy="#{item.globalStatusId.name}" filterMatchMode="contains">
                                             <f:facet name="header">
@@ -97,11 +97,11 @@
                     </p:panel>
 
                     <div class="EmptyBox20"></div>
-                    
+
                     <p:dialog dir="rtl" header="جدید" hideEffect="fade" showEffect="fade" 
                               closable="true" closeOnEscape="true" widgetVar="dlg1" modal="true"  width="500" height="500">
                         <h:form id="formnew" class="fontIran">
-                            
+
                             <p:inputText id="a" placeholder="سوال" value="#{questionBean.question}"   maxlength="300" required="true" class="Container96"/>
                             <div class="EmptyBox5"></div>
                             <p:inputText id="b" placeholder="جواب  اول" value="#{questionBean.answerA}"   maxlength="300" required="true" class="Container96"/>
@@ -144,12 +144,25 @@
                             <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>
-                    
+
                     <p:dialog dir="rtl" header="آپلود فایل" hideEffect="fade" showEffect="fade" 
                               closable="true" closeOnEscape="true" widgetVar="dlg4" modal="true" >
                         <h:form id="formphoto">
-                            <p:fileUpload styleClass="MainButton2" fileUploadListener="#{questionBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                            <p:fileUpload styleClass="MainButton2" fileUploadListener="#{questionBean.handleFileUpload}" mode="advanced" dragDropSupport="true"
                                           update=":formmain :messagePanel" sizeLimit="1500000"  allowTypes="/(\.|\/)(xls)$/" />
+                        </h:form>
+                    </p:dialog>
+
+                    <p:dialog dir="rtl" header="نمایش" hideEffect="fade" showEffect="fade" 
+                              closable="true" closeOnEscape="true" widgetVar="dlg2" modal="true"  width="500">
+                        <h:form id="formView">
+                            #{questionBean.vquestion} <div class="EmptyBox5"></div>
+                            #{questionBean.vanswerA} <div class="EmptyBox5"></div>
+                            #{questionBean.vanswerB} <div class="EmptyBox5"></div>
+                            #{questionBean.vanswerC} <div class="EmptyBox5"></div>
+                            #{questionBean.vanswerD} <div class="EmptyBox5"></div>
+                            #{questionBean.vdescription} <div class="EmptyBox5"></div>
+                            #{questionBean.vnote} <div class="EmptyBox5"></div>
                         </h:form>
                     </p:dialog>
 

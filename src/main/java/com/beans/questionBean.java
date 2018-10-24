@@ -43,10 +43,67 @@ public class questionBean extends BaseBean {
     private String question, answerA, answerB, answerC, answerD, note, description ,subchapter;
     private int time, importance, hardness, rightAnswer;
     private List<String> tag;
-    
+    private String vquestion, vanswerA, vanswerB, vanswerC, vanswerD, vnote, vdescription;
     private boolean disable = true;
     private int id;
 
+    public String getVquestion() {
+        return vquestion;
+    }
+
+    public void setVquestion(String vquestion) {
+        this.vquestion = vquestion;
+    }
+
+    public String getVanswerA() {
+        return vanswerA;
+    }
+
+    public void setVanswerA(String vanswerA) {
+        this.vanswerA = vanswerA;
+    }
+
+    public String getVanswerB() {
+        return vanswerB;
+    }
+
+    public void setVanswerB(String vanswerB) {
+        this.vanswerB = vanswerB;
+    }
+
+    public String getVanswerC() {
+        return vanswerC;
+    }
+
+    public void setVanswerC(String vanswerC) {
+        this.vanswerC = vanswerC;
+    }
+
+    public String getVanswerD() {
+        return vanswerD;
+    }
+
+    public void setVanswerD(String vanswerD) {
+        this.vanswerD = vanswerD;
+    }
+
+    public String getVnote() {
+        return vnote;
+    }
+
+    public void setVnote(String vnote) {
+        this.vnote = vnote;
+    }
+
+    public String getVdescription() {
+        return vdescription;
+    }
+
+    public void setVdescription(String vdescription) {
+        this.vdescription = vdescription;
+    }
+
+    
     public List<String> getTag() {
         return tag;
     }
@@ -219,6 +276,13 @@ public class questionBean extends BaseBean {
         id = ((Question) event.getObject()).getId();
         QuestionService questionServiceImp = new QuestionServiceImp();
         Question question = questionServiceImp.getQuestionDetaile(id);
+        vquestion  = question.getQuestion();
+        vanswerA =question.getAnswerA();
+        vanswerB = question .getAnswerB();
+        vanswerC = question.getAnswerC();
+        vanswerD = question.getAnswerD();
+        vnote = question.getNote();
+        vdescription =question.getDescription();
         
     }
     
