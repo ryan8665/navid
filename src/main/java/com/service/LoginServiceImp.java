@@ -39,6 +39,9 @@ public class LoginServiceImp implements LoginService{
                 .uniqueResult();
 
         try {
+            if(user.getUserTypeId().getId() == 3){
+                throw new Exception();
+            }
             loginDto.setFamily(user.getFamily());
             loginDto.setId(user.getId());
             loginDto.setName(user.getName());
